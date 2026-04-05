@@ -1,9 +1,9 @@
 /* ── Page Hero ─────────────────────────────────────────────────────────────── */
 .page-hero {
-  padding-top: calc(var(--nav-height) + var(--space-xl));
+  padding-top: var(--space-xl);
   padding-bottom: var(--space-xl);
-  background: var(--color-ocean-deep);
-  color: var(--text);
+  background: var(--color-bg-dark);
+  color: var(--color-text);
 }
 
 .page-hero__title {
@@ -382,15 +382,90 @@
 .nav__link {
   font-size: 0.875rem;
   font-weight: 500;
-  color: var(--color-foam);
+  color: #111111;
   transition: color var(--duration-fast);
-  padding: 0.25rem 0;
+  padding: 0.25rem 0.5rem;
 }
 
 .nav__link:hover {
-  color: var(--color-sail);
+  color: #1a56db;
+}
+
+.nav__actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.lang-toggle {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #999999;
+  padding: 0.25rem 0.5rem;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+.lang-toggle__option.active {
+  color: #1a56db;
+  font-weight: 700;
+}
+
+.lang-toggle__divider {
+  color: #e5e5e5;
 }
 
 @media (max-width: 768px) {
   .nav__link { display: none; }
+}
+
+/* ── Mobile Menu ─────────────────────────────────────────────────────────── */
+.nav__mobile {
+  display: none;
+  position: fixed;
+  top: var(--nav-height);
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #ffffff;
+  flex-direction: column;
+  padding: 2rem;
+  gap: 0.5rem;
+  z-index: 99;
+}
+
+.nav__mobile.is-open {
+  display: flex;
+}
+
+.nav__mobile-link {
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: #111111;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  padding: 0.5rem;
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+
+.hamburger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: #111111;
+  transition: transform var(--duration-fast), opacity var(--duration-fast);
+}
+
+@media (max-width: 768px) {
+  .hamburger { display: flex; }
+  .nav__actions .nav__link { display: none; }
 }

@@ -46,6 +46,15 @@ ul {
   --color-border:       #e5e5e5;
   --color-border-dark:  #333333;
 
+  /* Legacy/ocean theme — used by inner pages */
+  --color-ocean-deep:  #0f1628;
+  --color-ocean-light: #1e2d4d;
+  --color-foam:        #ffffff;
+  --color-sail:         #1a56db;
+  --color-white:        #ffffff;
+  --color-glow:        rgba(52, 152, 219, 0.3);
+  --text-muted:        #9ca3af;
+
   /* Typography */
   --font-display: 'Montserrat', 'Inter', system-ui, sans-serif;
   --font-body:    'Inter', system-ui, -apple-system, sans-serif;
@@ -91,6 +100,7 @@ body {
   color: var(--color-text);
   background-color: var(--color-bg);
   overflow-x: hidden;
+  padding-top: var(--nav-height);
 }
 
 h1, h2, h3, h4 {

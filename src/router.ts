@@ -44,15 +44,16 @@ function renderFrontpage(data: SiteData): string {
   const upcomingEvents = data.events.slice(0, 3)
 
   return `
-    <section class="hero hero--with-image" id="hero">
+    <section class="hero hero--with-image hero--slideshow" id="hero">
+      <div class="hero__bg"></div>
       <div class="hero__content">
         <h1 class="hero__title hero__title--frontpage reveal">
-          <span class="da">Lær at sejle i sommeren</span>
-          <span class="en">Learn to sail this summer</span>
+          <span class="da">Hop om bord – fællesskab på vandet</span>
+          <span class="en">Come aboard – community on the water</span>
         </h1>
         <p class="hero__sub reveal">
-          <span class="da">${data.site.tagline_da}</span>
-          <span class="en">${data.site.tagline_en}</span>
+          <span class="da">KØS Sejlsport samler børn, unge og voksne i et sikkert, sjovt og læringsrigt miljø. Eventyret venter på alle aldre.</span>
+          <span class="en">KØS Sejlsport brings together children, youth and adults in a safe, fun and educational environment. Adventure awaits for all ages.</span>
         </p>
         <div class="hero__cta-row reveal">
           <a href="/hold" class="btn btn--kos" data-link><span class="da">Start her</span><span class="en">Get started</span></a>
