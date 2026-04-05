@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="da" data-lang="da">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Galleri — KØS Sejlsport SommerCamp</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    button { cursor: pointer; border: none; background: none; font: inherit; }
+
+    :root {
+      --ocean-deep:   #0e1040;
+      --ocean-mid:    #181c5a;
+      --ocean-light:  #2e3176;
+      --water-bright: #4a52c8;
+      --foam:         #b0b8f0;
+      --sail:         #ffc300;
+      --white:        #f8f9ff;
+      --text:         #dde1f8;
+      --text-muted:   #8890c8;
+      --radius:       10px;
+      --sidebar-w:    220px;
+      --nav-h:        56px;
+      --font-display: 'Montserrat', system-ui, sans-serif;
+      --font-body:    'Inter', system-ui, sans-serif;
+    }
+
+    /* ── Layout ── */
+    html, body { height: 100%; }
+    body {
+      font-family: var(--font-body);
+      background: var(--ocean-deep);
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* ── Top nav ── */
+    .topnav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      height: var(--nav-h);
+      background: var(--ocean-mid);
+      border-bottom: 1px solid rgba(176,184,240,.15);
+      display: flex;
+      align-items: center;
+      padding: 0 1.25rem;
+      gap: 1rem;
+    }
+    .topnav__back {
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+      font-size: .8rem;
+      color: var(--foam);
+      opacity: .7;
+      transition: opacity .15s;
+    }
+    .topnav__back:hover { opacity: 1; }
+    .topnav__back svg { width: 16px; height: 16px; flex-shrink: 0; }
+    .topnav__logo {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 1rem;
+      letter-spacing: .03em;
+      margin-right: auto;
+    }
+    .topnav__logo span:first-child { color: var(--sail); }
+    .topnav__logo span:last-child  { color: var(--white); }
+    .lang-btn {
+      display: flex;
+      align-items: center;
+      gap: .25rem;
+      font-size: .75rem;
+      font-weight: 600;
+      letter-spacing: .08em;
+      color: var(--foam);
+      padding: .25rem .5rem;
+      border-radius: 4px;
+      border: 1px solid rgba(176,184,240,.25);
+      transition: border-color .15s, color .15s;
+    }
+    .lang-btn:hover { border-color: var(--foam); color: var(--white); }
+    .lang-btn__opt { transition: color .15s; }
+    .lang-btn__opt.active { color: var(--sail); }
+    .lang-btn__sep { opacity: .35; }
+
+    /* ── Main content area ── */
+    .layout {
+      display: flex;
+      flex: 1;
+      overflow: hidden;
+    }
+
+    /* ── Sidebar ── */
+    .sidebar {
+      width: var(--sidebar-w);
+      flex-shrink: 0;
+      background: var(--ocean-mid);
+      border-right: 1px solid rgba(176,184,240,.1);
+      overflow-y: auto;
+      padding: 1rem 0;
+    }
+    .sidebar__heading {
+      font-family: var(--font-display);
+      font-size: .65rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      padding: .25rem 1.25rem .75rem;
+    }
+    .folder-btn {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding: .55rem 1.25rem;
+      font-size: .82rem;
+      color: var(--text);
+      text-align: left;
+      border-left: 3px solid transparent;
+      transition: background .12s, border-color .12s, color .12s;
+    }
+    .folder-btn:hover {
+      background: rgba(176,184,240,.07);
+      color: var(--white);
+    }
+    .folder-btn.active {
+      background: rgba(74,82,200,.18);
+      border-left-color: var(--sail);
+      color: var(--white);
+      font-weight: 600;
+    }
+    .folder-btn__count {
+      font-size: .7rem;
+      color: var(--text-muted);
+      background: rgba(176,184,240,.1);
+      border-radius: 999px;
+      padding: .1rem .45rem;
+      min-width: 1.5rem;
+      text-align: center;
+    }
+    .folder-btn.active .folder-btn__count { color: var(--foam); }
+
+    /* ── Image grid ── */
+    .main {
+      flex: 1;
+      overflow-y: auto;
+      padding: 1.5rem;
+    }
+    .folder-header {
+      margin-bottom: 1.25rem;
+    }
+    .folder-header h1 {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--white);
+    }
+    .folder-header p {
+      font-size: .82rem;
+      color: var(--text-muted);
+      margin-top: .2rem;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: .75rem;
+    }
+    .grid-item {
+      position: relative;
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: var(--ocean-mid);
+      cursor: pointer;
+      aspect-ratio: 4/3;
+    }
+    .grid-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .3s ease;
+    }
+    .grid-item:hover img { transform: scale(1.04); }
+    .grid-item__caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: .6rem .75rem .5rem;
+      background: linear-gradient(transparent, rgba(14,16,64,.92));
+      font-size: .72rem;
+      color: var(--foam);
+      line-height: 1.35;
+      opacity: 0;
+      transform: translateY(4px);
+      transition: opacity .2s, transform .2s;
+    }
+    .grid-item:hover .grid-item__caption { opacity: 1; transform: translateY(0); }
+    .skeleton {
+      background: linear-gradient(90deg, var(--ocean-mid) 25%, rgba(176,184,240,.07) 50%, var(--ocean-mid) 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.4s infinite;
+      border-radius: var(--radius);
+      aspect-ratio: 4/3;
+    }
+    @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+
+    .empty-state {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 300px;
+      color: var(--text-muted);
+      gap: .75rem;
+      font-size: .9rem;
+    }
+    .empty-state svg { width: 48px; height: 48px; opacity: .4; }
+
+    /* ── Lightbox ── */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      background: rgba(14,16,64,.96);
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .lightbox.open { display: flex; }
+    .lightbox__img-wrap {
+      position: relative;
+      max-width: min(90vw, 1000px);
+      max-height: 78vh;
+    }
+    .lightbox__img-wrap img {
+      max-width: 100%;
+      max-height: 78vh;
+      border-radius: var(--radius);
+      object-fit: contain;
+      box-shadow: 0 8px 48px rgba(0,0,0,.7);
+    }
+    .lightbox__caption {
+      margin-top: .75rem;
+      font-size: .82rem;
+      color: var(--foam);
+      text-align: center;
+      max-width: min(90vw, 700px);
+      line-height: 1.5;
+    }
+    .lightbox__close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      color: var(--foam);
+      opacity: .7;
+      transition: opacity .15s;
+    }
+    .lightbox__close:hover { opacity: 1; }
+    .lightbox__close svg { width: 28px; height: 28px; }
+    .lightbox__nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--white);
+      opacity: .6;
+      padding: .5rem;
+      transition: opacity .15s;
+    }
+    .lightbox__nav:hover { opacity: 1; }
+    .lightbox__nav--prev { left: .75rem; }
+    .lightbox__nav--next { right: .75rem; }
+    .lightbox__nav svg { width: 32px; height: 32px; }
+    .lightbox__counter {
+      position: absolute;
+      bottom: 1rem;
+      right: 1rem;
+      font-size: .72rem;
+      color: var(--text-muted);
+    }
+
+    /* ── Mobile: sidebar becomes horizontal scroll ── */
+    @media (max-width: 700px) {
+      .layout { flex-direction: column; }
+      .sidebar {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid rgba(176,184,240,.1);
+        padding: .5rem 0;
+        overflow-x: auto;
+        overflow-y: hidden;
+        white-space: nowrap;
+        display: flex;
+        align-items: center;
+        gap: .25rem;
+        padding: .5rem .75rem;
+      }
+      .sidebar__heading { display: none; }
+      .folder-btn {
+        display: inline-flex;
+        width: auto;
+        border-left: none;
+        border-bottom: 2px solid transparent;
+        border-radius: 6px;
+        padding: .35rem .75rem;
+        font-size: .78rem;
+        white-space: nowrap;
+      }
+      .folder-btn.active {
+        border-bottom-color: var(--sail);
+        background: rgba(74,82,200,.2);
+      }
+      .folder-btn__count { display: none; }
+      .main { padding: 1rem; }
+      .grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: .5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top nav -->
+  <nav class="topnav">
+    <a href="/" class="topnav__back">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+      <span class="da">Tilbage</span><span class="en" hidden>Back</span>
+    </a>
+    <div class="topnav__logo">
+      <span>KØS</span><span> Sejlsport — Galleri</span>
+    </div>
+    <button class="lang-btn" id="langBtn" aria-label="Toggle language">
+      <span class="lang-btn__opt" id="optDa">DA</span>
+      <span class="lang-btn__sep">|</span>
+      <span class="lang-btn__opt" id="optEn">EN</span>
+    </button>
+  </nav>
+
+  <!-- Main layout -->
+  <div class="layout">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar__heading">
+        <span class="da">Temaer</span><span class="en" hidden>Themes</span>
+      </div>
+      <div id="folderList"></div>
+    </aside>
+
+    <main class="main" id="main">
+      <div class="empty-state" id="emptyState">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="3" y="3" width="18" height="18" rx="2"/>
+          <circle cx="8.5" cy="8.5" r="1.5"/>
+          <path d="M21 15l-5-5L5 21"/>
+        </svg>
+        <span class="da">Vælg et tema i menuen</span>
+        <span class="en" hidden>Select a theme from the menu</span>
+      </div>
+      <div id="folderHeader" class="folder-header" hidden></div>
+      <div class="grid" id="grid"></div>
+    </main>
+  </div>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true">
+    <button class="lightbox__close" id="lbClose" aria-label="Close">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+    <button class="lightbox__nav lightbox__nav--prev" id="lbPrev" aria-label="Previous">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+    </button>
+    <div>
+      <div class="lightbox__img-wrap">
+        <img id="lbImg" src="" alt="" />
+      </div>
+      <p class="lightbox__caption" id="lbCaption"></p>
+    </div>
+    <button class="lightbox__nav lightbox__nav--next" id="lbNext" aria-label="Next">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+    </button>
+    <span class="lightbox__counter" id="lbCounter"></span>
+  </div>
+
+  <script>
+    // ── i18n ──────────────────────────────────────────────────────────────────
+    const LABELS = {
+      '29er':          { da: '29er',              en: '29er' },
+      adventure:       { da: 'Adventure',         en: 'Adventure' },
+      begynder:        { da: 'Begynder',          en: 'Beginner' },
+      camp:            { da: 'Camp',              en: 'Camp' },
+      parentsailing:   { da: 'Forældresejlads',   en: 'Parent Sailing' },
+      'ilca-laser':    { da: 'ILCA / Laser',      en: 'ILCA / Laser' },
+      j70:             { da: 'J70',               en: 'J70' },
+      prepping:        { da: 'Klargøring',        en: 'Prepping' },
+      klubtur:         { da: 'Klubtur',           en: 'Club Trip' },
+      'mini-regatta':  { da: 'Mini Regatta',      en: 'Mini Regatta' },
+      'mini-sejler':   { da: 'Mini Sejler',       en: 'Mini Sailor' },
+      optimist:        { da: 'Optimist',          en: 'Optimist' },
+      provetimer:      { da: 'Prøvetimer',        en: 'Trial Hours' },
+      rsfeva:          { da: 'RS Feva',           en: 'RS Feva' },
+      rstera:          { da: 'RS Tera',           en: 'RS Tera' },
+      rszest:          { da: 'RS Zest',           en: 'RS Zest' },
+      socialt:         { da: 'Socialt',           en: 'Social' },
+      udflugt:         { da: 'Udflugt',           en: 'Excursion' },
+      undervisning:    { da: 'Undervisning',      en: 'Teaching' },
+    };
+
+    let lang = document.documentElement.dataset.lang || 'da';
+    let folders = [];
+    let currentFolder = null;
+    let currentImages = [];
+    let lbIndex = 0;
+
+    // ── Language toggle ───────────────────────────────────────────────────────
+    function setLang(l) {
+      lang = l;
+      document.documentElement.dataset.lang = l;
+      document.querySelectorAll('.da').forEach(el => { el.hidden = l !== 'da'; });
+      document.querySelectorAll('.en').forEach(el => { el.hidden = l !== 'en'; });
+      document.getElementById('optDa').classList.toggle('active', l === 'da');
+      document.getElementById('optEn').classList.toggle('active', l === 'en');
+      // Re-render sidebar labels and open folder caption
+      renderSidebar();
+      if (currentFolder) renderHeader(currentFolder);
+      updateLbCaption();
+    }
+
+    document.getElementById('langBtn').addEventListener('click', () => {
+      setLang(lang === 'da' ? 'en' : 'da');
+    });
+
+    // ── Fetch folders ─────────────────────────────────────────────────────────
+    async function loadFolders() {
+      try {
+        const res = await fetch('/api/gallery');
+        folders = await res.json();
+        renderSidebar();
+        // Auto-open first folder
+        if (folders.length) openFolder(folders[0].folder);
+      } catch (e) {
+        document.getElementById('emptyState').innerHTML =
+          '<span>Could not load gallery — API unavailable</span>';
+      }
+    }
+
+    function renderSidebar() {
+      const list = document.getElementById('folderList');
+      list.innerHTML = '';
+      folders.forEach(({ folder, count }) => {
+        const label = (LABELS[folder] || {})[lang] || folder;
+        const btn = document.createElement('button');
+        btn.className = 'folder-btn' + (folder === currentFolder ? ' active' : '');
+        btn.dataset.folder = folder;
+        btn.innerHTML = `<span>${label}</span><span class="folder-btn__count">${count}</span>`;
+        btn.addEventListener('click', () => openFolder(folder));
+        list.appendChild(btn);
+      });
+    }
+
+    // ── Open folder ───────────────────────────────────────────────────────────
+    async function openFolder(folder) {
+      currentFolder = folder;
+      renderSidebar();
+
+      const grid = document.getElementById('grid');
+      const emptyState = document.getElementById('emptyState');
+      emptyState.hidden = true;
+      document.getElementById('folderHeader').hidden = false;
+      renderHeader(folder);
+
+      // Show skeletons
+      grid.innerHTML = '';
+      for (let i = 0; i < 8; i++) {
+        const sk = document.createElement('div');
+        sk.className = 'skeleton';
+        grid.appendChild(sk);
+      }
+
+      const res = await fetch(`/api/gallery/${folder}`);
+      const data = await res.json();
+      currentImages = data.images || [];
+
+      grid.innerHTML = '';
+      currentImages.forEach((img, i) => {
+        const item = document.createElement('div');
+        item.className = 'grid-item';
+        item.dataset.index = i;
+
+        const pic = document.createElement('img');
+        pic.src = img.url;
+        pic.alt = img[`caption_${lang}`] || '';
+        pic.loading = 'lazy';
+
+        const cap = document.createElement('div');
+        cap.className = 'grid-item__caption';
+        cap.textContent = img[`caption_${lang}`] || '';
+
+        item.appendChild(pic);
+        item.appendChild(cap);
+        item.addEventListener('click', () => openLightbox(i));
+        grid.appendChild(item);
+      });
+    }
+
+    function renderHeader(folder) {
+      const label = (LABELS[folder] || {})[lang] || folder;
+      const info = folders.find(f => f.folder === folder);
+      const count = info ? info.count : '';
+      document.getElementById('folderHeader').innerHTML =
+        `<h1>${label}</h1><p>${count} ${lang === 'da' ? 'billeder' : 'photos'}</p>`;
+    }
+
+    // ── Lightbox ──────────────────────────────────────────────────────────────
+    function openLightbox(index) {
+      lbIndex = index;
+      renderLb();
+      document.getElementById('lightbox').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    function renderLb() {
+      const img = currentImages[lbIndex];
+      document.getElementById('lbImg').src = img.url;
+      document.getElementById('lbImg').alt = img[`caption_${lang}`] || '';
+      document.getElementById('lbCounter').textContent =
+        `${lbIndex + 1} / ${currentImages.length}`;
+      updateLbCaption();
+    }
+
+    function updateLbCaption() {
+      const img = currentImages[lbIndex];
+      if (!img) return;
+      document.getElementById('lbCaption').textContent = img[`caption_${lang}`] || '';
+    }
+
+    document.getElementById('lbClose').addEventListener('click', closeLightbox);
+    document.getElementById('lightbox').addEventListener('click', e => {
+      if (e.target === e.currentTarget) closeLightbox();
+    });
+    document.getElementById('lbPrev').addEventListener('click', e => {
+      e.stopPropagation();
+      lbIndex = (lbIndex - 1 + currentImages.length) % currentImages.length;
+      renderLb();
+    });
+    document.getElementById('lbNext').addEventListener('click', e => {
+      e.stopPropagation();
+      lbIndex = (lbIndex + 1) % currentImages.length;
+      renderLb();
+    });
+    document.addEventListener('keydown', e => {
+      if (!document.getElementById('lightbox').classList.contains('open')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') { lbIndex = (lbIndex - 1 + currentImages.length) % currentImages.length; renderLb(); }
+      if (e.key === 'ArrowRight') { lbIndex = (lbIndex + 1) % currentImages.length; renderLb(); }
+    });
+
+    // ── Init ──────────────────────────────────────────────────────────────────
+    setLang('da');
+    loadFolders();
+  </script>
+</body>
+</html>

@@ -1,0 +1,396 @@
+/* ── Page Hero ─────────────────────────────────────────────────────────────── */
+.page-hero {
+  padding-top: calc(var(--nav-height) + var(--space-xl));
+  padding-bottom: var(--space-xl);
+  background: var(--color-ocean-deep);
+  color: var(--text);
+}
+
+.page-hero__title {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 800;
+  color: var(--color-sail);
+  line-height: 1.1;
+  margin-bottom: var(--space-md);
+}
+
+.page-hero__sub {
+  font-size: clamp(1rem, 1.5vw, 1.25rem);
+  color: var(--color-foam);
+  opacity: 0.8;
+}
+
+.page-hero__tagline {
+  font-size: clamp(1.1rem, 2vw, 1.5rem);
+  color: var(--color-white);
+  margin-top: var(--space-md);
+  font-weight: 500;
+}
+
+/* ── Breadcrumb ────────────────────────────────────────────────────────────── */
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-bottom: var(--space-lg);
+  flex-wrap: wrap;
+}
+
+.breadcrumb a {
+  color: var(--color-foam);
+  transition: color 0.15s;
+}
+
+.breadcrumb a:hover {
+  color: var(--color-sail);
+}
+
+.breadcrumb__sep {
+  opacity: 0.4;
+  user-select: none;
+}
+
+/* ── Page Content Layout ───────────────────────────────────────────────────── */
+.page-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: start;
+}
+
+@media (max-width: 768px) {
+  .page-content {
+    grid-template-columns: 1fr;
+  }
+}
+
+.page-content__text {
+  max-width: 65ch;
+}
+
+/* ── Info Grid (Hold page) ─────────────────────────────────────────────────── */
+.info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-md);
+  margin-top: var(--space-xl);
+}
+
+@media (max-width: 480px) {
+  .info-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.info-item {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(176,184,240,0.1);
+  border-radius: var(--radius-md);
+  padding: var(--space-md) var(--space-lg);
+}
+
+.info-item__label {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 0.25rem;
+}
+
+.info-item__value {
+  font-size: 1rem;
+  color: var(--color-white);
+  font-weight: 500;
+}
+
+/* ── Page Gallery ──────────────────────────────────────────────────────────── */
+.page-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: var(--space-sm);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.page-gallery-item {
+  position: relative;
+  aspect-ratio: 4/3;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  background: var(--color-ocean-light);
+  cursor: pointer;
+}
+
+.page-gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s var(--ease-out);
+}
+
+.page-gallery-item:hover img {
+  transform: scale(1.05);
+}
+
+.page-gallery-item__caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 0.5rem 0.75rem;
+  background: linear-gradient(transparent, rgba(14,16,64,0.9));
+  font-size: 0.72rem;
+  color: var(--color-foam);
+  line-height: 1.35;
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+.page-gallery-item:hover .page-gallery-item__caption {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.gallery__empty {
+  text-align: center;
+  color: var(--text-muted);
+  padding: var(--space-xl);
+  font-size: 0.9rem;
+}
+
+/* ── Frontpage Grids ───────────────────────────────────────────────────────── */
+.hold-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(260px, 100%), 1fr));
+  gap: var(--space-md);
+  margin-top: var(--space-xl);
+}
+
+.hold-card {
+  display: block;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(176,184,240,0.1);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  transition: transform var(--duration-normal) var(--ease-out),
+              border-color var(--duration-normal),
+              box-shadow var(--duration-normal);
+}
+
+.hold-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255,195,0,0.3);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+}
+
+.hold-card__name {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-sail);
+  margin-bottom: 0.5rem;
+}
+
+.hold-card__age {
+  font-size: 0.85rem;
+  color: var(--color-foam);
+  margin-bottom: 0.25rem;
+}
+
+.hold-card__time {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.hold-card__boat {
+  font-size: 0.8rem;
+  color: var(--color-sail);
+  margin-top: 0.35rem;
+  font-weight: 500;
+}
+
+.hold-card__boat {
+  font-size: 0.8rem;
+  color: var(--color-sail);
+  margin-top: 0.35rem;
+  font-weight: 500;
+}
+
+.flade-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr));
+  gap: var(--space-md);
+  margin-top: var(--space-xl);
+}
+
+.flade-card {
+  display: block;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(176,184,240,0.1);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  transition: transform var(--duration-normal) var(--ease-out),
+              border-color var(--duration-normal);
+}
+
+.flade-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255,195,0,0.3);
+}
+
+.flade-card__name {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-sail);
+  margin-bottom: 0.35rem;
+}
+
+.flade-card__specs {
+  font-size: 0.8rem;
+  color: var(--color-foam);
+  margin-bottom: 0.5rem;
+  font-family: var(--font-mono);
+}
+
+.flade-card__desc {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.events-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr));
+  gap: var(--space-md);
+  margin-top: var(--space-xl);
+}
+
+.event-card {
+  display: block;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(176,184,240,0.1);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  transition: transform var(--duration-normal) var(--ease-out),
+              border-color var(--duration-normal);
+}
+
+.event-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255,195,0,0.3);
+}
+
+.event-card__date {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-sail);
+  margin-bottom: 0.35rem;
+}
+
+.event-card__name {
+  font-family: var(--font-display);
+  font-size: 1.375rem;
+  font-weight: 700;
+  color: var(--color-white);
+  margin-bottom: 0.35rem;
+}
+
+.event-card__tagline {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* ── Feature Card (SommerCamp on frontpage) ────────────────────────────────── */
+.feature-card {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: center;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,195,0,0.15);
+  border-radius: var(--radius-xl);
+  padding: clamp(2rem, 5vw, 3.5rem);
+}
+
+@media (max-width: 768px) {
+  .feature-card {
+    grid-template-columns: 1fr;
+  }
+}
+
+.feature-card__badge {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-sail);
+  margin-bottom: var(--space-md);
+}
+
+.feature-card__title {
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-weight: 800;
+  color: var(--color-white);
+  margin-bottom: var(--space-md);
+}
+
+.feature-card__body {
+  font-size: 1rem;
+  color: var(--color-foam);
+  line-height: 1.7;
+  margin-bottom: var(--space-lg);
+}
+
+.feature-card__actions {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+.feature-card__visual {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.feature-card__visual .countdown {
+  margin-block: 0;
+}
+
+.feature-card__visual .countdown__value {
+  font-size: clamp(2rem, 5vw, 4rem);
+}
+
+.feature-card__visual .countdown__sep {
+  font-size: clamp(2rem, 5vw, 4rem);
+}
+
+/* ── Nav Links ─────────────────────────────────────────────────────────────── */
+.nav__link {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-foam);
+  transition: color var(--duration-fast);
+  padding: 0.25rem 0;
+}
+
+.nav__link:hover {
+  color: var(--color-sail);
+}
+
+@media (max-width: 768px) {
+  .nav__link { display: none; }
+}

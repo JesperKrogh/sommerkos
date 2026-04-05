@@ -1,0 +1,31 @@
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    volumes:
+      - ./images-web:/app/images-web:ro
+      - ./images/captions.md:/app/images/captions.md:ro
+    environment:
+      - IMAGES_WEB_DIR=/app/images-web
+      - CAPTIONS_FILE=/app/images/captions.md
+    expose:
+      - "5000"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/api/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8888:80"
+    volumes:
+      - ./images-web:/usr/share/nginx/images-web:ro
+    depends_on:
+      - api
+    restart: unless-stopped

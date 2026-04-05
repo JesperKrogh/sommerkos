@@ -1,0 +1,207 @@
+/* ── Keyframes ─────────────────────────────────────────────────────────────── */
+
+@keyframes sail-drift {
+  0%, 100% {
+    transform: rotate(-1.5deg) translateY(0px);
+  }
+  50% {
+    transform: rotate(1.5deg) translateY(-8px);
+  }
+}
+
+@keyframes water-shimmer {
+  0% {
+    background-position: 0% 50%;
+    opacity: 0.4;
+  }
+  50% {
+    background-position: 100% 50%;
+    opacity: 0.65;
+  }
+  100% {
+    background-position: 0% 50%;
+    opacity: 0.4;
+  }
+}
+
+@keyframes scroll-bounce {
+  0%, 100% {
+    transform: translateY(0) translateX(-50%);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translateY(8px) translateX(-50%);
+    opacity: 0.4;
+  }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(52, 152, 219, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 12px rgba(52, 152, 219, 0);
+  }
+}
+
+@keyframes wave-bg {
+  0%   { background-position-x: 0; }
+  100% { background-position-x: 200px; }
+}
+
+@keyframes countdown-tick {
+  0%   { transform: scale(1); }
+  10%  { transform: scale(1.06); color: var(--color-foam); }
+  20%  { transform: scale(1); }
+}
+
+/* ── Applied Animations ────────────────────────────────────────────────────── */
+
+/* Hero boat floats gently */
+.hero__boat {
+  animation: sail-drift 6s var(--ease-in-out) infinite;
+  transform-origin: bottom center;
+}
+
+/* Hero scroll indicator bounces */
+.hero__scroll {
+  animation: scroll-bounce 2.5s ease-in-out infinite;
+}
+
+/* Countdown shimmer background */
+.countdown-shimmer {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    transparent 0%,
+    rgba(36, 113, 163, 0.12) 30%,
+    rgba(52, 152, 219, 0.18) 50%,
+    rgba(36, 113, 163, 0.12) 70%,
+    transparent 100%
+  );
+  background-size: 200% 200%;
+  animation: water-shimmer 8s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* Countdown digit tick animation — triggered by JS adding .tick class */
+.countdown__value.tick {
+  animation: countdown-tick 0.3s ease;
+}
+
+/* Lang toggle active indicator */
+.lang-toggle__option.active {
+  color: var(--color-foam);
+  font-weight: 600;
+}
+
+/* Nav entrance */
+.nav {
+  animation: fade-in 0.6s ease forwards;
+}
+
+/* Hero title lines stagger in */
+.hero__content .hero__eyebrow {
+  animation: fade-up 0.8s var(--ease-out) 0.2s both;
+}
+
+.hero__content .hero__title {
+  animation: fade-up 0.8s var(--ease-out) 0.4s both;
+}
+
+.hero__content .hero__sub {
+  animation: fade-up 0.8s var(--ease-out) 0.6s both;
+}
+
+.hero__content .hero__cta-row {
+  animation: fade-up 0.8s var(--ease-out) 0.8s both;
+}
+
+/* Gallery items hover lift */
+.gallery__item {
+  transition: transform var(--duration-normal) var(--ease-out),
+              box-shadow var(--duration-normal) var(--ease-out);
+}
+
+.gallery__item:hover {
+  transform: scale(1.02) translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  z-index: 2;
+}
+
+/* Card hover */
+.card {
+  transition: transform var(--duration-normal) var(--ease-out),
+              box-shadow var(--duration-normal) var(--ease-out),
+              border-color var(--duration-normal);
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-glow);
+  border-color: rgba(52, 152, 219, 0.4);
+}
+
+/* Timeline dot pulse on hover */
+.timeline__dot {
+  transition: transform var(--duration-fast), box-shadow var(--duration-fast);
+}
+
+.timeline__item:hover .timeline__dot {
+  transform: scale(1.3);
+  box-shadow: 0 0 0 6px rgba(52, 152, 219, 0.2);
+}
+
+/* Timeline dot destination */
+.timeline__dot--destination {
+  animation: pulse-glow 2.5s ease-in-out infinite;
+}
+
+/* Contact links */
+.contact-link {
+  transition: transform var(--duration-fast), color var(--duration-fast);
+}
+
+.contact-link:hover {
+  transform: translateX(6px);
+  color: var(--color-foam);
+}
+
+/* Lightbox */
+.lightbox {
+  animation: fade-in var(--duration-normal) ease;
+}
+
+/* Hamburger line transitions */
+.hamburger span {
+  transition: transform var(--duration-fast) var(--ease-out),
+              opacity var(--duration-fast);
+}
+
+.hamburger.is-open span:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+.hamburger.is-open span:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+.hamburger.is-open span:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}

@@ -1,0 +1,275 @@
+{
+  "site": {
+    "name": "KØS Sejlsport",
+    "tagline_da": "Sejlglæde i Svanemøllen Havn siden 1984",
+    "tagline_en": "Sailing joy at Svanemøllen Harbour since 1984",
+    "address": "Svaneknoppen 5, 2100 København Ø",
+    "email": "bestyrelsen@kossejlsport.dk",
+    "website": "https://www.kossejlsport.dk",
+    "facebook": "https://www.facebook.com/kossejlsport"
+  },
+
+  "hold": [
+    {
+      "slug": "mini-sejler",
+      "name_da": "Mini-Sejler",
+      "name_en": "Mini Sailor",
+      "age_da": "6–9 år",
+      "age_en": "6–9 years",
+      "time_da": "Lørdag 10–12",
+      "time_en": "Saturday 10:00–12:00",
+      "season_da": "April – Oktober",
+      "season_en": "April – October",
+      "boat_da": "Optimist",
+      "boat_en": "Optimist",
+      "description_da": "De yngste sejleres første møde med vandet. I Mini-Sejler lærer børnene at balancere i jollen, styre med ror og sejl og få fortrolighed med vandet. Alt foregår legende og trygt med erfarne instruktører ved siden af.",
+      "description_en": "The youngest sailors' first encounter with the water. In Mini-Sejler, children learn to balance in the dinghy, steer with rudder and sail, and gain confidence on the water. Everything is playful and safe with experienced instructors by their side.",
+      "image_folder": "mini-sejler"
+    },
+    {
+      "slug": "begynder",
+      "name_da": "Begynder",
+      "name_en": "Beginner",
+      "age_da": "10–15 år",
+      "age_en": "10–15 years",
+      "time_da": "Tirsdag og torsdag 16–18",
+      "time_en": "Tuesday and Thursday 16:00–18:00",
+      "season_da": "April – Oktober",
+      "season_en": "April – October",
+      "boat_da": "Optimist / RS Feva",
+      "boat_en": "Optimist / RS Feva",
+      "description_da": "For dig der aldrig har sejlet før eller kun har prøvet det en enkelt gang. Du lærer grundlæggende sejlteknik, hvordan man vender, krydser og lægger til. Efter sæsonen kan du selv komme ud og sejle med dine nye venner.",
+      "description_en": "For you who have never sailed before or only tried it once. You learn basic sailing techniques, how to tack, crosswind and dock. After the season you can go out sailing on your own with your new friends.",
+      "image_folder": "begynder"
+    },
+    {
+      "slug": "fortsaetter",
+      "name_da": "Fortsætter",
+      "name_en": "Continuer",
+      "age_da": "10–17 år",
+      "age_en": "10–17 years",
+      "time_da": "Mandag og onsdag 16–18",
+      "time_en": "Monday and Wednesday 16:00–18:00",
+      "season_da": "April – Oktober",
+      "season_en": "April – October",
+      "boat_da": "RS Feva / RS Zest",
+      "boat_en": "RS Feva / RS Zest",
+      "description_da": "Du har sejlet før og kan de grundlæggende manøvrer. Nu skal der arbejdes med teknik, trim og taktik. Vi sejler både alene og i hold, og der er masser af udfordringer for dem der vil dygtiggøre sig.",
+      "description_en": "You've sailed before and know the basic manoeuvres. Now it's time to work on technique, trim and tactics. We sail both alone and in teams, and there are plenty of challenges for those who want to improve.",
+      "image_folder": "provetimer"
+    },
+    {
+      "slug": "ovede",
+      "name_da": "Øvede",
+      "name_en": "Advanced",
+      "age_da": "12–18 år",
+      "age_en": "12–18 years",
+      "time_da": "Tirsdag og torsdag 17–19",
+      "time_en": "Tuesday and Thursday 17:00–19:00",
+      "season_da": "April – Oktober",
+      "season_en": "April – October",
+      "boat_da": "ILCA / Laser / RS Feva",
+      "boat_en": "ILCA / Laser / RS Feva",
+      "description_da": "For den erfarne sejler der vil træne seriøst og måske kaste sig over kapsejlads. Vi arbejder med avanceret teknik, startstrategi og banetaktik. Der er også mulighed for at repræsentere klubben ved stævner.",
+      "description_en": "For the experienced sailor who wants to train seriously and perhaps try racing. We work on advanced technique, start strategy and race tactics. There's also the opportunity to represent the club at regattas.",
+      "image_folder": "undervisning"
+    },
+    {
+      "slug": "adventure",
+      "name_da": "Adventure",
+      "name_en": "Adventure",
+      "age_da": "12–18 år",
+      "age_en": "12–18 years",
+      "time_da": "Lørdag 10–15",
+      "time_en": "Saturday 10:00–15:00",
+      "season_da": "Maj – September",
+      "season_en": "May – September",
+      "boat_da": "RS Feva / J70 / H-Båd",
+      "boat_en": "RS Feva / J70 / H-Boat",
+      "description_da": "Eventyrlysten sejler! På Adventure-holdet kommer I på længere ture, sejler til andre havne, overnatter på øer og oplever hvad sejlsport kan være når man giver sig tid. Kræver basis sejlerfaring.",
+      "description_en": "For the adventurous sailor! On the Adventure team you'll go on longer trips, sail to other harbours, overnight on islands and experience what sailing can be when you take your time. Requires basic sailing experience.",
+      "image_folder": "adventure"
+    },
+    {
+      "slug": "j70-youngster",
+      "name_da": "J70 Youngster",
+      "name_en": "J70 Youngster",
+      "age_da": "14–21 år",
+      "age_en": "14–21 years",
+      "time_da": "Onsdag 17–19 + lørdage",
+      "time_en": "Wednesday 17:00–19:00 + Saturdays",
+      "season_da": "April – Oktober",
+      "season_en": "April – October",
+      "boat_da": "J70",
+      "boat_en": "J70",
+      "description_da": "Klubens J70'er er tilgængelige for unge sejlere der vil opleve kraften i en moderne kølbåd. Her lærer I at sejle med storsejl, fok og gennaker — og at arbejde som et hold ombord.",
+      "description_en": "The club's J70s are available for young sailors who want to experience the power of a modern keelboat. Here you'll learn to sail with mainsail, jib and gennaker — and to work as a team on board.",
+      "image_folder": "j70"
+    },
+    {
+      "slug": "j70-begyndere",
+      "name_da": "J70 Begynder",
+      "name_en": "J70 Beginner",
+      "age_da": "Voksne",
+      "age_en": "Adults",
+      "time_da": "Søndag 10–13",
+      "time_en": "Sunday 10:00–13:00",
+      "season_da": "April – Oktober",
+      "season_en": "April – October",
+      "boat_da": "J70",
+      "boat_en": "J70",
+      "description_da": "Drømmer du om at sejle kølbåd? På J70 Begynder lærer du alt om den populære J70 — fra grundlæggende sejlads til kapsejlads. Ingen erfaring med kølbåd nødvendig, men du skal kunne svømme.",
+      "description_en": "Dreaming of sailing a keelboat? In J70 Beginner you'll learn everything about the popular J70 — from basic sailing to racing. No keelboat experience necessary, but you must be able to swim.",
+      "image_folder": "j70"
+    },
+    {
+      "slug": "j70",
+      "name_da": "J70 Træning",
+      "name_en": "J70 Training",
+      "age_da": "Voksne",
+      "age_en": "Adults",
+      "time_da": "Tirsdag 17–20 + weekend",
+      "time_en": "Tuesday 17:00–20:00 + weekends",
+      "season_da": "April – Oktober",
+      "season_en": "April – October",
+      "boat_da": "J70",
+      "boat_en": "J70",
+      "description_da": "Træning og kapsejlads for erfarne J70-sejlere. Vi træner manøvrer, start og bane, og deltager i J70-stævner rundt om i landet. Kræver erfaring med J70 eller tilsvarende kølbåd.",
+      "description_en": "Training and racing for experienced J70 sailors. We practise manoeuvres, starts and courses, and participate in J70 regattas around the country. Requires experience with J70 or equivalent keelboat.",
+      "image_folder": "j70"
+    }
+  ],
+
+  "flade": [
+    {
+      "slug": "optimist",
+      "name_da": "Optimist",
+      "name_en": "Optimist",
+      "description_da": "Optimisten er verdens mest udbredte sejlbåd for børn og unge. Den er stabil, nem at sejle med og perfekt til at lære sejlsportens grundteknikker. Klubben har en flåde af Optimister til rådighed for Mini-Sejler og Begynder holdene.",
+      "description_en": "The Optimist is the world's most popular sailing dinghy for children and young people. It's stable, easy to sail and perfect for learning the basics of sailing. The club has a fleet of Optimists available for the Mini-Sejler and Beginner teams.",
+      "specs_da": "Længde: 2,31 m · Sejlareal: 3,3 m² · Vægt: 35 kg",
+      "specs_en": "Length: 2.31 m · Sail area: 3.3 m² · Weight: 35 kg",
+      "image_folder": "optimist"
+    },
+    {
+      "slug": "opticube",
+      "name_da": "OptiCube",
+      "name_en": "OptiCube",
+      "description_da": "OptiCube er den moderne afløser for Optimisten — en let, stabil jolle med samme sejl men opdateret design. Perfekt til de yngste sejlere der skal have en tryg start på vandet.",
+      "description_en": "The OptiCube is the modern successor to the Optimist — a light, stable dinghy with the same sail but updated design. Perfect for the youngest sailors who need a safe start on the water.",
+      "specs_da": "Længde: 2,31 m · Sejlareal: 3,3 m²",
+      "specs_en": "Length: 2.31 m · Sail area: 3.3 m²",
+      "image_folder": "optimist"
+    },
+    {
+      "slug": "rs-tera",
+      "name_da": "RS Tera",
+      "name_en": "RS Tera",
+      "description_da": "RS Tera er den perfekte overgangsbåd fra Optimist til større joller. Den findes i to sejlvarianter (Sport og Pro) så den kan vokse med sejleren. Populær til kapsejlads for ungdom.",
+      "description_en": "The RS Tera is the perfect transition boat from Optimist to larger dinghies. It comes in two sail variants (Sport and Pro) so it can grow with the sailor. Popular for youth racing.",
+      "specs_da": "Længde: 3,30 m · Sejlareal: 4,6 / 5,7 m²",
+      "specs_en": "Length: 3.30 m · Sail area: 4.6 / 5.7 m²",
+      "image_folder": "rstera"
+    },
+    {
+      "slug": "rs-feva",
+      "name_da": "RS Feva",
+      "name_en": "RS Feva",
+      "description_da": "RS Feva er en tomandsjolle der er ideel til unge sejlere der vil lære at sejle sammen. Med storsejl, fok og gennaker får man en smagsprøve på hvad der venter i større både. Klubben har flere RS Feva'er.",
+      "description_en": "The RS Feva is a two-person dinghy that's ideal for young sailors who want to learn to sail together. With mainsail, jib and gennaker you get a taste of what awaits in larger boats. The club has several RS Fevas.",
+      "specs_da": "Længde: 3,63 m · Sejlareal: 8,7 m² · Mand: 2",
+      "specs_en": "Length: 3.63 m · Sail area: 8.7 m² · Crew: 2",
+      "image_folder": "rsfeva"
+    },
+    {
+      "slug": "rs-zest",
+      "name_da": "RS Zest",
+      "name_en": "RS Zest",
+      "description_da": "RS Zest er en sportslig tomandsjolle for unge og voksne. Den er hurtig, responsiv og giver masser af adrenalinen. Perfekt til fortsætter- og øvede sejlere der vil have mere power.",
+      "description_en": "The RS Zest is a sporty two-person dinghy for young people and adults. It's fast, responsive and delivers plenty of adrenaline. Perfect for intermediate and advanced sailors who want more power.",
+      "specs_da": "Længde: 3,89 m · Sejlareal: 8,8 m² · Mand: 2",
+      "specs_en": "Length: 3.89 m · Sail area: 8.8 m² · Crew: 2",
+      "image_folder": "rszest"
+    },
+    {
+      "slug": "ilca-laser",
+      "name_da": "ILCA / Laser",
+      "name_en": "ILCA / Laser",
+      "description_da": "ILCA (tidligere Laser) er verdens mest udbredte kapsejladsjolle. Enmandsjollen er krævende men utrolig givende — det er dig og båden mod vinden. Klubben har ILCA'er til øvede sejlere.",
+      "description_en": "The ILCA (formerly Laser) is the world's most popular racing dinghy. The single-handed boat is demanding but incredibly rewarding — it's you and the boat against the wind. The club has ILCA's for advanced sailors.",
+      "specs_da": "Længde: 4,23 m · Sejlareal: 4,7 / 7,06 m² · Mand: 1",
+      "specs_en": "Length: 4.23 m · Sail area: 4.7 / 7.06 m² · Crew: 1",
+      "image_folder": "ilca-laser"
+    },
+    {
+      "slug": "h-baad",
+      "name_da": "H-Båd",
+      "name_en": "H-Boat",
+      "description_da": "H-Båden er en klassisk dansk konstruktion — en smuk og sej kølbåd til 3-4 personer. Den er perfekt til familier og sejlere der vil have en mere afslappet oplevelse på vandet med mulighed for længere ture.",
+      "description_en": "The H-Boat is a classic Danish design — a beautiful and stable keelboat for 3-4 people. It's perfect for families and sailors who want a more relaxed experience on the water with the option of longer trips.",
+      "specs_da": "Længde: 7,60 m · Sejlareal: 22,5 m² · Mand: 3-4",
+      "specs_en": "Length: 7.60 m · Sail area: 22.5 m² · Crew: 3-4",
+      "image_folder": "klubtur"
+    },
+    {
+      "slug": "j70",
+      "name_da": "J70",
+      "name_en": "J70",
+      "description_da": "J70 er verdens mest populære sports-kølbåd — hurtig, moderne og med gennaker. Klubben har flere J70'er der bruges til træning, kapsejlads og adventure-ture. En fantastisk båd for unge og voksne der vil have fart over feltet.",
+      "description_en": "The J70 is the world's most popular sports keelboat — fast, modern and with a gennaker. The club has several J70's used for training, racing and adventure trips. A fantastic boat for young people and adults who want speed.",
+      "specs_da": "Længde: 6,93 m · Sejlareal: 27,9 m² · Mand: 3-4",
+      "specs_en": "Length: 6.93 m · Sail area: 27.9 m² · Crew: 3-4",
+      "image_folder": "j70"
+    }
+  ],
+
+  "events": [
+    {
+      "slug": "sommercamps",
+      "name_da": "SommerCamp 2026",
+      "name_en": "SummerCamp 2026",
+      "date_da": "29. juni – 7. august 2026",
+      "date_en": "June 29 – August 7, 2026",
+      "tagline_da": "Sejl hele sommeren — 6 uger med vind, vand og fællesskab",
+      "tagline_en": "Sail all summer — 6 weeks of wind, water and community",
+      "description_da": "Hele skolernes sommerferie byder KØS Sejlsport på SommerCamp på Svanemøllen Havn. Campen kører i 6 uger, mandag til fredag kl. 09–15. Hver uge har sit eget tema og der er plads til alle — fra nybegyndere til erfarne sejlere fra 11 år.",
+      "description_en": "Throughout the school summer holiday, KØS Sejlsport hosts SommerCamp at Svanemøllen Harbour. The camp runs for 6 weeks, Monday to Friday 09:00–15:00. Each week has its own theme and there's room for everyone — from beginners to experienced sailors aged 11+.",
+      "weeks": [
+        { "week": 27, "dates_da": "29. juni – 3. juli", "dates_en": "June 29 – July 3", "desc_da": "Første campuge — bliv introduceret til livet på vandet", "desc_en": "First camp week — get introduced to life on the water" },
+        { "week": 28, "dates_da": "6. – 10. juli", "dates_en": "July 6–10", "desc_da": "Byg videre på dine sejlfærdigheder og find nye venner", "desc_en": "Build on your sailing skills and make new friends" },
+        { "week": 29, "dates_da": "13. – 17. juli", "dates_en": "July 13–17", "desc_da": "Adventure og fart — prøv kræfter med jollesejlads", "desc_en": "Adventure and speed — try your hand at dinghy sailing" },
+        { "week": 30, "dates_da": "20. – 24. juli", "dates_en": "July 20–24", "desc_da": "Fællesskab og sjov — sommerens bedste uge på havnen", "desc_en": "Community and fun — the best week of summer at the harbour" },
+        { "week": 31, "dates_da": "27. – 31. juli", "dates_en": "July 27–31", "desc_da": "Øv dine manøvrer og tag på mini-regatta med de andre", "desc_en": "Practice your manoeuvres and join a mini regatta with the others" },
+        { "week": 32, "dates_da": "3. – 7. august", "dates_en": "August 3–7", "desc_da": "Afslutningsuge — fest, sejlads og sommer-diplom", "desc_en": "Final week — celebration, sailing and summer diploma" }
+      ],
+      "signup_url": "https://www.kossejlsport.dk/klub/kos-sejlsport/sider/sommercamps-2026",
+      "image_folder": "camp"
+    },
+    {
+      "slug": "sommer-i-kos",
+      "name_da": "Sommer i KØS",
+      "name_en": "Summer at KØS",
+      "date_da": "Hele sommeren 2026",
+      "date_en": "All summer 2026",
+      "tagline_da": "Havnen summer af liv — kom og vær med",
+      "tagline_en": "The harbour buzzes with life — come join in",
+      "description_da": "Sommer i KØS er klubbens samlede sommeraktiviteter. Ud over SommerCampen er der åbne sejldage, familiedage, grill-aftener og sociale arrangementer hele sommeren. Følg med på Facebook og i nyhedsbrevet for datoer.",
+      "description_en": "Summer at KØS is the club's collective summer activities. In addition to SommerCamp, there are open sailing days, family days, BBQ evenings and social events all summer. Follow us on Facebook and in the newsletter for dates.",
+      "signup_url": "https://www.kossejlsport.dk",
+      "image_folder": "socialt"
+    },
+    {
+      "slug": "svanemoellehavnsfestival",
+      "name_da": "Svanemøllehavnsfestival",
+      "name_en": "Svanemøllen Harbour Festival",
+      "date_da": "TBD 2026",
+      "date_en": "TBD 2026",
+      "tagline_da": "Havnens store fest — sejlads, musik og fællesskab",
+      "tagline_en": "The harbour's big celebration — sailing, music and community",
+      "description_da": "Svanemøllehavnsfestivalen er den årlige fejring af havnelivet. KØS er med som aktiv deltager med opvisningssejlads, prøvetimer for børn og voksne, og vi er vært for en hyggelig havnefest. Mere info følger.",
+      "description_en": "The Svanemøllen Harbour Festival is the annual celebration of harbour life. KØS participates actively with demonstration sailing, trial sessions for children and adults, and we host a cosy harbour party. More info to come.",
+      "signup_url": null,
+      "image_folder": "socialt"
+    }
+  ]
+}
