@@ -10,6 +10,7 @@ COPY . .
 RUN npm run build
 RUN cp -r /app/data /app/dist/data
 RUN cp /app/logo-kos.png /app/dist/logo-kos.png
+RUN cp -r /app/images-web /app/dist/images
 
 # ── Stage 2: Serve ────────────────────────────────────────────────────────────
 FROM nginx:1.27-alpine AS serve
