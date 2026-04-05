@@ -1,6 +1,6 @@
-# SommerCamp 2026 — KØS Sejlsport
+# KØS Sejlsport — sommer-i-kos
 
-A modern, bilingual (Danish/English) landing page for **KØS Sejlsport SommerCamp 2026** — a youth sailing camp at Svanemøllen Havn, Copenhagen.
+A modern, bilingual (Danish/English) website for **KØS Sejlsport** — a sailing club in Svanemøllen Havn, Copenhagen. The site showcases the club's teams (Hold), fleet (Flåde), events, and SommerCamp programs.
 
 ## Quick Start
 
@@ -44,7 +44,8 @@ The frontend is served at `http://localhost:8888` and the API is proxied through
 ## Features
 
 - **Bilingual** — Toggle between Danish and English with persistent preference
-- **Live countdown** — Real-time countdown to the first camp week
+- **Client-side routing** — Subpages for Hold, Flåde, Events, SommerCamp without page reloads
+- **Hero slideshow** — Full-screen rotating background images (4 images, 6s each) with centered glass-text box
 - **Scroll animations** — Elements reveal on scroll with staggered timing
 - **Photo gallery** — Dynamic gallery powered by the API with lightbox viewer
 - **Responsive** — Mobile-first with hamburger menu and adaptive layouts
@@ -54,51 +55,65 @@ The frontend is served at `http://localhost:8888` and the API is proxied through
 ## Project Structure
 
 ```
-├── index.html              # Single-page application shell
+├── index.html              # SPA shell with fixed navbar
 ├── src/
 │   ├── main.ts             # Entry point
-│   ├── modules/            # Feature modules (nav, hero, countdown, etc.)
-│   └── style/              # CSS (base, components, animations)
+│   ├── router.ts           # SPA router + page templates
+│   ├── data.ts             # Data loading utilities
+│   └── style/              # CSS (base, pages, components, animations)
+├── data/
+│   └── site.json           # All content: hold, flåde, events
 ├── api/
 │   ├── app.py              # Flask API for gallery images
 │   └── requirements.txt
-├── images/                 # Source images organised by category
-├── public/                 # Static assets (favicon)
-├── docker-compose.yml      # Frontend + API services
+├── images-web/             # Source images by category
+├── public/
+│   └── logo-kos.png        # KØS logo
+├── docker-compose.yml       # Frontend + API services
 ├── Dockerfile              # Frontend build (Node → nginx)
-├── Dockerfile.api          # API build (Python + gunicorn)
-└── nginx.conf              # Reverse proxy configuration
+├── Dockerfile.api           # API build (Python + gunicorn)
+└── nginx.conf               # Reverse proxy configuration
 ```
 
 See [ARCHITECTURE.md](./ARCHITECTURE.md) for a detailed technical overview.
 
-## Sections
+## Pages
 
-The landing page consists of these sections:
+| Page | Route | Description |
+|------|-------|-------------|
+| **Forside (Home)** | `/` | Hero slideshow, intro, SommerCamp banner, team/fleet overviews, events, gallery teaser, contact |
+| **Hold (Teams)** | `/hold` | Grid of all teams |
+| **Hold Detail** | `/hold/:slug` | Team info, timing, boat, gallery |
+| **Flåde (Fleet)** | `/flade` | Grid of all boats |
+| **Flåde Detail** | `/flåde/:slug` | Boat specs, description, gallery |
+| **Events** | `/events/:slug` | Event detail with week cards (e.g., SommerCamp, Sommer i KØS) |
+| **Galleri** | `/galleri` | Photo gallery with link to static image browser |
 
-| Section | ID | Description |
-|---------|-----|-------------|
-| **Navigation** | `#nav` | Sticky nav with logo, language toggle, CTA button, hamburger menu |
-| **Hero** | `#hero` | Full-screen hero with title, CTAs, animated boat SVG, parallax |
-| **About** | `#om-campen` | Camp description with key stats (6 weeks, 11+, 09–15, location) |
-| **Countdown** | `#nedtaelling` | Live countdown timer to first camp week (June 29, 2026) |
-| **Camp Weeks** | `#uger` | 6 week cards (week 27–32) with dates and descriptions |
-| **Gallery** | `#galleri` | Dynamic photo gallery with lightbox (populated via API) |
-| **Practical Info** | `#praktisk` | Who can join, what to bring, safety information |
-| **Sign Up** | `#tilmelding` | Links to registration, email, and Facebook |
-| **Footer** | — | KØS branding and copyright |
+## Content Management
+
+All content is stored in `data/site.json`:
+
+```json
+{
+  "site": { "email": "...", "facebook": "..." },
+  "hold": [{ "slug": "...", "name_da": "...", "name_en": "...", "age_da": "...", ... }],
+  "flade": [{ "slug": "...", "name_da": "...", "specs_da": "...", ... }],
+  "events": [{ "slug": "...", "name_da": "...", "weeks": [...], ... }]
+}
+```
 
 ## Adding Images
 
-Images are organised in category folders under `images/`:
+Images are organised in category folders under `images-web/`:
 
 ```
-images/
+images-web/
 ├── optimist/
 │   ├── photo1.jpg
 │   └── photo1.md        # Optional bilingual caption
-├── ilca-laser/
-├── begynder/
+├── j70/
+├── rsfeva/
+├── socialt/
 └── ...
 ```
 
@@ -113,8 +128,6 @@ Beskrivende tekst på dansk
 ## English
 Descriptive text in English
 ```
-
-The API reads these captions and serves them alongside image URLs.
 
 ## API Endpoints
 
