@@ -38,24 +38,26 @@ addRoute('/galleri', renderGalleryPage)
 
 // ── Page: Frontpage ───────────────────────────────────────────────────────────
 
-function getHoldCardImage(folder: string): string {
+function getHoldCardImage(slug: string): string {
   const imageMap: Record<string, string> = {
-    'mini-sejler': '580503850_1138151188302354_413008472373367144_n.jpg',
-    'begynder': '527500299_1060930106024463_2018805063777711299_n.jpg',
-    'provetimer': '496205293_1011788924271915_5737802054615581617_n.jpg',
-    'undervisning': '547367784_1091568366293970_682452581349231292_n.jpg',
-    'adventure': '491260218_989642696486538_6580478291154598179_n.jpg',
-    'j70': '547784091_1093273136123493_1554396093967990186_n.jpg',
+    'mini-sejler': 'hold-mini-sejler.jpg',
+    'begynder': 'hold-begynder.jpg',
+    'fortsaetter': 'hold-fortsætter.jpg',
+    'ovede': 'hold-øvede.jpg',
+    'adventure': 'hold-adventure.jpg',
+    'j70-youngster': 'hold-j70-youngster.jpg',
+    'j70-begyndere': 'hold-j70-begyndere.jpg',
+    'j70': 'hold-j70-træning.jpg',
   }
-  const img = imageMap[folder] || imageMap['j70']
-  return `/images-web/${folder}/${img}`
+  const img = imageMap[slug] || imageMap['j70']
+  return `/images-web/images-overview/${img}`
 }
 
 function renderFrontpage(data: SiteData): string {
   const lang = getLang()
   const isDa = lang === 'da'
   const upcomingEvents = data.events.slice(0, 3)
-  const holdCards = data.hold.map((h) => `<a href="/hold/${h.slug}" class="hold-card hold-card--with-bg reveal" data-link style="--card-bg: url('${getHoldCardImage(h.image_folder)}')"><div class="hold-card__name">${isDa ? h.name_da : h.name_en}</div><div class="hold-card__age">${isDa ? h.age_da : h.age_en}</div><div class="hold-card__time">${isDa ? h.time_da : h.time_en}</div></a>`).join('')
+  const holdCards = data.hold.map((h) => `<a href="/hold/${h.slug}" class="hold-card hold-card--with-bg reveal" data-link style="--card-bg: url('${getHoldCardImage(h.slug)}')"><div class="hold-card__name">${isDa ? h.name_da : h.name_en}</div><div class="hold-card__age">${isDa ? h.age_da : h.age_en}</div><div class="hold-card__time">${isDa ? h.time_da : h.time_en}</div></a>`).join('')
 
   return `
     <section class="hero hero--with-image hero--slideshow" id="hero">
@@ -221,7 +223,7 @@ function renderFrontpage(data: SiteData): string {
 
 function renderHoldOverview(data: SiteData): string {
   const isDa = getLang() === 'da'
-  const holdCards = data.hold.map((h) => `<a href="/hold/${h.slug}" class="hold-card hold-card--with-bg reveal" data-link style="--card-bg: url('${getHoldCardImage(h.image_folder)}')"><div class="hold-card__name">${isDa ? h.name_da : h.name_en}</div><div class="hold-card__age">${isDa ? h.age_da : h.age_en}</div><div class="hold-card__time">${isDa ? h.time_da : h.time_en}</div><div class="hold-card__boat">${isDa ? h.boat_da : h.boat_en}</div></a>`).join('')
+  const holdCards = data.hold.map((h) => `<a href="/hold/${h.slug}" class="hold-card hold-card--with-bg reveal" data-link style="--card-bg: url('${getHoldCardImage(h.slug)}')"><div class="hold-card__name">${isDa ? h.name_da : h.name_en}</div><div class="hold-card__age">${isDa ? h.age_da : h.age_en}</div><div class="hold-card__time">${isDa ? h.time_da : h.time_en}</div><div class="hold-card__boat">${isDa ? h.boat_da : h.boat_en}</div></a>`).join('')
   return `
     <section class="page-hero"><div class="container">
       <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/" data-link><span class="da">Forside</span><span class="en">Home</span></a><span class="breadcrumb__sep">›</span><span><span class="da">Hold</span><span class="en">Teams</span></span></nav>
