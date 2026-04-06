@@ -1,0 +1,207 @@
+- generic [active] [ref=e1]:
+  - navigation [ref=e2]:
+    - generic [ref=e3]:
+      - link "KØS Sejlsport" [ref=e4] [cursor=pointer]:
+        - /url: /
+        - img "KØS Sejlsport" [ref=e5]
+      - generic [ref=e6]:
+        - link "Hold" [ref=e7] [cursor=pointer]:
+          - /url: /hold
+        - link "Tilmelding" [ref=e8] [cursor=pointer]:
+          - /url: /events/sommercamps
+        - link "Events" [ref=e9] [cursor=pointer]:
+          - /url: /#events-overview
+        - link "Om" [ref=e10] [cursor=pointer]:
+          - /url: /#contact
+        - button "Toggle language" [ref=e11] [cursor=pointer]: DA | EN
+  - main [ref=e12]:
+    - generic [ref=e15]:
+      - heading "Hop om bord – fællesskab på vandet" [level=1] [ref=e16]
+      - paragraph [ref=e17]: KØS Sejlsport samler børn, unge og voksne i et sikkert, sjovt og læringsrigt miljø. Eventyret venter på alle aldre.
+      - generic [ref=e18]:
+        - link "Start her" [ref=e19] [cursor=pointer]:
+          - /url: /hold
+          - generic [ref=e20]: Start her
+        - link "SommerCamp 2026" [ref=e21] [cursor=pointer]:
+          - /url: /events/sommercamps
+          - generic [ref=e22]: SommerCamp 2026
+    - generic [ref=e26]:
+      - generic [ref=e27]: Velkommen til KØS
+      - heading "Sommer, sol og vind på vandet" [level=2] [ref=e28]
+      - paragraph [ref=e29]: KØS Sejlsport er en ung og dynamisk sejlerklub i hjertet af København. Vi tilbyder sejlundervisning for børn, unge og voksne — uanset om du aldrig har prøvet det før eller allerede er en erfaren sejler.
+      - generic [ref=e30]:
+        - generic [ref=e31]: 🏊 Fra 6 år
+        - generic [ref=e32]: ⛵ Alle niveauer
+        - generic [ref=e33]: 👨‍👩‍👧‍👦 Familievenligt
+      - link "Se alle hold" [ref=e34] [cursor=pointer]:
+        - /url: /hold
+        - generic [ref=e35]: Se alle hold
+    - generic [ref=e38]:
+      - generic [ref=e39]:
+        - generic [ref=e40]: 🏖️ SommerCamp 2026
+        - heading "6 ugers eventyr på vandet" [level=2] [ref=e41]
+        - paragraph [ref=e42]: Giv dit barn en sommer fuld af oplevelser, venskaber og sejlglæde. SommerCamp henvender sig til børn og unge fra 11 år — alle niveauer er velkomne!
+        - link "Læs mere om SommerCamp" [ref=e43] [cursor=pointer]:
+          - /url: /events/sommercamps
+          - generic [ref=e44]: Læs mere om SommerCamp
+      - generic [ref=e46]:
+        - generic [ref=e47]:
+          - text: "83"
+          - generic [ref=e48]: Dage
+        - text: ":"
+        - generic [ref=e49]:
+          - text: "23"
+          - generic [ref=e50]: Timer
+        - text: ":"
+        - generic [ref=e51]:
+          - text: "30"
+          - generic [ref=e52]: Min
+        - text: ":"
+        - generic [ref=e53]:
+          - text: "55"
+          - generic [ref=e54]: Sek
+    - generic [ref=e56]:
+      - generic [ref=e57]: Hold
+      - heading "Find dit hold" [level=2] [ref=e58]
+      - generic [ref=e59]:
+        - link "Mini-Sejler 6–9 år Lørdag 10–12" [ref=e60] [cursor=pointer]:
+          - /url: /hold/mini-sejler
+          - generic [ref=e61]: Mini-Sejler
+          - generic [ref=e62]: 6–9 år
+          - generic [ref=e63]: Lørdag 10–12
+        - link "Begynder 10–15 år Tirsdag og torsdag 16–18" [ref=e64] [cursor=pointer]:
+          - /url: /hold/begynder
+          - generic [ref=e65]: Begynder
+          - generic [ref=e66]: 10–15 år
+          - generic [ref=e67]: Tirsdag og torsdag 16–18
+        - link "Fortsætter 10–17 år Mandag og onsdag 16–18" [ref=e68] [cursor=pointer]:
+          - /url: /hold/fortsaetter
+          - generic [ref=e69]: Fortsætter
+          - generic [ref=e70]: 10–17 år
+          - generic [ref=e71]: Mandag og onsdag 16–18
+        - link "Øvede 12–18 år Tirsdag og torsdag 17–19" [ref=e72] [cursor=pointer]:
+          - /url: /hold/ovede
+          - generic [ref=e73]: Øvede
+          - generic [ref=e74]: 12–18 år
+          - generic [ref=e75]: Tirsdag og torsdag 17–19
+        - link "Adventure 12–18 år Lørdag 10–15" [ref=e76] [cursor=pointer]:
+          - /url: /hold/adventure
+          - generic [ref=e77]: Adventure
+          - generic [ref=e78]: 12–18 år
+          - generic [ref=e79]: Lørdag 10–15
+        - link "J70 Youngster 14–21 år Onsdag 17–19 + lørdage" [ref=e80] [cursor=pointer]:
+          - /url: /hold/j70-youngster
+          - generic [ref=e81]: J70 Youngster
+          - generic [ref=e82]: 14–21 år
+          - generic [ref=e83]: Onsdag 17–19 + lørdage
+        - link "J70 Begynder Voksne Søndag 10–13" [ref=e84] [cursor=pointer]:
+          - /url: /hold/j70-begyndere
+          - generic [ref=e85]: J70 Begynder
+          - generic [ref=e86]: Voksne
+          - generic [ref=e87]: Søndag 10–13
+        - link "J70 Træning Voksne Tirsdag 17–20 + weekend" [ref=e88] [cursor=pointer]:
+          - /url: /hold/j70
+          - generic [ref=e89]: J70 Træning
+          - generic [ref=e90]: Voksne
+          - generic [ref=e91]: Tirsdag 17–20 + weekend
+    - generic [ref=e93]:
+      - generic [ref=e94]: Flåde
+      - heading "Vores både" [level=2] [ref=e95]
+      - generic [ref=e96]:
+        - 'link "Optimist Længde: 2,31 m · Sejlareal: 3,3 m² · Vægt: 35 kg Optimisten er verdens mest udbredte sejlbåd for børn og unge. Den er stabil, nem at sejle med og perfekt til at lære sej…" [ref=e97] [cursor=pointer]':
+          - /url: /flade/optimist
+          - generic [ref=e98]: Optimist
+          - generic [ref=e99]: "Længde: 2,31 m · Sejlareal: 3,3 m² · Vægt: 35 kg"
+          - generic [ref=e100]: Optimisten er verdens mest udbredte sejlbåd for børn og unge. Den er stabil, nem at sejle med og perfekt til at lære sej…
+        - 'link "OptiCube Længde: 2,31 m · Sejlareal: 3,3 m² OptiCube er den moderne afløser for Optimisten — en let, stabil jolle med samme sejl men opdateret design. Perfekt til d…" [ref=e101] [cursor=pointer]':
+          - /url: /flade/opticube
+          - generic [ref=e102]: OptiCube
+          - generic [ref=e103]: "Længde: 2,31 m · Sejlareal: 3,3 m²"
+          - generic [ref=e104]: OptiCube er den moderne afløser for Optimisten — en let, stabil jolle med samme sejl men opdateret design. Perfekt til d…
+        - 'link "RS Tera Længde: 3,30 m · Sejlareal: 4,6 / 5,7 m² RS Tera er den perfekte overgangsbåd fra Optimist til større joller. Den findes i to sejlvarianter (Sport og Pro) så den…" [ref=e105] [cursor=pointer]':
+          - /url: /flade/rs-tera
+          - generic [ref=e106]: RS Tera
+          - generic [ref=e107]: "Længde: 3,30 m · Sejlareal: 4,6 / 5,7 m²"
+          - generic [ref=e108]: RS Tera er den perfekte overgangsbåd fra Optimist til større joller. Den findes i to sejlvarianter (Sport og Pro) så den…
+        - 'link "RS Feva Længde: 3,63 m · Sejlareal: 8,7 m² · Mand: 2 RS Feva er en tomandsjolle der er ideel til unge sejlere der vil lære at sejle sammen. Med storsejl, fok og gennaker får…" [ref=e109] [cursor=pointer]':
+          - /url: /flade/rs-feva
+          - generic [ref=e110]: RS Feva
+          - generic [ref=e111]: "Længde: 3,63 m · Sejlareal: 8,7 m² · Mand: 2"
+          - generic [ref=e112]: RS Feva er en tomandsjolle der er ideel til unge sejlere der vil lære at sejle sammen. Med storsejl, fok og gennaker får…
+        - 'link "RS Zest Længde: 3,89 m · Sejlareal: 8,8 m² · Mand: 2 RS Zest er en sportslig tomandsjolle for unge og voksne. Den er hurtig, responsiv og giver masser af adrenalinen. Perfek…" [ref=e113] [cursor=pointer]':
+          - /url: /flade/rs-zest
+          - generic [ref=e114]: RS Zest
+          - generic [ref=e115]: "Længde: 3,89 m · Sejlareal: 8,8 m² · Mand: 2"
+          - generic [ref=e116]: RS Zest er en sportslig tomandsjolle for unge og voksne. Den er hurtig, responsiv og giver masser af adrenalinen. Perfek…
+        - 'link "ILCA / Laser Længde: 4,23 m · Sejlareal: 4,7 / 7,06 m² · Mand: 1 ILCA (tidligere Laser) er verdens mest udbredte kapsejladsjolle. Enmandsjollen er krævende men utrolig givende — det er …" [ref=e117] [cursor=pointer]':
+          - /url: /flade/ilca-laser
+          - generic [ref=e118]: ILCA / Laser
+          - generic [ref=e119]: "Længde: 4,23 m · Sejlareal: 4,7 / 7,06 m² · Mand: 1"
+          - generic [ref=e120]: ILCA (tidligere Laser) er verdens mest udbredte kapsejladsjolle. Enmandsjollen er krævende men utrolig givende — det er …
+        - 'link "H-Båd Længde: 7,60 m · Sejlareal: 22,5 m² · Mand: 3-4 H-Båden er en klassisk dansk konstruktion — en smuk og sej kølbåd til 3-4 personer. Den er perfekt til familier og sejle…" [ref=e121] [cursor=pointer]':
+          - /url: /flade/h-baad
+          - generic [ref=e122]: H-Båd
+          - generic [ref=e123]: "Længde: 7,60 m · Sejlareal: 22,5 m² · Mand: 3-4"
+          - generic [ref=e124]: H-Båden er en klassisk dansk konstruktion — en smuk og sej kølbåd til 3-4 personer. Den er perfekt til familier og sejle…
+        - 'link "J70 Længde: 6,93 m · Sejlareal: 27,9 m² · Mand: 3-4 J70 er verdens mest populære sports-kølbåd — hurtig, moderne og med gennaker. Klubben har flere J70''er der bruges til tr…" [ref=e125] [cursor=pointer]':
+          - /url: /flade/j70
+          - generic [ref=e126]: J70
+          - generic [ref=e127]: "Længde: 6,93 m · Sejlareal: 27,9 m² · Mand: 3-4"
+          - generic [ref=e128]: J70 er verdens mest populære sports-kølbåd — hurtig, moderne og med gennaker. Klubben har flere J70'er der bruges til tr…
+    - generic [ref=e130]:
+      - generic [ref=e131]: Events
+      - heading "Kommende events" [level=2] [ref=e132]
+      - generic [ref=e133]:
+        - link "29. juni – 7. august 2026 SommerCamp 2026 Sejl hele sommeren — 6 uger med vind, vand og fællesskab" [ref=e134] [cursor=pointer]:
+          - /url: /events/sommercamps
+          - generic [ref=e135]: 29. juni – 7. august 2026
+          - generic [ref=e136]: SommerCamp 2026
+          - generic [ref=e137]: Sejl hele sommeren — 6 uger med vind, vand og fællesskab
+        - link "Hele sommeren 2026 Sommer i KØS Havnen summer af liv — kom og vær med" [ref=e138] [cursor=pointer]:
+          - /url: /events/sommer-i-kos
+          - generic [ref=e139]: Hele sommeren 2026
+          - generic [ref=e140]: Sommer i KØS
+          - generic [ref=e141]: Havnen summer af liv — kom og vær med
+        - link "TBD 2026 Svanemøllehavnsfestival Havnens store fest — sejlads, musik og fællesskab" [ref=e142] [cursor=pointer]:
+          - /url: /events/svanemoellehavnsfestival
+          - generic [ref=e143]: TBD 2026
+          - generic [ref=e144]: Svanemøllehavnsfestival
+          - generic [ref=e145]: Havnens store fest — sejlads, musik og fællesskab
+    - generic [ref=e147]:
+      - generic [ref=e148]: Galleri
+      - heading "Billeder fra klubben" [level=2] [ref=e149]
+      - generic [ref=e150]:
+        - generic [ref=e151]:
+          - img "Børnene er ude at sejle i en RS Zest med en instruktør på en vindstille dag – det er altid sjovt at lære nyt på vandet!"
+          - generic [ref=e152]: Børnene er ude at sejle i en RS Zest med en instruktør på en vindstille dag – det er altid sjovt at lære nyt på vandet!
+        - generic [ref=e153]:
+          - img "To joller mødes på vandet"
+          - generic [ref=e154]: To joller mødes på vandet
+        - generic [ref=e155]:
+          - img "En sejlbåd med spiler glæder sig over solskin og fantastisk sejlsport på vandet!"
+          - generic [ref=e156]: En sejlbåd med spiler glæder sig over solskin og fantastisk sejlsport på vandet!
+        - generic [ref=e157]:
+          - img "Klar til en fantastisk dag på vandet! Vi glæder os til at skabe uforglemmelige sommerminder sammen."
+          - generic [ref=e158]: Klar til en fantastisk dag på vandet! Vi glæder os til at skabe uforglemmelige sommerminder sammen.
+        - generic [ref=e159]:
+          - img "To joller stævner ud fra kysten på en smuk dag! Mærk suset ved at navigere din egen båd."
+          - generic [ref=e160]: To joller stævner ud fra kysten på en smuk dag! Mærk suset ved at navigere din egen båd.
+        - generic [ref=e161]:
+          - img "Vores instruktører hjælper dig med at gøre båden klar, så du trygt kan udforske bølgerne på Roskilde Fjord!"
+          - generic [ref=e162]: Vores instruktører hjælper dig med at gøre båden klar, så du trygt kan udforske bølgerne på Roskilde Fjord!
+      - link "Se hele galleriet" [ref=e164] [cursor=pointer]:
+        - /url: /galleri
+        - generic [ref=e165]: Se hele galleriet
+    - generic [ref=e168]:
+      - generic [ref=e169]: Kontakt
+      - heading "Kom forbi havnen" [level=2] [ref=e170]
+      - paragraph [ref=e171]: Vi holder til på Svaneknoppen 5 i Svanemøllen Havn. Kig forbi — vi er altid glade for at vise rundt og fortælle om mulighederne for at komme i gang med sejlads.
+      - generic [ref=e172]:
+        - link "bestyrelsen@kossejlsport.dk" [ref=e173] [cursor=pointer]:
+          - /url: mailto:bestyrelsen@kossejlsport.dk
+          - img [ref=e174]
+          - text: bestyrelsen@kossejlsport.dk
+        - link "Følg KØS på Facebook" [ref=e177] [cursor=pointer]:
+          - /url: https://www.facebook.com/kossejlsport
+          - img [ref=e178]
+          - generic [ref=e180]: Følg KØS på Facebook
