@@ -8,8 +8,33 @@ export interface SiteData {
     website: string
     facebook: string
   }
+  about: AboutData
   flade: Flade[]
   events: Event[]
+}
+
+export interface AboutMember {
+  name: string
+  role: string
+  bio: string
+  phone: string
+  email: string
+}
+
+export interface AboutSection {
+  title_da: string
+  title_en: string
+  content_da?: string
+  content_en?: string
+  members_da?: AboutMember[]
+  members_en?: AboutMember[]
+}
+
+export interface AboutData {
+  vedtaegter: AboutSection
+  bestyrelsen: AboutSection
+  sikkerhed: AboutSection
+  udmeldelse: AboutSection
 }
 
 export interface Flade {

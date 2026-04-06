@@ -1,0 +1,97 @@
+- generic [active] [ref=e1]:
+  - navigation [ref=e2]:
+    - generic [ref=e3]:
+      - link "KØS Sejlsport" [ref=e4] [cursor=pointer]:
+        - /url: /
+        - img "KØS Sejlsport" [ref=e5]
+      - generic [ref=e6]:
+        - link "Hold" [ref=e7] [cursor=pointer]:
+          - /url: /hold
+        - link "Tilmelding" [ref=e8] [cursor=pointer]:
+          - /url: /events/sommercamps
+        - link "Events" [ref=e9] [cursor=pointer]:
+          - /url: /#events-overview
+        - link "Om" [ref=e10] [cursor=pointer]:
+          - /url: /om
+        - button "Toggle language" [ref=e11] [cursor=pointer]: DA | EN
+  - main [ref=e12]:
+    - generic [ref=e14]:
+      - navigation "Breadcrumb" [ref=e15]:
+        - link "Forside" [ref=e16] [cursor=pointer]:
+          - /url: /
+        - generic [ref=e17]: ›
+        - generic [ref=e18]: Om KØS
+      - heading "Om KØS" [level=1] [ref=e19]
+    - generic [ref=e22]:
+      - generic [ref=e23]:
+        - heading "Vedtægter" [level=2] [ref=e24]
+        - generic [ref=e25]: "**§ 1. Navn, hjemsted og stander** Klubbens navn er **KØS Sejlsport**, der forkortes **KØS**. Klubben har hjemsted i Københavns Kommune. Klubbens stander har mørk blå bundfarve. Herpå ses en hvid svane med 3 små unger. **§ 2. Klubbens formål** - at etablere og drive gode og trygge faciliteter og rammer for sejlads for børn og unge i alderen 4-25 år. - at introducere og udvikle børn og unges glæde og færdigheder knyttet til sejlads og andre nært relaterede oplevelser ved og på vandet - at understøtte børn og unges trivsel, fællesskab og forståelse for det gode kammeratskab i nærhed med naturen - at sikre en høj grad af forståelse for sikkerhed, miljø og bæredygtighed på og ved vandet. - at give medlemmerne viden, praktiske færdigheder i sejlads med joller og kølbåde samt evt. flerskrogsbåde. - at inspirere og udvikle udvalgte sejlere, forældre, ledere og trænere til at varetage undervisningen og træning af klubbens medlemmer. - at støtte og opmuntre medlemmerne til at deltage i lokale, nationale og internationale sejlsports stævner. - at arrangere udflugter, sommerferie, ungdomsstævner, kapsejladser og andre sociale tiltag for klubbens medlemmer. **§ 3. Dansk Sejlunion** Klubben er medlem af Dansk Sejlunion (DS) og er underlagt DS's vedtægter og bestemmelser. **§ 4. Optagelse af medlemmer** Som medlemmer kan optages børn og unge fra det fyldte 4. år til og med det år, hvor de fylder 25 år. Aktivt medlemskab ophører med udgangen af det år, hvor medlemmer fylder 25 år. **§ 5. Kontingent** Kontingentet for det faste medlemskab fastsættes for ét år ad gangen på den ordinære generalforsamling. **§ 6. Udmeldelse og eksklusion** Udmeldelse af klubben skal ske skriftligt. Ved kontingentrestance over 3 måneder, kan bestyrelsen ekskludere medlemmet. **§ 7. Ordinær generalforsamling** Generalforsamlingen, der er klubbens øverste myndighed, afholdes hvert år i marts måned. **§ 8. Ekstraordinær generalforsamling** Ekstraordinær generalforsamling indkaldes af bestyrelsen, når den finder det nødvendigt eller når mindst 20% af de stemmeberettigede medlemmer anmoder om det. **§ 9. Bestyrelse** Klubben ledes af en bestyrelse på mindst 5 og max 8 personer. Bestyrelsen konstituerer sig efter generalforsamlingen. **§ 10. Regnskab og revision** Regnskabsåret følger kalenderåret. Årsregnskabet forelægges generalforsamlingen til godkendelse. **§ 11. Klubbens opløsning** I tilfælde af klubbens opløsning skal de aktiver, der er i behold, anvendes til ungdomsarbejde i K.A.S, ØSF og Sejlklubben Sundet. *Vedtægter besluttet på generalforsamlingen den 19. marts 2024.*"
+      - generic [ref=e26]:
+        - heading "Bestyrelsen" [level=2] [ref=e27]
+        - generic [ref=e28]:
+          - generic [ref=e30]:
+            - generic [ref=e31]: Henning Seehausen
+            - generic [ref=e32]: Formand
+            - paragraph [ref=e33]: Forældre og mangeårig deltager som frivillig i foreningsarbejde. Formand siden januar 2023. Sejlet siden ungdommen. Brænder for at skabe gode rammer for vores børn og unge.
+            - generic [ref=e34]:
+              - link "52390400" [ref=e35] [cursor=pointer]:
+                - /url: tel:52390400
+              - link "hse@sandwalk.dk" [ref=e36] [cursor=pointer]:
+                - /url: mailto:hse@sandwalk.dk
+          - generic [ref=e38]:
+            - generic [ref=e39]: Peter Ottesen
+            - generic [ref=e40]: Økonomiansvarlig
+            - paragraph [ref=e41]: Far til sejler på begynderholdet. Med i bestyrelsen siden marts 2024. Derudover formand i JolleKolle.
+            - generic [ref=e42]:
+              - link "40271025" [ref=e43] [cursor=pointer]:
+                - /url: tel:40271025
+              - link "p_ottesen@icloud.com" [ref=e44] [cursor=pointer]:
+                - /url: mailto:p_ottesen@icloud.com
+          - generic [ref=e46]:
+            - generic [ref=e47]: Jesper Krogh
+            - generic [ref=e48]: Bestyrelsesmedlem + træner begynder torsdag
+            - paragraph [ref=e49]: Far til 2 begyndersejlere i KØS. Har været aktiv i foreningslivet i over 25 år.
+            - generic [ref=e50]:
+              - link "27773240" [ref=e51] [cursor=pointer]:
+                - /url: tel:27773240
+              - link "jesper@krogh.cc" [ref=e52] [cursor=pointer]:
+                - /url: mailto:jesper@krogh.cc
+          - generic [ref=e54]:
+            - generic [ref=e55]: Maria Jørgensen
+            - generic [ref=e56]: Bestyrelsesmedlem
+            - generic [ref=e57]:
+              - link "28191290" [ref=e58] [cursor=pointer]:
+                - /url: tel:28191290
+              - link "zonen@c.dk" [ref=e59] [cursor=pointer]:
+                - /url: mailto:zonen@c.dk
+          - generic [ref=e61]:
+            - generic [ref=e62]: Storm Kejser Hansen
+            - generic [ref=e63]: Bestyrelsesmedlem, Træner Børn og Båd, Adventure
+            - generic [ref=e64]:
+              - link "93882407" [ref=e65] [cursor=pointer]:
+                - /url: tel:93882407
+              - link "stormkdk@icloud.com" [ref=e66] [cursor=pointer]:
+                - /url: mailto:stormkdk@icloud.com
+          - generic [ref=e68]:
+            - generic [ref=e69]: Danielle Ferguson
+            - generic [ref=e70]: Bestyrelsesmedlem, Træner Adventure
+            - paragraph [ref=e71]: Mor til en ung begyndersejler i KØS, aktiv frivillig og hjælpetræner for Adventure Team. RYA Day Skipper-certifikat.
+            - generic [ref=e72]:
+              - link "50244242" [ref=e73] [cursor=pointer]:
+                - /url: tel:50244242
+              - link "daniellepferguson@gmail.com" [ref=e74] [cursor=pointer]:
+                - /url: mailto:daniellepferguson@gmail.com
+          - generic [ref=e76]:
+            - generic [ref=e77]: Anton Seehausen
+            - generic [ref=e78]: Bestyrelsesmedlem, cheftræner
+            - generic [ref=e79]:
+              - link "20676460" [ref=e80] [cursor=pointer]:
+                - /url: tel:20676460
+              - link "anton@seehausen.nu" [ref=e81] [cursor=pointer]:
+                - /url: mailto:anton@seehausen.nu
+      - generic [ref=e82]:
+        - heading "Sikkerhedspolitik" [level=2] [ref=e83]
+        - generic [ref=e84]: "## Mål Sikkerhed er vores højeste prioritet i KØS Sejlsport. Vores mål er at sikre, at ingen kommer til skade under aktiviteterne, og at både sejlere, trænere og forældre føler sig trygge. ## Trænere Trænernes kompetencer og adfærd er afgørende for sikkerheden. Derfor fokuserer vi på: - Faglige færdigheder inden for sejlads og svømning. - Førstehjælp og livredning. - Sikker sejlads med følgebåde. ## Sejlere **Krav til jollesejlere:** - En årlig kæntringsprøve under kontrollerede forhold. - Dokumentation for, at de kan svømme 200 meter (med svømmevest og våddragt). **Påkrævet sikkerhedsudstyr:** - Alle sejlere og forældre skal altid bære godkendte redningsveste eller svømmeveste på jollerampen, broer og i bådene. - Selvoppustelige redningsveste er ikke tilladt. ## Følgebåde - Speedbådskørekort kræves. - Medbringelse af VHF-radio og \"Mand-overbord\"-sikringssnor. - Hastighedsbegrænsningen i Svanemøllebugten er 6 knob. ## Nødhjælp - Nødhjælpskasse i klubhuset. - Redningskranse på optimistskuret. - Hjertestarter ved Sejlklubben Sundets indgang. *Gældende fra maj 2024*"
+      - generic [ref=e85]:
+        - heading "Udmeldelse" [level=2] [ref=e86]
+        - generic [ref=e87]: "## Forlader du os? Det er vi selvfølgeligt kede af! Vi håber du har haft en god tid i KØS og gerne vil anbefale os til venner og bekendte. ## Sådan foregår udmelding Udmeldelse sker via vores Google Formular: [Link til udmeldelse](https://forms.gle/qPGCjq6VU5Nj4UwbA) Formularen stiller lidt spørgsmål fordi vi super gerne vil vide hvad vi har gjort godt og kan gøre endnu bedre. Udmeldelse fra Holdsport vil efterfølgende ske manuelt fra klubbens side. Tusind tak for din tid i KØS Sejlsport - vi håber at se dig på vandet igen senere."

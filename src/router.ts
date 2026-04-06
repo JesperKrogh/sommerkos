@@ -37,6 +37,7 @@ addRoute('/flade', renderFladeOverview)
 addRoute('/flade/:slug', renderFladePage)
 addRoute('/events/:slug', renderEventPage)
 addRoute('/galleri', renderGalleryPage)
+addRoute('/om', renderOmPage)
 
 // ── Page: Frontpage ───────────────────────────────────────────────────────────
 
@@ -384,6 +385,55 @@ function renderGalleryPage(): string {
     <section class="section section--mid"><div class="container">
       <p class="section-body reveal"><span class="da">Udforsk billeder fra alle vores aktiviteter — vælg en kategori i galleriet.</span><span class="en">Explore photos from all our activities — choose a category in the gallery.</span></p>
       <div style="text-align:center;margin-top:2rem"><a href="/images/" class="btn btn--kos" target="_blank"><span class="da">Åbn galleri</span><span class="en">Open gallery</span></a></div>
+    </div></section>
+  `
+}
+
+// ── Page: Om (About) ────────────────────────────────────────────────────────
+
+function renderOmPage(data: SiteData): string {
+  const isDa = getLang() === 'da'
+  const { vedtaegter, bestyrelsen, sikkerhed, udmeldelse } = data.about
+
+  const members = isDa ? bestyrelsen.members_da : bestyrelsen.members_en
+  const membersHtml = members ? members.map(m => `
+    <div class="board-member">
+      <div class="board-member__info">
+        <div class="board-member__name">${m.name}</div>
+        <div class="board-member__role">${m.role}</div>
+        ${m.bio ? `<p class="board-member__bio">${m.bio}</p>` : ''}
+        <div class="board-member__contact">
+          ${m.phone ? `<a href="tel:${m.phone.replace(/\s/g, '')}" class="board-member__link">${m.phone}</a>` : ''}
+          ${m.email ? `<a href="mailto:${m.email}" class="board-member__link">${m.email}</a>` : ''}
+        </div>
+      </div>
+    </div>
+  `).join('') : ''
+
+  return `
+    <section class="page-hero"><div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/" data-link><span class="da">Forside</span><span class="en">Home</span></a><span class="breadcrumb__sep">›</span><span><span class="da">Om KØS</span><span class="en">About KØS</span></span></nav>
+      <h1 class="page-hero__title"><span class="da">Om KØS</span><span class="en">About KØS</span></h1>
+    </div></section>
+    <section class="section section--mid"><div class="container">
+      <div class="about-sections">
+        <div class="about-section" id="vedtaegter">
+          <h2 class="about-section__title">${isDa ? vedtaegter.title_da : vedtaegter.title_en}</h2>
+          <div class="about-section__content">${isDa ? vedtaegter.content_da : vedtaegter.content_en}</div>
+        </div>
+        <div class="about-section" id="bestyrelsen">
+          <h2 class="about-section__title">${isDa ? bestyrelsen.title_da : bestyrelsen.title_en}</h2>
+          <div class="board-grid">${membersHtml}</div>
+        </div>
+        <div class="about-section" id="sikkerhed">
+          <h2 class="about-section__title">${isDa ? sikkerhed.title_da : sikkerhed.title_en}</h2>
+          <div class="about-section__content">${isDa ? sikkerhed.content_da : sikkerhed.content_en}</div>
+        </div>
+        <div class="about-section" id="udmeldelse">
+          <h2 class="about-section__title">${isDa ? udmeldelse.title_da : udmeldelse.title_en}</h2>
+          <div class="about-section__content">${isDa ? udmeldelse.content_da : udmeldelse.content_en}</div>
+        </div>
+      </div>
     </div></section>
   `
 }
