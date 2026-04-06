@@ -1,8 +1,10 @@
-import { loadData, getLang, navigate, getRoute, type SiteData } from './data'
+import { loadData, loadHoldCards, getLang, navigate, getRoute, type SiteData, type HoldCards } from './data'
 
 type PageFn = (data: SiteData, params: Record<string, string>) => string
 
 const routes: { pattern: RegExp; paramNames: string[]; page: PageFn }[] = []
+
+let _holdCards: HoldCards = {}
 
 function addRoute(pattern: string, page: PageFn): void {
   const paramNames: string[] = []
@@ -57,7 +59,10 @@ function renderFrontpage(data: SiteData): string {
   const lang = getLang()
   const isDa = lang === 'da'
   const upcomingEvents = data.events.slice(0, 3)
-  const holdCards = data.hold.map((h) => `<a href="/hold/${h.slug}" class="hold-card hold-card--with-bg reveal" data-link style="--card-bg: url('${getHoldCardImage(h.slug)}')"><div class="hold-card__name">${isDa ? h.name_da : h.name_en}</div><div class="hold-card__age">${isDa ? h.age_da : h.age_en}</div><div class="hold-card__time">${isDa ? h.time_da : h.time_en}</div></a>`).join('')
+  const holdCards = data.hold.map((h) => {
+    const card = _holdCards[h.slug]
+    return `<a href="/hold/${h.slug}" class="hold-card hold-card--with-bg reveal" data-link style="--card-bg: url('${getHoldCardImage(h.slug)}')"><div class="hold-card__name">${isDa ? card.name_da : card.name_en}</div><div class="hold-card__age">${isDa ? card.age_da : card.age_en}</div><div class="hold-card__time">${isDa ? card.time_da : card.time_en}</div></a>`
+  }).join('')
 
   return `
     <section class="hero hero--with-image hero--slideshow" id="hero">
@@ -223,7 +228,10 @@ function renderFrontpage(data: SiteData): string {
 
 function renderHoldOverview(data: SiteData): string {
   const isDa = getLang() === 'da'
-  const holdCards = data.hold.map((h) => `<a href="/hold/${h.slug}" class="hold-card hold-card--with-bg reveal" data-link style="--card-bg: url('${getHoldCardImage(h.slug)}')"><div class="hold-card__name">${isDa ? h.name_da : h.name_en}</div><div class="hold-card__age">${isDa ? h.age_da : h.age_en}</div><div class="hold-card__time">${isDa ? h.time_da : h.time_en}</div><div class="hold-card__boat">${isDa ? h.boat_da : h.boat_en}</div></a>`).join('')
+  const holdCards = data.hold.map((h) => {
+    const card = _holdCards[h.slug]
+    return `<a href="/hold/${h.slug}" class="hold-card hold-card--with-bg reveal" data-link style="--card-bg: url('${getHoldCardImage(h.slug)}')"><div class="hold-card__name">${isDa ? card.name_da : card.name_en}</div><div class="hold-card__age">${isDa ? card.age_da : card.age_en}</div><div class="hold-card__time">${isDa ? card.time_da : card.time_en}</div><div class="hold-card__boat">${isDa ? card.equipment_da : card.equipment_en}</div></a>`
+  }).join('')
   return `
     <section class="page-hero"><div class="container">
       <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/" data-link><span class="da">Forside</span><span class="en">Home</span></a><span class="breadcrumb__sep">›</span><span><span class="da">Hold</span><span class="en">Teams</span></span></nav>
@@ -361,7 +369,9 @@ function renderNotFound(): string {
 
 // ── Router init ───────────────────────────────────────────────────────────────
 
-export function initRouter(): void {
+export async function initRouter(): Promise<void> {
+  _holdCards = await loadHoldCards()
+
   function handleRoute(): void {
     const path = getRoute()
     const match = matchRoute(path)

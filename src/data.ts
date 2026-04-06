@@ -56,7 +56,21 @@ export interface Event {
   image_folder: string
 }
 
+export interface HoldCard {
+  name_da: string
+  name_en: string
+  age_da: string
+  age_en: string
+  time_da: string
+  time_en: string
+  equipment_da: string
+  equipment_en: string
+}
+
+export type HoldCards = Record<string, HoldCard>
+
 let _data: SiteData | null = null
+let _holdCards: HoldCards | null = null
 
 export async function loadData(): Promise<SiteData> {
   if (_data) return _data
@@ -64,6 +78,15 @@ export async function loadData(): Promise<SiteData> {
   if (!res.ok) throw new Error('Failed to load site data')
   _data = await res.json()
   return _data!
+}
+
+export async function loadHoldCards(): Promise<HoldCards> {
+  if (_holdCards) return _holdCards
+  const res = await fetch('/data/hold-cards.json')
+  if (!res.ok) throw new Error('Failed to load hold cards data')
+  const data = await res.json()
+  _holdCards = data['hold-cards']
+  return _holdCards!
 }
 
 export function getLang(): 'da' | 'en' {

@@ -1,0 +1,84 @@
+{
+  "hold-cards": {
+    "mini-sejler": {
+      "name_da": "Mini-Sejler",
+      "name_en": "Mini Sailor",
+      "age_da": "6–9 år",
+      "age_en": "6–9 years",
+      "time_da": "Lørdag 10–12",
+      "time_en": "Saturday 10:00–12:00",
+      "equipment_da": "Optimist",
+      "equipment_en": "Optimist"
+    },
+    "begynder": {
+      "name_da": "Begynder",
+      "name_en": "Beginner",
+      "age_da": "10–15 år",
+      "age_en": "10–15 years",
+      "time_da": "Tirsdag og torsdag 16–18",
+      "time_en": "Tuesday and Thursday 16:00–18:00",
+      "equipment_da": "Optimist / RS Feva",
+      "equipment_en": "Optimist / RS Feva"
+    },
+    "fortsaetter": {
+      "name_da": "Fortsætter",
+      "name_en": "Continuer",
+      "age_da": "10–17 år",
+      "age_en": "10–17 years",
+      "time_da": "Mandag og onsdag 16–18",
+      "time_en": "Monday and Wednesday 16:00–18:00",
+      "equipment_da": "RS Feva / RS Zest",
+      "equipment_en": "RS Feva / RS Zest"
+    },
+    "ovede": {
+      "name_da": "Øvede",
+      "name_en": "Advanced",
+      "age_da": "12–18 år",
+      "age_en": "12–18 years",
+      "time_da": "Tirsdag og torsdag 17–19",
+      "time_en": "Tuesday and Thursday 17:00–19:00",
+      "equipment_da": "ILCA / Laser / RS Feva",
+      "equipment_en": "ILCA / Laser / RS Feva"
+    },
+    "adventure": {
+      "name_da": "Adventure",
+      "name_en": "Adventure",
+      "age_da": "12–18 år",
+      "age_en": "12–18 years",
+      "time_da": "Lørdag 10–15",
+      "time_en": "Saturday 10:00–15:00",
+      "equipment_da": "RS Feva / J70 / H-Båd",
+      "equipment_en": "RS Feva / J70 / H-Boat"
+    },
+    "j70-youngster": {
+      "name_da": "J70 Youngster",
+      "name_en": "J70 Youngster",
+      "age_da": "14–21 år",
+      "age_en": "14–21 years",
+      "time_da": "Onsdag 17–19 + lørdage",
+      "time_en": "Wednesday 17:00–19:00 + Saturdays",
+      "equipment_da": "J70",
+      "equipment_en": "J70"
+    },
+    "j70-begyndere": {
+      "name_da": "J70 Begynder",
+      "name_en": "J70 Beginner",
+      "age_da": "Voksne",
+      "age_en": "Adults",
+      "time_da": "Søndag 10–13",
+      "time_en": "Sunday 10:00–13:00",
+      "equipment_da": "J70",
+      "equipment_en": "J70"
+    },
+    "j70": {
+      "name_da": "J70 Træning",
+      "name_en": "J70 Training",
+      "age_da": "Voksne",
+      "age_en": "Adults",
+      "time_da": "Tirsdag 17–20 + weekend",
+      "time_en": "Tuesday 17:00–20:00 + weekends",
+      "equipment_da": "J70",
+      "equipment_en": "J70"
+    }
+  }
+}
