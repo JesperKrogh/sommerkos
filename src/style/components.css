@@ -57,8 +57,8 @@
 }
 
 @keyframes heroSlideshow {
-  0%, 25% { background-image: url('/images/j70/547784091_1093273136123493_1554396093967990186_n.jpg'); }
-  25.01%, 50% { background-image: url('/images/rsfeva/547367784_1091568366293970_682452581349231292_n.jpg'); }
-  50.01%, 75% { background-image: url('/images/undervisning/493010834_987538240030317_4017353076541010794_n.jpg'); }
-  75.01%, 100% { background-image: url('/images/socialt/492694740_986693480114793_4118764152267689699_n.jpg'); }
+  0%, 25% { background-image: url('/images-web/j70/547784091_1093273136123493_1554396093967990186_n.jpg'); }
+  25.01%, 50% { background-image: url('/images-web/rsfeva/547367784_1091568366293970_682452581349231292_n.jpg'); }
+  50.01%, 75% { background-image: url('/images-web/undervisning/493010834_987538240030317_4017353076541010794_n.jpg'); }
+  75.01%, 100% { background-image: url('/images-web/socialt/492694740_986693480114793_4118764152267689699_n.jpg'); }
 }

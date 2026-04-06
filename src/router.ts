@@ -110,9 +110,9 @@ function renderFrontpage(data: SiteData): string {
           </div>
           <div class="intro-images reveal" id="intro-images">
             <div class="intro-image-stack">
-              <div class="intro-image intro-image--1" style="background-image: url('/images/j70/547201391_1093273222790151_6353806278774509213_n.jpg')"></div>
-              <div class="intro-image intro-image--2" style="background-image: url('/images/rsfeva/547367784_1091568366293970_682452581349231292_n.jpg')"></div>
-              <div class="intro-image intro-image--3" style="background-image: url('/images/socialt/492694740_986693480114793_4118764152267689699_n.jpg')"></div>
+              <div class="intro-image intro-image--1" style="background-image: url('/images-web/j70/547201391_1093273222790151_6353806278774509213_n.jpg')"></div>
+              <div class="intro-image intro-image--2" style="background-image: url('/images-web/rsfeva/547367784_1091568366293970_682452581349231292_n.jpg')"></div>
+              <div class="intro-image intro-image--3" style="background-image: url('/images-web/socialt/492694740_986693480114793_4118764152267689699_n.jpg')"></div>
             </div>
           </div>
         </div>
