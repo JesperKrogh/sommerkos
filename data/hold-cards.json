@@ -53,8 +53,8 @@
     "j70-youngster": {
       "name_da": "J70 Youngster",
       "name_en": "J70 Youngster",
-      "age_da": "14–21 år",
-      "age_en": "14–21 years",
+      "age_da": "15–18 år",
+      "age_en": "15–18 years",
       "time_da": "Torsdag 17.00–19.00",
       "time_en": "Thursday 17:00–19:00",
       "equipment_da": "J70",
@@ -63,8 +63,8 @@
     "j70-begyndere": {
       "name_da": "J70 Begynder",
       "name_en": "J70 Beginner",
-      "age_da": "Voksne",
-      "age_en": "Adults",
+      "age_da": "18+ år",
+      "age_en": "18+ years",
       "time_da": "Lørdag 9.00–11.00 eller 13.00–15.00",
       "time_en": "Saturday 9:00–11:00 or 13:00–15:00",
       "equipment_da": "J70",
