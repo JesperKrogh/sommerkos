@@ -266,21 +266,26 @@ function renderHoldPage(data: SiteData, params: Record<string, string>): string 
   const hold = data.hold.find(h => h.slug === params.slug)
   if (!hold) return renderNotFound()
   const isDa = getLang() === 'da'
+  const card = _holdCards[params.slug]
+  const cardName = card ? (isDa ? card.name_da : card.name_en) : (isDa ? hold.name_da : hold.name_en)
+  const cardAge = card ? (isDa ? card.age_da : card.age_en) : (isDa ? hold.age_da : hold.age_en)
+  const cardTime = card ? (isDa ? card.time_da : card.time_en) : (isDa ? hold.time_da : hold.time_en)
+  const cardEquipment = card ? (isDa ? card.equipment_da : card.equipment_en) : (isDa ? hold.boat_da : hold.boat_en)
   return `
     <section class="page-hero"><div class="container">
-      <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/" data-link><span class="da">Forside</span><span class="en">Home</span></a><span class="breadcrumb__sep">›</span><a href="/hold" data-link><span class="da">Hold</span><span class="en">Teams</span></a><span class="breadcrumb__sep">›</span><span>${isDa ? hold.name_da : hold.name_en}</span></nav>
-      <h1 class="page-hero__title">${isDa ? hold.name_da : hold.name_en}</h1>
-      <p class="page-hero__sub">${isDa ? hold.age_da : hold.age_en} · ${isDa ? hold.time_da : hold.time_en}</p>
+      <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/" data-link><span class="da">Forside</span><span class="en">Home</span></a><span class="breadcrumb__sep">›</span><a href="/hold" data-link><span class="da">Hold</span><span class="en">Teams</span></a><span class="breadcrumb__sep">›</span><span>${cardName}</span></nav>
+      <h1 class="page-hero__title">${cardName}</h1>
+      <p class="page-hero__sub">${cardAge} · ${cardTime}</p>
     </div></section>
     <section class="section section--mid"><div class="container">
       <div class="page-content">
         <div class="page-content__text">
           <p class="section-body">${isDa ? hold.description_da : hold.description_en}</p>
           <div class="info-grid">
-            <div class="info-item"><span class="info-item__label"><span class="da">Alder</span><span class="en">Age</span></span><span class="info-item__value">${isDa ? hold.age_da : hold.age_en}</span></div>
-            <div class="info-item"><span class="info-item__label"><span class="da">Tidspunkt</span><span class="en">Time</span></span><span class="info-item__value">${isDa ? hold.time_da : hold.time_en}</span></div>
+            <div class="info-item"><span class="info-item__label"><span class="da">Alder</span><span class="en">Age</span></span><span class="info-item__value">${cardAge}</span></div>
+            <div class="info-item"><span class="info-item__label"><span class="da">Tidspunkt</span><span class="en">Time</span></span><span class="info-item__value">${cardTime}</span></div>
             <div class="info-item"><span class="info-item__label"><span class="da">Sæson</span><span class="en">Season</span></span><span class="info-item__value">${isDa ? hold.season_da : hold.season_en}</span></div>
-            <div class="info-item"><span class="info-item__label"><span class="da">Båd</span><span class="en">Boat</span></span><span class="info-item__value">${isDa ? hold.boat_da : hold.boat_en}</span></div>
+            <div class="info-item"><span class="info-item__label"><span class="da">Båd</span><span class="en">Boat</span></span><span class="info-item__value">${cardEquipment}</span></div>
           </div>
         </div>
         <div class="page-content__gallery" id="page-gallery" data-folder="${hold.image_folder}"></div>
@@ -481,6 +486,6 @@ async function loadPageGallery(folder: string): Promise<void> {
     const data = await res.json()
     const images = data.images || []
     if (!images.length) { container.innerHTML = '<p class="gallery__empty">No images yet</p>'; return }
-    container.innerHTML = `<div class="page-gallery-grid">${images.map((img: { url: string; caption_da: string; caption_en: string }) => `<div class="page-gallery-item"><img src="${img.url}" alt="${img.caption_da || ''}" loading="lazy" /><div class="page-gallery-item__caption"><span class="da">${img.caption_da}</span><span class="en">${img.caption_en}</span></div></div>`).join('')}</div>`
+    container.innerHTML = `<div class="page-gallery-grid">${images.map((img: { url: string; caption_da: string; caption_en: string }) => `<div class="page-gallery-item" data-caption-da="${img.caption_da || ''}" data-caption-en="${img.caption_en || ''}"><img src="${img.url}" alt="${img.caption_da || ''}" loading="lazy" /><div class="page-gallery-item__caption"><span class="da">${img.caption_da}</span><span class="en">${img.caption_en}</span></div></div>`).join('')}</div>`
   } catch { /* ignore */ }
 }
