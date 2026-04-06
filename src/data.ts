@@ -26,6 +26,8 @@ export interface AboutSection {
   title_en: string
   content_da?: string
   content_en?: string
+  sections_da?: { title: string; text: string }[]
+  sections_en?: { title: string; text: string }[]
   members_da?: AboutMember[]
   members_en?: AboutMember[]
 }

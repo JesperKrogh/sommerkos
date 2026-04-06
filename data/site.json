@@ -9,12 +9,32 @@
     "facebook": "https://www.facebook.com/kossejlsport"
   },
 
-  "about": {
+"about": {
     "vedtaegter": {
       "title_da": "Vedtægter",
       "title_en": "Constitution",
-      "content_da": "**§ 1. Navn, hjemsted og stander**\n\nKlubbens navn er **KØS Sejlsport**, der forkortes **KØS**.\n\nKlubben har hjemsted i Københavns Kommune.\n\nKlubbens stander har mørk blå bundfarve. Herpå ses en hvid svane med 3 små unger.\n\n\n**§ 2. Klubbens formål**\n\n- at etablere og drive gode og trygge faciliteter og rammer for sejlads for børn og unge i alderen 4-25 år.\n- at introducere og udvikle børn og unges glæde og færdigheder knyttet til sejlads og andre nært relaterede oplevelser ved og på vandet\n- at understøtte børn og unges trivsel, fællesskab og forståelse for det gode kammeratskab i nærhed med naturen\n- at sikre en høj grad af forståelse for sikkerhed, miljø og bæredygtighed på og ved vandet.\n- at give medlemmerne viden, praktiske færdigheder i sejlads med joller og kølbåde samt evt. flerskrogsbåde.\n- at inspirere og udvikle udvalgte sejlere, forældre, ledere og trænere til at varetage undervisningen og træning af klubbens medlemmer.\n- at støtte og opmuntre medlemmerne til at deltage i lokale, nationale og internationale sejlsports stævner.\n- at arrangere udflugter, sommerferie, ungdomsstævner, kapsejladser og andre sociale tiltag for klubbens medlemmer.\n\n**§ 3. Dansk Sejlunion**\n\nKlubben er medlem af Dansk Sejlunion (DS) og er underlagt DS's vedtægter og bestemmelser.\n\n**§ 4. Optagelse af medlemmer**\n\nSom medlemmer kan optages børn og unge fra det fyldte 4. år til og med det år, hvor de fylder 25 år.\n\nAktivt medlemskab ophører med udgangen af det år, hvor medlemmer fylder 25 år.\n\n**§ 5. Kontingent**\n\nKontingentet for det faste medlemskab fastsættes for ét år ad gangen på den ordinære generalforsamling.\n\n**§ 6. Udmeldelse og eksklusion**\n\nUdmeldelse af klubben skal ske skriftligt. Ved kontingentrestance over 3 måneder, kan bestyrelsen ekskludere medlemmet.\n\n\n**§ 7. Ordinær generalforsamling**\n\nGeneralforsamlingen, der er klubbens øverste myndighed, afholdes hvert år i marts måned.\n\n**§ 8. Ekstraordinær generalforsamling**\n\nEkstraordinær generalforsamling indkaldes af bestyrelsen, når den finder det nødvendigt eller når mindst 20% af de stemmeberettigede medlemmer anmoder om det.\n\n\n**§ 9. Bestyrelse**\n\nKlubben ledes af en bestyrelse på mindst 5 og max 8 personer. Bestyrelsen konstituerer sig efter generalforsamlingen.\n\n**§ 10. Regnskab og revision**\n\nRegnskabsåret følger kalenderåret. Årsregnskabet forelægges generalforsamlingen til godkendelse.\n\n**§ 11. Klubbens opløsning**\n\nI tilfælde af klubbens opløsning skal de aktiver, der er i behold, anvendes til ungdomsarbejde i K.A.S, ØSF og Sejlklubben Sundet.\n\n*Vedtægter besluttet på generalforsamlingen den 19. marts 2024.*",
-      "content_en": "**§ 1. Name, residence and pennant**\n\nThe club's name is **KØS Sejlsport**, abbreviated **KØS**.\n\n\nThe club is based in Copenhagen Municipality.\n\n**§ 2. Club purpose**\n\n- To establish and operate good and safe facilities for sailing for children and youth aged 4-25.\n- To introduce and develop children's joy and skills related to sailing and other water experiences\n- To support children's well-being, community and understanding of good companionship near nature\n- To ensure a high degree of understanding for safety, environment and sustainability on the water.\n- To provide members with knowledge and practical sailing skills in dinghies and keelboats\n- To support members to participate in local, national and international sailing events.\n\n**§ 3. Danish Sailing Association**\nThe club is a member of the Danish Sailing Association (DS).\n\n**§ 4. Membership**\n\nChildren and youth from age 4 to age 25 can become members.\n\n**§ 5. Subscription**\n\nThe subscription is determined annually at the general meeting.\n\n**§ 6. Resignation and exclusion**\n\nResignation must be made in writing.\n\n**§ 7. Ordinary general meeting**\n\nThe general meeting is held annually in March.\n\n**§ 9. Board**\n\nThe club is managed by a board of 5-8 members.\n\n*Constitution decided at the general meeting on March 19, 2024.*"
+      "sections_da": [
+        { "title": "§ 1. Navn, hjemsted og stander", "text": "Klubbens navn er KØS Sejlsport, der forkortes KØS. Klubben har hjemsted i Københavns Kommune. Klubbens stander har mørk blå bundfarve. Herpå ses en hvid svane med 3 små unger." },
+        { "title": "§ 2. Klubbens formål", "text": "at etablere og drive gode og trygge faciliteter og rammer for sejlads for børn og unge i alderen 4-25 år. at introducere og udvikle børn og unges glæde og færdigheder knyttet til sejlads og andre nært relaterede oplevelser ved og på vandet. at understøtte børn og unges trivsel, fællesskab og forståelse for det gode kammeratskab i nærhed med naturen. at sikre en høj grad af forståelse for sikkerhed, miljø og bæredygtighed på og ved vandet. at give medlemmerne viden, praktiske færdigheder i sejlads med joller og kølbåde samt evt. flerskrogsbåde. at inspirere og udvikle udvalgte sejlere, forældre, ledere og trænere til at varetage undervisningen og træning af klubbens medlemmer. at støtte og opmuntre medlemmerne til at deltage i lokale, nationale og internationale sejlsports stævner. at arrangere udflugter, sommerferie, ungdomsstævner, kapsejladser og andre sociale tiltag for klubbens medlemmer." },
+        { "title": "§ 3. Dansk Sejlunion", "text": "Klubben er medlem af Dansk Sejlunion (DS) og er underlagt DS's vedtægter og bestemmelser." },
+        { "title": "§ 4. Optagelse af medlemmer", "text": "Som medlemmer kan optages børn og unge fra det fyldte 4. år til og med det år, hvor de fylder 25 år. Aktivt medlemskab ophører med udgangen af det år, hvor medlemmer fylder 25 år." },
+        { "title": "§ 5. Kontingent", "text": "Kontingentet for det faste medlemskab fastsættes for ét år ad gangen på den ordinære generalforsamling. Kontingentet kan være differentieret ift. holdtype og alder. Bestyrelsen fastsætter, hvor mange rater årskontingentet deles op i." },
+        { "title": "§ 6. Udmeldelse og eksklusion", "text": "Udmeldelse af klubben skal ske skriftligt. Ved kontingentrestance over 3 måneder, kan bestyrelsen ekskludere medlemmet." },
+        { "title": "§ 7. Ordinær generalforsamling", "text": "Generalforsamlingen, der er klubbens øverste myndighed, afholdes hvert år i marts måned." },
+        { "title": "§ 9. Bestyrelse", "text": "Klubben ledes af en bestyrelse på mindst 5 og max 8 personer. Bestyrelsen konstituerer sig efter generalforsamlingen." },
+        { "title": "§ 10. Regnskab og revision", "text": "Regnskabsåret følger kalenderåret. Årsregnskabet forelægges generalforsamlingen til godkendelse." }
+      ],
+      "sections_en": [
+        { "title": "§ 1. Name, residence and pennant", "text": "The club's name is KØS Sejlsport, abbreviated KØS. The club is based in Copenhagen Municipality." },
+        { "title": "§ 2. Club purpose", "text": "To establish and operate good and safe facilities for sailing for children and youth aged 4-25. To introduce and develop children's joy and skills related to sailing and other water experiences. To support children's well-being and community. To ensure understanding for safety, environment and sustainability." },
+        { "title": "§ 3. Danish Sailing Association", "text": "The club is a member of the Danish Sailing Association (DS)." },
+        { "title": "§ 4. Membership", "text": "Children and youth from age 4 to age 25 can become members." },
+        { "title": "§ 5. Subscription", "text": "The subscription is determined annually at the general meeting." },
+        { "title": "§ 6. Resignation and exclusion", "text": "Resignation must be made in writing." },
+        { "title": "§ 7. Ordinary general meeting", "text": "The general meeting is held annually in March." },
+        { "title": "§ 9. Board", "text": "The club is managed by a board of 5-8 members." },
+        { "title": "§ 10. Accounts and audit", "text": "The financial year follows the calendar year." }
+      ]
     },
     "bestyrelsen": {
       "title_da": "Bestyrelsen",
@@ -38,12 +58,39 @@
         { "name": "Anton Seehausen", "role": "Board member, head trainer", "bio": "", "phone": "20676460", "email": "anton@seehausen.nu" }
       ]
     },
-    "sikkerhed": {
+"sikkerhed": {
       "title_da": "Sikkerhedspolitik",
       "title_en": "Safety Policy",
-      "content_da": "## Mål\n\nSikkerhed er vores højeste prioritet i KØS Sejlsport. Vores mål er at sikre, at ingen kommer til skade under aktiviteterne, og at både sejlere, trænere og forældre føler sig trygge.\n\n## Trænere\n\nTrænernes kompetencer og adfærd er afgørende for sikkerheden. Derfor fokuserer vi på:\n- Faglige færdigheder inden for sejlads og svømning.\n- Førstehjælp og livredning.\n- Sikker sejlads med følgebåde.\n\n\n## Sejlere\n\n**Krav til jollesejlere:**\n- En årlig kæntringsprøve under kontrollerede forhold.\n- Dokumentation for, at de kan svømme 200 meter (med svømmevest og våddragt).\n\n\n**Påkrævet sikkerhedsudstyr:**\n- Alle sejlere og forældre skal altid bære godkendte redningsveste eller svømmeveste på jollerampen, broer og i bådene.\n- Selvoppustelige redningsveste er ikke tilladt.\n\n## Følgebåde\n\n- Speedbådskørekort kræves.\n- Medbringelse af VHF-radio og \"Mand-overbord\"-sikringssnor.\n- Hastighedsbegrænsningen i Svanemøllebugten er 6 knob.\n\n\n## Nødhjælp\n\n- Nødhjælpskasse i klubhuset.\n- Redningskranse på optimistskuret.\n- Hjertestarter ved Sejlklubben Sundets indgang.\n\n*Gældende fra maj 2024*",
-      "content_en": "## Goal\n\nSafety is our highest priority at KØS Sejlsport. Our goal is to ensure that no one is injured during activities.\n\n## Trainers\n\nTrainer competencies and behavior are crucial for safety. We focus on:\n- Professional skills in sailing and swimming.\n- First aid and lifesaving.\n- Safe sailing with support boats.\n\n\n## Sailors\n\n\n**Requirements for dinghy sailors:**\n- An annual capsizing test under controlled conditions.\n- Documentation that they can swim 200 meters.\n\n**Required safety equipment:**\n- All sailors and parents must always wear approved life jackets on the dinghy ramp, bridges and in boats.\n- Self-inflatable life jackets are not permitted.\n\n## Support boats\n\n- Speedboat license required.\n- VHF radio and \"Man overboard\" safety line required.\n- Speed limit in Svanemølle Bay is 6 knots.\n\n## Emergency aid\n\n- First aid kit in the clubhouse.\n- Life rings on the optimist shed.\n- Defibrillator at the entrance of Sejlklubben Sundet.\n\n*Effective from May 2024*"
+      "sections_da": [
+        { "title": "Mål", "text": "Sikkerhed er vores højeste prioritet i KØS Sejlsport. Vores mål er at sikre, at ingen kommer til skade under aktiviteterne, og at både sejlere, trænere og forældre føler sig trygge." },
+        { "title": "Trænere", "text": "Trænernes kompetencer og adfærd er afgørende for sikkerheden. Vi fokuserer på faglige færdigheder inden for sejlads og svømning, førstehjælp og livredning, samt sikker sejlads med følgebåde." },
+        { "title": "Krav til jollesejlere", "text": "En årlig kæntringsprøve under kontrollerede forhold. Dokumentation for at de kan svømme 200 meter med svømmevest og våddragt." },
+        { "title": "Påkrævet sikkerhedsudstyr", "text": "Alle sejlere og forældre skal altid bære godkendte redningsveste eller svømmeveste på jollerampen, broer og i bådene. Selvoppustelige redningsveste er ikke tilladt." },
+        { "title": "Følgebåde", "text": "Speedbådskørekort kræves. Medbringelse af VHF-radio og Mand-overbord-sikringssnor. Hastighedsbegrænsningen i Svanemøllebugten er 6 knob." },
+        { "title": "Nødhjælp", "text": "Nødhjælpskasse i klubhuset. Redningskranse på optimistskuret. Hjertestarter ved Sejlklubben Sundets indgang." }
+      ],
+      "sections_en": [
+        { "title": "Goal", "text": "Safety is our highest priority at KØS Sejlsport. Our goal is to ensure that no one is injured during activities." },
+        { "title": "Trainers", "text": "Trainer competencies are crucial for safety. We focus on professional skills in sailing and swimming, first aid and lifesaving, and safe sailing with support boats." },
+        { "title": "Requirements for dinghy sailors", "text": "An annual capsizing test under controlled conditions. Documentation that they can swim 200 meters." },
+        { "title": "Required safety equipment", "text": "All sailors and parents must always wear approved life jackets on the dinghy ramp, bridges and in boats. Self-inflatable life jackets are not permitted." },
+        { "title": "Support boats", "text": "Speedboat license required. VHF radio and Man overboard safety line required. Speed limit in Svanemølle Bay is 6 knots." },
+        { "title": "Emergency aid", "text": "First aid kit in the clubhouse. Life rings on the optimist shed. Defibrillator at the entrance of Sejlklubben Sundet." }
+      ]
     },
+    "udmeldelse": {
+      "title_da": "Udmeldelse",
+      "title_en": "Resignation",
+      "sections_da": [
+        { "title": "Forlader du os?", "text": "Det er vi selvfølgeligt kede af! Vi håber du har haft en god tid i KØS og gerne vil anbefale os til venner og bekendte." },
+        { "title": "Sådan foregår udmelding", "text": "Udmeldelse sker via vores Google Formular: https://forms.gle/qPGCjq6VU5Nj4UwbA. Formularen stiller lidt spørgsmål fordi vi super gerne vil vide hvad vi har gjort godt og kan gøre endnu bedre. Udmeldelse fra Holdsport vil efterfølgende ske manuelt fra klubbens side." }
+      ],
+      "sections_en": [
+        { "title": "Are you leaving us?", "text": "We're sorry to see you go! We hope you had a good time at KØS and would recommend us to friends and acquaintances." },
+        { "title": "How to resign", "text": "Resignation is done via our Google Form: https://forms.gle/qPGCjq6VU5Nj4UwbA. The form asks a few questions because we'd really like to know what we did well and can do even better. Resignation from Holdsport will subsequently be done manually by the club." }
+      ]
+    }
+  },
     "udmeldelse": {
       "title_da": "Udmeldelse",
       "title_en": "Resignation",

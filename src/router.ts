@@ -391,16 +391,14 @@ function renderGalleryPage(): string {
 
 // ── Page: Om (About) ────────────────────────────────────────────────────────
 
-function renderSimpleText(text: string | undefined): string {
-  if (!text) return ''
-  return text
-    .replace(/\*\*/g, '')
-    .replace(/^-+ /gm, '')
-    .split('\n\n')
-    .map(p => p.trim())
-    .filter(p => p && !p.match(/^-+$/))
-    .map(p => `<p>${p.replace(/\n/g, '<br>')}</p>`)
-    .join('')
+function renderAboutSections(sections: { title: string; text: string }[] | undefined): string {
+  if (!sections) return ''
+  return sections.map(s => `
+    <div class="about-subsection">
+      <h3 class="about-subsection__title">${s.title}</h3>
+      <p class="about-subsection__text">${s.text}</p>
+    </div>
+  `).join('')
 }
 
 function renderOmPage(data: SiteData): string {
@@ -440,7 +438,7 @@ function renderOmPage(data: SiteData): string {
       <div class="about-sections">
         <div class="about-section" id="vedtaegter">
           <h2 class="about-section__title">${isDa ? vedtaegter.title_da : vedtaegter.title_en}</h2>
-          <div class="about-section__content">${renderSimpleText(isDa ? vedtaegter.content_da : vedtaegter.content_en)}</div>
+          <div class="about-section__content">${renderAboutSections(isDa ? vedtaegter.sections_da : vedtaegter.sections_en)}</div>
         </div>
         <div class="about-section" id="bestyrelsen">
           <h2 class="about-section__title">${isDa ? bestyrelsen.title_da : bestyrelsen.title_en}</h2>
@@ -448,11 +446,11 @@ function renderOmPage(data: SiteData): string {
         </div>
         <div class="about-section" id="sikkerhed">
           <h2 class="about-section__title">${isDa ? sikkerhed.title_da : sikkerhed.title_en}</h2>
-          <div class="about-section__content">${renderSimpleText(isDa ? sikkerhed.content_da : sikkerhed.content_en)}</div>
+          <div class="about-section__content">${renderAboutSections(isDa ? sikkerhed.sections_da : sikkerhed.sections_en)}</div>
         </div>
         <div class="about-section" id="udmeldelse">
           <h2 class="about-section__title">${isDa ? udmeldelse.title_da : udmeldelse.title_en}</h2>
-          <div class="about-section__content">${renderSimpleText(isDa ? udmeldelse.content_da : udmeldelse.content_en)}</div>
+          <div class="about-section__content">${renderAboutSections(isDa ? udmeldelse.sections_da : udmeldelse.sections_en)}</div>
         </div>
       </div>
     </div></section>
@@ -498,7 +496,18 @@ export async function initRouter(): Promise<void> {
   window.addEventListener('route-change', handleRoute)
   document.addEventListener('click', (e) => {
     const link = (e.target as HTMLElement).closest('[data-link]') as HTMLAnchorElement
-    if (link && link.href.startsWith(window.location.origin)) {
+    if (!link) return
+    const href = link.getAttribute('href') || ''
+    if (href.startsWith('#')) {
+      e.preventDefault()
+      const target = document.getElementById(href.slice(1))
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' })
+        history.replaceState(null, '', href)
+      }
+      return
+    }
+    if (link.href.startsWith(window.location.origin)) {
       e.preventDefault()
       navigate(link.href.replace(window.location.origin, ''))
     }
