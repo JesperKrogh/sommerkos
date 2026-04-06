@@ -26,6 +26,7 @@ services:
       - "8888:80"
     volumes:
       - ./images-web:/usr/share/nginx/images-web:ro
+      - ./images-overview:/usr/share/nginx/images-overview:ro
     depends_on:
       - api
     restart: unless-stopped

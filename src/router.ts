@@ -50,7 +50,7 @@ function getHoldCardImage(slug: string): string {
     'j70': 'hold-j70-træning.jpg',
   }
   const img = imageMap[slug] || imageMap['j70']
-  return `/images-web/images-overview/${img}`
+  return `/images-overview/${img}`
 }
 
 function renderFrontpage(data: SiteData): string {
