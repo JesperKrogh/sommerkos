@@ -236,7 +236,7 @@ function renderHoldOverview(data: SiteData): string {
     <section class="page-hero"><div class="container">
       <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/" data-link><span class="da">Forside</span><span class="en">Home</span></a><span class="breadcrumb__sep">›</span><span><span class="da">Hold</span><span class="en">Teams</span></span></nav>
       <h1 class="page-hero__title"><span class="da">Hold</span><span class="en">Teams</span></h1>
-      <p class="page-hero__sub"><span class="da">Find det hold der passer til dig — uanset alder og niveau</span><span class="en">Find the team that suits you — regardless of age and level</span></p>
+      <p class="page-hero__sub"><span class="da">Find det hold der passer til dig — uanset alder og niveau. KØS Sejlsport har et tilbud til alle mellem 6 og 25 år — aldersintervallerne beskriver de typiske aldersgrupper på holdene.</span><span class="en">Find the team that suits you — regardless of age and level. KØS Sejlsport has an offering for everyone between 6 and 25 years — the age ranges describe the typical age groups on the teams.</span></p>
     </div></section>
     <section class="section section--mid"><div class="container">
       <div class="hold-grid">${holdCards}</div>
