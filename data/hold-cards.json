@@ -7,8 +7,8 @@
       "age_en": "6–9 years",
       "time_da": "Tirsdag 17.00–19.00 eller lørdag 9.00–11.00",
       "time_en": "Tuesday 17:00–19:00 or Saturday 9:00–11:00",
-      "equipment_da": "Optimist",
-      "equipment_en": "Optimist"
+      "equipment_da": "Optimist, SUP, RS Zest",
+      "equipment_en": "Optimist, SUP, RS Zest"
     },
     "begynder": {
       "name_da": "Begynder",
@@ -17,8 +17,8 @@
       "age_en": "10–15 years",
       "time_da": "Mandag, onsdag eller torsdag 17.00–19.00",
       "time_en": "Monday, Wednesday or Thursday 17:00–19:00",
-      "equipment_da": "Optimist / RS Feva",
-      "equipment_en": "Optimist / RS Feva"
+      "equipment_da": "Optimist, RS Tera, RS Zest",
+      "equipment_en": "Optimist, RS Tera, RS Zest"
     },
     "fortsaetter": {
       "name_da": "Fortsætter",
@@ -27,8 +27,8 @@
       "age_en": "10–17 years",
       "time_da": "Tirsdag eller onsdag 17.00–19.00",
       "time_en": "Tuesday or Wednesday 17:00–19:00",
-      "equipment_da": "RS Feva / RS Zest",
-      "equipment_en": "RS Feva / RS Zest"
+      "equipment_da": "Optimist, RS Feva, RS Tera, ILCA",
+      "equipment_en": "Optimist, RS Feva, RS Tera, ILCA"
     },
     "ovede": {
       "name_da": "Øvede",
@@ -37,8 +37,8 @@
       "age_en": "12–18 years",
       "time_da": "Mandag 17.00–19.00",
       "time_en": "Monday 17:00–19:00",
-      "equipment_da": "ILCA / Laser / RS Feva",
-      "equipment_en": "ILCA / Laser / RS Feva"
+      "equipment_da": "RS Feva, RS Tera, ILCA",
+      "equipment_en": "RS Feva, RS Tera, ILCA"
     },
     "adventure": {
       "name_da": "Adventure",
@@ -47,8 +47,8 @@
       "age_en": "12–18 years",
       "time_da": "Tirsdag eller torsdag 17.00–19.00",
       "time_en": "Tuesday or Thursday 17:00–19:00",
-      "equipment_da": "RS Feva / J70 / H-Båd",
-      "equipment_en": "RS Feva / J70 / H-Boat"
+      "equipment_da": "H-Båd",
+      "equipment_en": "H-Boat"
     },
     "j70-youngster": {
       "name_da": "J70 Youngster",
