@@ -391,6 +391,18 @@ function renderGalleryPage(): string {
 
 // ── Page: Om (About) ────────────────────────────────────────────────────────
 
+function renderSimpleText(text: string | undefined): string {
+  if (!text) return ''
+  return text
+    .replace(/\*\*/g, '')
+    .replace(/^-+ /gm, '')
+    .split('\n\n')
+    .map(p => p.trim())
+    .filter(p => p && !p.match(/^-+$/))
+    .map(p => `<p>${p.replace(/\n/g, '<br>')}</p>`)
+    .join('')
+}
+
 function renderOmPage(data: SiteData): string {
   const isDa = getLang() === 'da'
   const { vedtaegter, bestyrelsen, sikkerhed, udmeldelse } = data.about
@@ -410,16 +422,25 @@ function renderOmPage(data: SiteData): string {
     </div>
   `).join('') : ''
 
+  const tocItems = [
+    { id: 'vedtaegter', label: isDa ? vedtaegter.title_da : vedtaegter.title_en },
+    { id: 'bestyrelsen', label: isDa ? bestyrelsen.title_da : bestyrelsen.title_en },
+    { id: 'sikkerhed', label: isDa ? sikkerhed.title_da : sikkerhed.title_en },
+    { id: 'udmeldelse', label: isDa ? udmeldelse.title_da : udmeldelse.title_en },
+  ]
+  const tocHtml = tocItems.map(item => `<a href="#${item.id}" class="toc-link" data-link>${item.label}</a>`).join('')
+
   return `
     <section class="page-hero"><div class="container">
       <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/" data-link><span class="da">Forside</span><span class="en">Home</span></a><span class="breadcrumb__sep">›</span><span><span class="da">Om KØS</span><span class="en">About KØS</span></span></nav>
       <h1 class="page-hero__title"><span class="da">Om KØS</span><span class="en">About KØS</span></h1>
     </div></section>
     <section class="section section--mid"><div class="container">
+      <nav class="toc">${tocHtml}</nav>
       <div class="about-sections">
         <div class="about-section" id="vedtaegter">
           <h2 class="about-section__title">${isDa ? vedtaegter.title_da : vedtaegter.title_en}</h2>
-          <div class="about-section__content">${isDa ? vedtaegter.content_da : vedtaegter.content_en}</div>
+          <div class="about-section__content">${renderSimpleText(isDa ? vedtaegter.content_da : vedtaegter.content_en)}</div>
         </div>
         <div class="about-section" id="bestyrelsen">
           <h2 class="about-section__title">${isDa ? bestyrelsen.title_da : bestyrelsen.title_en}</h2>
@@ -427,11 +448,11 @@ function renderOmPage(data: SiteData): string {
         </div>
         <div class="about-section" id="sikkerhed">
           <h2 class="about-section__title">${isDa ? sikkerhed.title_da : sikkerhed.title_en}</h2>
-          <div class="about-section__content">${isDa ? sikkerhed.content_da : sikkerhed.content_en}</div>
+          <div class="about-section__content">${renderSimpleText(isDa ? sikkerhed.content_da : sikkerhed.content_en)}</div>
         </div>
         <div class="about-section" id="udmeldelse">
           <h2 class="about-section__title">${isDa ? udmeldelse.title_da : udmeldelse.title_en}</h2>
-          <div class="about-section__content">${isDa ? udmeldelse.content_da : udmeldelse.content_en}</div>
+          <div class="about-section__content">${renderSimpleText(isDa ? udmeldelse.content_da : udmeldelse.content_en)}</div>
         </div>
       </div>
     </div></section>

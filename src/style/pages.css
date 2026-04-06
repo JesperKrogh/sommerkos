@@ -71,6 +71,32 @@
   max-width: 65ch;
 }
 
+/* ── Table of Contents ────────────────────────────────────────────────────── */
+.toc {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm) var(--space-lg);
+  margin-bottom: var(--space-xl);
+  padding: var(--space-md) var(--space-lg);
+  background: rgba(0,0,0,0.03);
+  border-radius: var(--radius-md);
+}
+
+.toc-link {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--color-accent);
+  text-decoration: none;
+  padding: 0.25rem 0;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.15s, color 0.15s;
+}
+
+.toc-link:hover {
+  color: var(--color-accent-dark);
+  border-bottom-color: var(--color-accent);
+}
+
 /* ── About Page Sections ──────────────────────────────────────────────────── */
 .about-sections {
   display: flex;
@@ -97,7 +123,7 @@
 
 .about-section__content {
   font-size: 1rem;
-  color: var(--color-foam);
+  color: var(--color-text);
   line-height: 1.8;
   max-width: 70ch;
 }
