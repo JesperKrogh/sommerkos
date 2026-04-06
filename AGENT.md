@@ -12,6 +12,8 @@ After completing any task, create a git commit with a descriptive message. Use `
 
 ## Testing
 
-- Use `playwright-cli` for browser testing
-- Run tests: `npx playwright-cli test`
-- Open UI: `npx playwright-cli open`
+- Use Docker endpoint for testing: `http://localhost:8888/`
+- The `sommer-i-kos-frontend-1` container serves the production build
+- After code changes, rebuild with: `docker-compose build frontend` or `docker-compose up --build frontend`
+- Use `playwright-cli open http://localhost:8888/` to test
+- Take screenshots with: `playwright-cli screenshot --filename <name>.png`
