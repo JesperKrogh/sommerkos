@@ -8,26 +8,8 @@ export interface SiteData {
     website: string
     facebook: string
   }
-  hold: Hold[]
   flade: Flade[]
   events: Event[]
-}
-
-export interface Hold {
-  slug: string
-  name_da: string
-  name_en: string
-  age_da: string
-  age_en: string
-  time_da: string
-  time_en: string
-  season_da: string
-  season_en: string
-  boat_da: string
-  boat_en: string
-  description_da: string
-  description_en: string
-  image_folder: string
 }
 
 export interface Flade {
@@ -80,6 +62,7 @@ export interface HoldCard {
   coaches_da: string[]
   coaches_en: string[]
   signup_url: string
+  image_folder: string
 }
 
 export type HoldCards = Record<string, HoldCard>

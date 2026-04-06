@@ -23,7 +23,8 @@
       "expectations_en": ["Shared meals are an important part of the club's spirit – bring food 1-2 times per season", "Parents expected to help with practical tasks", "Stay updated on Holdsport and Facebook"],
       "coaches_da": ["Emma Hospes (Lørdag formiddag)", "Jesper Krogh (Tirsdag)", "Christian Brevadt (Tirsdag)"],
       "coaches_en": ["Emma Hospes (Saturday morning)", "Jesper Krogh (Tuesday)", "Christian Brevadt (Tuesday)"],
-      "signup_url": "https://www.kossejlsport.dk/klub/kos-sejlsport/sider/tilmelding"
+      "signup_url": "https://www.kossejlsport.dk/klub/kos-sejlsport/sider/tilmelding",
+      "image_folder": "mini-sejler"
     },
     "begynder": {
       "name_da": "Begynder",
@@ -48,7 +49,8 @@
       "expectations_en": ["Engage in the club's activities", "Follow the trainer's instructions", "Be open to new challenges"],
       "coaches_da": [],
       "coaches_en": [],
-      "signup_url": "https://www.kossejlsport.dk/klub/kos-sejlsport/sider/tilmelding"
+      "signup_url": "https://www.kossejlsport.dk/klub/kos-sejlsport/sider/tilmelding",
+      "image_folder": "begynder"
     },
     "fortsaetter": {
       "name_da": "Fortsætter",
@@ -73,7 +75,8 @@
       "expectations_en": ["Participate actively in training", "Be ready for challenges"],
       "coaches_da": [],
       "coaches_en": [],
-      "signup_url": "https://www.kossejlsport.dk/klub/kos-sejlsport/sider/tilmelding"
+      "signup_url": "https://www.kossejlsport.dk/klub/kos-sejlsport/sider/tilmelding",
+      "image_folder": "fortsaetter"
     },
     "ovede": {
       "name_da": "Øvede",
@@ -98,7 +101,8 @@
       "expectations_en": ["Dedicated training", "Racing when possible"],
       "coaches_da": [],
       "coaches_en": [],
-      "signup_url": "https://www.kossejlsport.dk/klub/kos-sejlsport/sider/tilmelding"
+      "signup_url": "https://www.kossejlsport.dk/klub/kos-sejlsport/sider/tilmelding",
+      "image_folder": "undervisning"
     },
     "adventure": {
       "name_da": "Adventure",
@@ -123,7 +127,8 @@
       "expectations_en": ["Sense of adventure", "Willing to participate in overnight stays"],
       "coaches_da": [],
       "coaches_en": [],
-      "signup_url": "https://www.kossejlsport.dk/klub/kos-sejlsport/sider/tilmelding"
+      "signup_url": "https://www.kossejlsport.dk/klub/kos-sejlsport/sider/tilmelding",
+      "image_folder": "adventure"
     },
     "j70-youngster": {
       "name_da": "J70 Youngster",
@@ -148,7 +153,8 @@
       "expectations_en": ["Crew cooperation", "Learning keelboat sailing"],
       "coaches_da": [],
       "coaches_en": [],
-      "signup_url": "https://www.kossejlsport.dk/klub/kos-sejlsport/sider/tilmelding"
+      "signup_url": "https://www.kossejlsport.dk/klub/kos-sejlsport/sider/tilmelding",
+      "image_folder": "j70"
     },
     "j70-begyndere": {
       "name_da": "J70 Begynder",
@@ -173,7 +179,8 @@
       "expectations_en": ["Open to new challenges", "Crew cooperation"],
       "coaches_da": [],
       "coaches_en": [],
-      "signup_url": "https://www.kossejlsport.dk/klub/kos-sejlsport/sider/tilmelding"
+      "signup_url": "https://www.kossejlsport.dk/klub/kos-sejlsport/sider/tilmelding",
+      "image_folder": "j70"
     },
     "j70": {
       "name_da": "J70 Træning",

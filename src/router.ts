@@ -59,9 +59,10 @@ function renderFrontpage(data: SiteData): string {
   const lang = getLang()
   const isDa = lang === 'da'
   const upcomingEvents = data.events.slice(0, 3)
-  const holdCards = data.hold.map((h) => {
-    const card = _holdCards[h.slug]
-    return `<a href="/hold/${h.slug}" class="hold-card hold-card--with-bg reveal" data-link style="--card-bg: url('${getHoldCardImage(h.slug)}')"><div class="hold-card__name">${isDa ? card.name_da : card.name_en}</div><div class="hold-card__age">${isDa ? card.age_da : card.age_en}</div><div class="hold-card__time">${isDa ? card.time_da : card.time_en}</div></a>`
+  const holdSlugs = Object.keys(_holdCards)
+  const holdCards = holdSlugs.map(slug => {
+    const card = _holdCards[slug]
+    return `<a href="/hold/${slug}" class="hold-card hold-card--with-bg reveal" data-link style="--card-bg: url('${getHoldCardImage(slug)}')"><div class="hold-card__name">${isDa ? card.name_da : card.name_en}</div><div class="hold-card__age">${isDa ? card.age_da : card.age_en}</div><div class="hold-card__time">${isDa ? card.time_da : card.time_en}</div></a>`
   }).join('')
 
   return `
@@ -226,11 +227,12 @@ function renderFrontpage(data: SiteData): string {
 
 // ── Page: Hold Overview ───────────────────────────────────────────────────────
 
-function renderHoldOverview(data: SiteData): string {
+function renderHoldOverview(_data: SiteData): string {
   const isDa = getLang() === 'da'
-  const holdCards = data.hold.map((h) => {
-    const card = _holdCards[h.slug]
-    return `<a href="/hold/${h.slug}" class="hold-card hold-card--with-bg reveal" data-link style="--card-bg: url('${getHoldCardImage(h.slug)}')"><div class="hold-card__name">${isDa ? card.name_da : card.name_en}</div><div class="hold-card__age">${isDa ? card.age_da : card.age_en}</div><div class="hold-card__time">${isDa ? card.time_da : card.time_en}</div><div class="hold-card__boat">${isDa ? card.equipment_da : card.equipment_en}</div></a>`
+  const holdSlugs = Object.keys(_holdCards)
+  const holdCards = holdSlugs.map(slug => {
+    const card = _holdCards[slug]
+    return `<a href="/hold/${slug}" class="hold-card hold-card--with-bg reveal" data-link style="--card-bg: url('${getHoldCardImage(slug)}')"><div class="hold-card__name">${isDa ? card.name_da : card.name_en}</div><div class="hold-card__age">${isDa ? card.age_da : card.age_en}</div><div class="hold-card__time">${isDa ? card.time_da : card.time_en}</div><div class="hold-card__boat">${isDa ? card.equipment_da : card.equipment_en}</div></a>`
   }).join('')
   return `
     <section class="page-hero"><div class="container">
@@ -262,23 +264,22 @@ function renderFladeOverview(data: SiteData): string {
 
 // ── Page: Hold Detail ─────────────────────────────────────────────────────────
 
-function renderHoldPage(data: SiteData, params: Record<string, string>): string {
-  const hold = data.hold.find(h => h.slug === params.slug)
-  if (!hold) return renderNotFound()
-  const isDa = getLang() === 'da'
+function renderHoldPage(_data: SiteData, params: Record<string, string>): string {
   const card = _holdCards[params.slug]
-  const cardName = card ? (isDa ? card.name_da : card.name_en) : (isDa ? hold.name_da : hold.name_en)
-  const cardTagline = card ? (isDa ? card.tagline_da : card.tagline_en) : ''
-  const cardAge = card ? (isDa ? card.age_da : card.age_en) : (isDa ? hold.age_da : hold.age_en)
-  const cardTime = card ? (isDa ? card.time_da : card.time_en) : (isDa ? hold.time_da : hold.time_en)
-  const cardSeason = card ? (isDa ? card.season_da : card.season_en) : (isDa ? hold.season_da : hold.season_en)
-  const cardEquipment = card ? (isDa ? card.equipment_da : card.equipment_en) : (isDa ? hold.boat_da : hold.boat_en)
-  const cardDescription = card ? (isDa ? card.description_da : card.description_en) : (isDa ? hold.description_da : hold.description_en)
-  const activities = card ? (isDa ? card.activities_da : card.activities_en) : []
-  const prerequisites = card ? (isDa ? card.prerequisites_da : card.prerequisites_en) : ''
-  const expectations = card ? (isDa ? card.expectations_da : card.expectations_en) : []
-  const coaches = card ? (isDa ? card.coaches_da : card.coaches_en) : []
-  const signupUrl = card ? card.signup_url : ''
+  if (!card) return renderNotFound()
+  const isDa = getLang() === 'da'
+  const cardName = isDa ? card.name_da : card.name_en
+  const cardTagline = isDa ? card.tagline_da : card.tagline_en
+  const cardAge = isDa ? card.age_da : card.age_en
+  const cardTime = isDa ? card.time_da : card.time_en
+  const cardSeason = isDa ? card.season_da : card.season_en
+  const cardEquipment = isDa ? card.equipment_da : card.equipment_en
+  const cardDescription = isDa ? card.description_da : card.description_en
+  const activities = isDa ? card.activities_da : card.activities_en
+  const prerequisites = isDa ? card.prerequisites_da : card.prerequisites_en
+  const expectations = isDa ? card.expectations_da : card.expectations_en
+  const coaches = isDa ? card.coaches_da : card.coaches_en
+  const signupUrl = card.signup_url
 
   const activitiesHtml = activities.length ? `<div class="hold-detail-section"><h3 class="hold-detail-section__title"><span class="da">Aktiviteter</span><span class="en">Activities</span></h3><ul>${activities.map(a => `<li>${a}</li>`).join('')}</ul></div>` : ''
   const prerequisitesHtml = prerequisites ? `<div class="hold-detail-section"><h3 class="hold-detail-section__title"><span class="da">Forudsætninger</span><span class="en">Prerequisites</span></h3><p>${prerequisites}</p></div>` : ''
@@ -314,7 +315,7 @@ function renderHoldPage(data: SiteData, params: Record<string, string>): string 
             <div class="info-item"><span class="info-item__label"><span class="da">Sæson</span><span class="en">Season</span></span><span class="info-item__value">${cardSeason}</span></div>
             <div class="info-item"><span class="info-item__label"><span class="da">Båd</span><span class="en">Boat</span></span><span class="info-item__value">${cardEquipment}</span></div>
           </div>
-          <div class="page-content__gallery" id="page-gallery" data-folder="${hold.image_folder}"></div>
+          <div class="page-content__gallery" id="page-gallery" data-folder="${card.image_folder}"></div>
         </div>
       </div>
     </div></section>
