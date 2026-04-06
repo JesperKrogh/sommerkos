@@ -188,17 +188,18 @@
   background-size: cover;
   background-position: center;
   background-image: var(--card-bg);
-  min-height: 180px;
+  min-height: 200px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  padding: 1.5rem;
 }
 
 .hold-card--with-bg::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(15,22,40,0.9) 0%, rgba(15,22,40,0.3) 100%);
+  background: linear-gradient(to top, rgba(10,15,30,0.92) 0%, rgba(10,15,30,0.4) 60%, transparent 100%);
   border-radius: inherit;
   z-index: 0;
 }
@@ -208,16 +209,21 @@
   z-index: 1;
 }
 
+.hold-card--with-bg .hold-card__name {
+  color: #ffffff;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+}
+
 .hold-card--with-bg .hold-card__age {
-  color: rgba(255,255,255,0.85);
+  color: rgba(255,255,255,0.9);
 }
 
 .hold-card--with-bg .hold-card__time {
-  color: rgba(255,255,255,0.6);
+  color: rgba(255,255,255,0.7);
 }
 
 .hold-card--with-bg .hold-card__boat {
-  color: rgba(255,255,255,0.8);
+  color: rgba(255,255,255,0.85);
 }
 
 .hold-card:hover {
