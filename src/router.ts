@@ -48,7 +48,7 @@ function getHoldCardImage(folder: string): string {
     'j70': '547784091_1093273136123493_1554396093967990186_n.jpg',
   }
   const img = imageMap[folder] || imageMap['j70']
-  return `/images/${folder}/${img}`
+  return `/images/images-web/${folder}/${img}`
 }
 
 function renderFrontpage(data: SiteData): string {
