@@ -275,6 +275,7 @@ h3 .da, h3 .en {
 .btn--kos {
   background-color: var(--color-text);
   color: #ffffff;
+  border: 1px solid #ffffff;
 }
 
 .btn--kos:hover {
@@ -282,14 +283,14 @@ h3 .da, h3 .en {
 }
 
 .btn--kos-outline {
-  border: 1.5px solid var(--color-text);
-  color: var(--color-text);
-  background: transparent;
+  border: 1px solid #ffffff;
+  color: #ffffff;
+  background: var(--color-text);
 }
 
 .btn--kos-outline:hover {
-  background: var(--color-text);
-  color: #ffffff;
+  background-color: #000000;
+  border-color: #000000;
 }
 
 /* ── Wave Dividers ─────────────────────────────────────────────────────────── */
