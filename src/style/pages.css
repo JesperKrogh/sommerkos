@@ -183,6 +183,27 @@
               box-shadow var(--duration-normal);
 }
 
+.hold-card--with-bg {
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  background-image: var(--card-bg);
+}
+
+.hold-card--with-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(15,22,40,0.85) 0%, rgba(15,22,40,0.6) 100%);
+  border-radius: inherit;
+  z-index: 0;
+}
+
+.hold-card--with-bg > * {
+  position: relative;
+  z-index: 1;
+}
+
 .hold-card:hover {
   transform: translateY(-4px);
   border-color: rgba(255,195,0,0.3);
@@ -197,6 +218,10 @@
   margin-bottom: 0.5rem;
 }
 
+.hold-card--with-bg .hold-card__name {
+  color: #ffffff;
+}
+
 .hold-card__age {
   font-size: 0.85rem;
   color: var(--color-foam);
@@ -208,11 +233,19 @@
   color: var(--text-muted);
 }
 
+.hold-card--with-bg .hold-card__time {
+  color: rgba(255,255,255,0.7);
+}
+
 .hold-card__boat {
   font-size: 0.8rem;
   color: var(--color-sail);
   margin-top: 0.35rem;
   font-weight: 500;
+}
+
+.hold-card--with-bg .hold-card__boat {
+  color: rgba(255,255,255,0.8);
 }
 
 .hold-card__boat {

@@ -38,10 +38,24 @@ addRoute('/galleri', renderGalleryPage)
 
 // ── Page: Frontpage ───────────────────────────────────────────────────────────
 
+function getHoldCardImage(folder: string): string {
+  const imageMap: Record<string, string> = {
+    'mini-sejler': '493080020_990637449720396_8459519070608298571_n.jpg',
+    'begynder': '493080020_990637449720396_8459519070608298571_n.jpg',
+    'provetimer': '494368337_994873475963460_6392584822740470859_n.jpg',
+    'undervisning': '493010834_987538240030317_4017353076541010794_n.jpg',
+    'adventure': '547669701_1093272722790201_6911747364417688967_n.jpg',
+    'j70': '547784091_1093273136123493_1554396093967990186_n.jpg',
+  }
+  const img = imageMap[folder] || '547201391_1093273222790151_6353806278774509213_n.jpg'
+  return `/images/${folder}/${img}`
+}
+
 function renderFrontpage(data: SiteData): string {
   const lang = getLang()
   const isDa = lang === 'da'
   const upcomingEvents = data.events.slice(0, 3)
+  const holdCards = data.hold.map((h) => `<a href="/hold/${h.slug}" class="hold-card hold-card--with-bg reveal" data-link style="--card-bg: url('${getHoldCardImage(h.image_folder)}')"><div class="hold-card__name">${isDa ? h.name_da : h.name_en}</div><div class="hold-card__age">${isDa ? h.age_da : h.age_en}</div><div class="hold-card__time">${isDa ? h.time_da : h.time_en}</div></a>`).join('')
 
   return `
     <section class="hero hero--with-image hero--slideshow" id="hero">
@@ -143,7 +157,7 @@ function renderFrontpage(data: SiteData): string {
         <span class="section-label reveal"><span class="da">Hold</span><span class="en">Teams</span></span>
         <h2 class="section-title reveal"><span class="da">Find dit hold</span><span class="en">Find your team</span></h2>
         <div class="hold-grid">
-          ${data.hold.map((h) => `<a href="/hold/${h.slug}" class="hold-card reveal" data-link><div class="hold-card__name">${isDa ? h.name_da : h.name_en}</div><div class="hold-card__age">${isDa ? h.age_da : h.age_en}</div><div class="hold-card__time">${isDa ? h.time_da : h.time_en}</div></a>`).join('')}
+          ${holdCards}
         </div>
       </div>
     </section>
@@ -207,6 +221,7 @@ function renderFrontpage(data: SiteData): string {
 
 function renderHoldOverview(data: SiteData): string {
   const isDa = getLang() === 'da'
+  const holdCards = data.hold.map((h) => `<a href="/hold/${h.slug}" class="hold-card hold-card--with-bg reveal" data-link style="--card-bg: url('${getHoldCardImage(h.image_folder)}')"><div class="hold-card__name">${isDa ? h.name_da : h.name_en}</div><div class="hold-card__age">${isDa ? h.age_da : h.age_en}</div><div class="hold-card__time">${isDa ? h.time_da : h.time_en}</div><div class="hold-card__boat">${isDa ? h.boat_da : h.boat_en}</div></a>`).join('')
   return `
     <section class="page-hero"><div class="container">
       <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/" data-link><span class="da">Forside</span><span class="en">Home</span></a><span class="breadcrumb__sep">›</span><span><span class="da">Hold</span><span class="en">Teams</span></span></nav>
@@ -214,7 +229,7 @@ function renderHoldOverview(data: SiteData): string {
       <p class="page-hero__sub"><span class="da">Find det hold der passer til dig — uanset alder og niveau</span><span class="en">Find the team that suits you — regardless of age and level</span></p>
     </div></section>
     <section class="section section--mid"><div class="container">
-      <div class="hold-grid">${data.hold.map((h) => `<a href="/hold/${h.slug}" class="hold-card reveal" data-link><div class="hold-card__name">${isDa ? h.name_da : h.name_en}</div><div class="hold-card__age">${isDa ? h.age_da : h.age_en}</div><div class="hold-card__time">${isDa ? h.time_da : h.time_en}</div><div class="hold-card__boat">${isDa ? h.boat_da : h.boat_en}</div></a>`).join('')}</div>
+      <div class="hold-grid">${holdCards}</div>
     </div></section>
   `
 }
