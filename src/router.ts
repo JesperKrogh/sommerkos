@@ -41,7 +41,7 @@ addRoute('/galleri', renderGalleryPage)
 function getHoldCardImage(folder: string): string {
   const imageMap: Record<string, string> = {
     'mini-sejler': '580503850_1138151188302354_413008472373367144_n.jpg',
-    'begynder': '591697516_1154016806715792_2862262999162887056_n.jpg',
+    'begynder': '527500299_1060930106024463_2018805063777711299_n.jpg',
     'provetimer': '496205293_1011788924271915_5737802054615581617_n.jpg',
     'undervisning': '547367784_1091568366293970_682452581349231292_n.jpg',
     'adventure': '491260218_989642696486538_6580478291154598179_n.jpg',
