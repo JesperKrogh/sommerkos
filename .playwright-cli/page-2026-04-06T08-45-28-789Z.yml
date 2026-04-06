@@ -1,0 +1,100 @@
+- generic [active] [ref=e1]:
+  - navigation [ref=e2]:
+    - generic [ref=e3]:
+      - link "KØS Sejlsport" [ref=e4] [cursor=pointer]:
+        - /url: /
+        - img "KØS Sejlsport" [ref=e5]
+      - generic [ref=e6]:
+        - link "Hold" [ref=e7] [cursor=pointer]:
+          - /url: /hold
+        - link "Tilmelding" [ref=e8] [cursor=pointer]:
+          - /url: /events/sommercamps
+        - link "Events" [ref=e9] [cursor=pointer]:
+          - /url: /#events-overview
+        - link "Om" [ref=e10] [cursor=pointer]:
+          - /url: /#contact
+        - button "Toggle language" [ref=e11] [cursor=pointer]: DA | EN
+  - main [ref=e12]:
+    - generic [ref=e14]:
+      - navigation "Breadcrumb" [ref=e15]:
+        - link "Forside" [ref=e16] [cursor=pointer]:
+          - /url: /
+        - generic [ref=e17]: ›
+        - link "Hold" [ref=e18] [cursor=pointer]:
+          - /url: /hold
+        - generic [ref=e19]: ›
+        - generic [ref=e20]: Mini-Sejler
+      - heading "Mini-Sejler" [level=1] [ref=e21]
+      - paragraph [ref=e22]: Børn og Båd – hyggeligt, uformelt og super sjovt
+      - paragraph [ref=e23]: 6–9 år · Tirsdag 16.30–18.30 eller lørdag 9.00–11.00 / 13.00–15.00
+    - generic [ref=e26]:
+      - generic [ref=e27]:
+        - paragraph [ref=e29]: Mini-sejler holdet er for børn i alderen 6-9 år. Formålet med træningen er at gøre børn trygge i miljøet ved vandet og få en masse gode oplevelser der gerne kan give dem mod på at fortsætte jollesejlads på vores begynderhold.
+        - generic [ref=e30]:
+          - heading "Aktiviteter" [level=3] [ref=e31]
+          - list [ref=e32]:
+            - listitem [ref=e33]: → Sejlads i Optimistjoller (gerne sammen med far eller mor)
+            - listitem [ref=e34]: → Sejlads i RS Zest jolle (2-3 personers jolle med træner eller forældre)
+            - listitem [ref=e35]: → SUP boards i havnen
+            - listitem [ref=e36]: → Kajak sejlads i havnemiljøet
+            - listitem [ref=e37]: → Leg ved broen
+        - generic [ref=e38]:
+          - heading "Forudsætninger" [level=3] [ref=e39]
+          - paragraph [ref=e40]: Mini-svømmeprøve anbefales. Læs vores sikkerhedspolitik.
+        - generic [ref=e41]:
+          - heading "Forventninger" [level=3] [ref=e42]
+          - list [ref=e43]:
+            - listitem [ref=e44]: → Fællesspisning er en vigtig del af klubbens ånd – medbring mad 1-2 gange i sæsonen
+            - listitem [ref=e45]: → Forældre forventes at hjælpe med praktiske opgaver
+            - listitem [ref=e46]: → Hold dig opdateret på Holdsport og Facebook
+        - generic [ref=e47]:
+          - heading "Trænere" [level=3] [ref=e48]
+          - list [ref=e49]:
+            - listitem [ref=e50]: → Emma Hospes (Lørdag formiddag)
+            - listitem [ref=e51]: → Jesper Krogh (Tirsdag)
+            - listitem [ref=e52]: → Christian Brevadt (Tirsdag)
+        - link "Tilmeld" [ref=e54] [cursor=pointer]:
+          - /url: https://www.kossejlsport.dk/klub/kos-sejlsport/sider/tilmelding
+          - generic [ref=e55]: Tilmeld
+      - generic [ref=e56]:
+        - generic [ref=e57]:
+          - generic [ref=e58]:
+            - generic [ref=e59]: Alder
+            - text: 6–9 år
+          - generic [ref=e60]:
+            - generic [ref=e61]: Tidspunkt
+            - text: Tirsdag 16.30–18.30 eller lørdag 9.00–11.00 / 13.00–15.00
+          - generic [ref=e62]:
+            - generic [ref=e63]: Sæson
+            - text: Uge 18 til efterårsferien
+          - generic [ref=e64]:
+            - generic [ref=e65]: Båd
+            - text: Optimist, RS Zest, SUP boards
+        - generic [ref=e67]:
+          - generic [ref=e68] [cursor=pointer]:
+            - img "Spændte børn gør klar til at sejle en tur på vandet i deres optimistjoller – eventyret venter!" [ref=e69]
+            - generic [ref=e70]: Spændte børn gør klar til at sejle en tur på vandet i deres optimistjoller – eventyret venter!
+          - generic [ref=e71] [cursor=pointer]:
+            - img "En deltager surfer på vandet, mens de andre hepper. Mød nye venner og sejl ud på fantastiske eventyr sammen!" [ref=e72]
+            - generic [ref=e73]: En deltager surfer på vandet, mens de andre hepper. Mød nye venner og sejl ud på fantastiske eventyr sammen!
+          - generic [ref=e74] [cursor=pointer]:
+            - img "Glad besætning klar til eventyr på vandet i gummibåd. Glæd dig til en sommer fuld af sejlads og nye venskaber!" [ref=e75]
+            - generic [ref=e76]: Glad besætning klar til eventyr på vandet i gummibåd. Glæd dig til en sommer fuld af sejlads og nye venskaber!
+          - generic [ref=e77] [cursor=pointer]:
+            - img "Her fanger de unge sejlere krabber fra broen — en sjov aktivitet, der binder venskaber sammen i sommerSolen!" [ref=e78]
+            - generic [ref=e79]: Her fanger de unge sejlere krabber fra broen — en sjov aktivitet, der binder venskaber sammen i sommerSolen!
+          - generic [ref=e80] [cursor=pointer]:
+            - img "En perfekt dag ved vandet med glade sejlere, klar til sommerens eventyr og nye venskaber!" [ref=e81]
+            - generic [ref=e82]: En perfekt dag ved vandet med glade sejlere, klar til sommerens eventyr og nye venskaber!
+          - generic [ref=e83] [cursor=pointer]:
+            - img "Børnene er ude at sejle i en RS Zest med en instruktør på en vindstille dag – det er altid sjovt at lære nyt på vandet!" [ref=e84]
+            - generic [ref=e85]: Børnene er ude at sejle i en RS Zest med en instruktør på en vindstille dag – det er altid sjovt at lære nyt på vandet!
+          - generic [ref=e86] [cursor=pointer]:
+            - img "To glade drenge og en instruktør forbereder jollen ved broen. Kom med ud og mærk fællesskabet på vandet!" [ref=e87]
+            - generic [ref=e88]: To glade drenge og en instruktør forbereder jollen ved broen. Kom med ud og mærk fællesskabet på vandet!
+          - generic [ref=e89] [cursor=pointer]:
+            - img "Fuld fart fremad! Vores sejlere nyder solen og havet, mens de lærer at mestre bølgerne." [ref=e90]
+            - generic [ref=e91]: Fuld fart fremad! Vores sejlere nyder solen og havet, mens de lærer at mestre bølgerne.
+          - generic [ref=e92] [cursor=pointer]:
+            - img "Børn og instruktører nyder en smuk sejltur i Katamaraner under åben himmel. De oplever spændingen ved teamwork og friheden på vandet." [ref=e93]
+            - generic [ref=e94]: Børn og instruktører nyder en smuk sejltur i Katamaraner under åben himmel. De oplever spændingen ved teamwork og friheden på vandet.

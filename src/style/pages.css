@@ -71,6 +71,92 @@
   max-width: 65ch;
 }
 
+/* ── Hold Detail Layout ────────────────────────────────────────────────────── */
+.hold-detail {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .hold-detail {
+    grid-template-columns: 1fr;
+  }
+}
+
+.hold-detail__main {
+  max-width: 70ch;
+}
+
+.hold-detail-section {
+  margin-bottom: var(--space-xl);
+}
+
+.hold-detail-section__title {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--color-sail);
+  margin-bottom: var(--space-md);
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(176,184,240,0.15);
+}
+
+.hold-detail-section__description {
+  font-size: 1rem;
+  color: var(--color-foam);
+  line-height: 1.75;
+}
+
+.hold-detail-section ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.hold-detail-section li {
+  position: relative;
+  padding-left: 1.25rem;
+  font-size: 0.95rem;
+  color: var(--color-foam);
+  line-height: 1.5;
+}
+
+.hold-detail-section li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--color-sail);
+  font-weight: 700;
+}
+
+.hold-detail-section p {
+  font-size: 0.95rem;
+  color: var(--color-foam);
+  line-height: 1.6;
+}
+
+.hold-detail-section--cta {
+  margin-top: var(--space-xl);
+  padding-top: var(--space-xl);
+  border-top: 1px solid rgba(176,184,240,0.1);
+}
+
+.hold-detail__sidebar {
+  position: sticky;
+  top: calc(var(--nav-height) + var(--space-lg));
+}
+
+@media (max-width: 900px) {
+  .hold-detail__sidebar {
+    position: static;
+    order: -1;
+  }
+}
+
 /* ── Info Grid (Hold page) ─────────────────────────────────────────────────── */
 .info-grid {
   display: grid;

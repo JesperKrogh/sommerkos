@@ -268,27 +268,54 @@ function renderHoldPage(data: SiteData, params: Record<string, string>): string 
   const isDa = getLang() === 'da'
   const card = _holdCards[params.slug]
   const cardName = card ? (isDa ? card.name_da : card.name_en) : (isDa ? hold.name_da : hold.name_en)
+  const cardTagline = card ? (isDa ? card.tagline_da : card.tagline_en) : ''
   const cardAge = card ? (isDa ? card.age_da : card.age_en) : (isDa ? hold.age_da : hold.age_en)
   const cardTime = card ? (isDa ? card.time_da : card.time_en) : (isDa ? hold.time_da : hold.time_en)
+  const cardSeason = card ? (isDa ? card.season_da : card.season_en) : (isDa ? hold.season_da : hold.season_en)
   const cardEquipment = card ? (isDa ? card.equipment_da : card.equipment_en) : (isDa ? hold.boat_da : hold.boat_en)
+  const cardDescription = card ? (isDa ? card.description_da : card.description_en) : (isDa ? hold.description_da : hold.description_en)
+  const activities = card ? (isDa ? card.activities_da : card.activities_en) : []
+  const prerequisites = card ? (isDa ? card.prerequisites_da : card.prerequisites_en) : ''
+  const expectations = card ? (isDa ? card.expectations_da : card.expectations_en) : []
+  const coaches = card ? (isDa ? card.coaches_da : card.coaches_en) : []
+  const signupUrl = card ? card.signup_url : ''
+
+  const activitiesHtml = activities.length ? `<div class="hold-detail-section"><h3 class="hold-detail-section__title"><span class="da">Aktiviteter</span><span class="en">Activities</span></h3><ul>${activities.map(a => `<li>${a}</li>`).join('')}</ul></div>` : ''
+  const prerequisitesHtml = prerequisites ? `<div class="hold-detail-section"><h3 class="hold-detail-section__title"><span class="da">Forudsætninger</span><span class="en">Prerequisites</span></h3><p>${prerequisites}</p></div>` : ''
+  const expectationsHtml = expectations.length ? `<div class="hold-detail-section"><h3 class="hold-detail-section__title"><span class="da">Forventninger</span><span class="en">Expectations</span></h3><ul>${expectations.map(e => `<li>${e}</li>`).join('')}</ul></div>` : ''
+  const coachesHtml = coaches.length ? `<div class="hold-detail-section"><h3 class="hold-detail-section__title"><span class="da">Trænere</span><span class="en">Coaches</span></h3><ul>${coaches.map(c => `<li>${c}</li>`).join('')}</ul></div>` : ''
+  const signupHtml = signupUrl ? `<a href="${signupUrl}" class="btn btn--kos" target="_blank"><span class="da">Tilmeld</span><span class="en">Sign up</span></a>` : ''
+
   return `
     <section class="page-hero"><div class="container">
       <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/" data-link><span class="da">Forside</span><span class="en">Home</span></a><span class="breadcrumb__sep">›</span><a href="/hold" data-link><span class="da">Hold</span><span class="en">Teams</span></a><span class="breadcrumb__sep">›</span><span>${cardName}</span></nav>
       <h1 class="page-hero__title">${cardName}</h1>
+      ${cardTagline ? `<p class="page-hero__tagline">${cardTagline}</p>` : ''}
       <p class="page-hero__sub">${cardAge} · ${cardTime}</p>
     </div></section>
     <section class="section section--mid"><div class="container">
-      <div class="page-content">
-        <div class="page-content__text">
-          <p class="section-body">${isDa ? hold.description_da : hold.description_en}</p>
+      <div class="hold-detail">
+        <div class="hold-detail__main">
+          <div class="hold-detail-section">
+            <p class="hold-detail-section__description">${cardDescription}</p>
+          </div>
+          ${activitiesHtml}
+          ${prerequisitesHtml}
+          ${expectationsHtml}
+          ${coachesHtml}
+          <div class="hold-detail-section hold-detail-section--cta">
+            ${signupHtml}
+          </div>
+        </div>
+        <div class="hold-detail__sidebar">
           <div class="info-grid">
             <div class="info-item"><span class="info-item__label"><span class="da">Alder</span><span class="en">Age</span></span><span class="info-item__value">${cardAge}</span></div>
             <div class="info-item"><span class="info-item__label"><span class="da">Tidspunkt</span><span class="en">Time</span></span><span class="info-item__value">${cardTime}</span></div>
-            <div class="info-item"><span class="info-item__label"><span class="da">Sæson</span><span class="en">Season</span></span><span class="info-item__value">${isDa ? hold.season_da : hold.season_en}</span></div>
+            <div class="info-item"><span class="info-item__label"><span class="da">Sæson</span><span class="en">Season</span></span><span class="info-item__value">${cardSeason}</span></div>
             <div class="info-item"><span class="info-item__label"><span class="da">Båd</span><span class="en">Boat</span></span><span class="info-item__value">${cardEquipment}</span></div>
           </div>
+          <div class="page-content__gallery" id="page-gallery" data-folder="${hold.image_folder}"></div>
         </div>
-        <div class="page-content__gallery" id="page-gallery" data-folder="${hold.image_folder}"></div>
       </div>
     </div></section>
   `

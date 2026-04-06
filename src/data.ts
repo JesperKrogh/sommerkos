@@ -59,12 +59,27 @@ export interface Event {
 export interface HoldCard {
   name_da: string
   name_en: string
+  tagline_da: string
+  tagline_en: string
   age_da: string
   age_en: string
   time_da: string
   time_en: string
+  season_da: string
+  season_en: string
   equipment_da: string
   equipment_en: string
+  description_da: string
+  description_en: string
+  activities_da: string[]
+  activities_en: string[]
+  prerequisites_da: string
+  prerequisites_en: string
+  expectations_da: string[]
+  expectations_en: string[]
+  coaches_da: string[]
+  coaches_en: string[]
+  signup_url: string
 }
 
 export type HoldCards = Record<string, HoldCard>
