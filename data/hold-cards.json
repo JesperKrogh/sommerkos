@@ -13,8 +13,8 @@
     "begynder": {
       "name_da": "Begynder",
       "name_en": "Beginner",
-      "age_da": "10–15 år",
-      "age_en": "10–15 years",
+      "age_da": "8–14 år",
+      "age_en": "8–14 years",
       "time_da": "Mandag, onsdag eller torsdag 17.00–19.00",
       "time_en": "Monday, Wednesday or Thursday 17:00–19:00",
       "equipment_da": "Optimist, RS Tera, RS Zest",
@@ -23,8 +23,8 @@
     "fortsaetter": {
       "name_da": "Fortsætter",
       "name_en": "Continuer",
-      "age_da": "10–17 år",
-      "age_en": "10–17 years",
+      "age_da": "10–15 år",
+      "age_en": "10–15 years",
       "time_da": "Tirsdag eller onsdag 17.00–19.00",
       "time_en": "Tuesday or Wednesday 17:00–19:00",
       "equipment_da": "Optimist, RS Feva, RS Tera, ILCA",
