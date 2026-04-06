@@ -14,6 +14,6 @@ After completing any task, create a git commit with a descriptive message. Use `
 
 - Use Docker endpoint for testing: `http://localhost:8888/`
 - The `sommer-i-kos-frontend-1` container serves the production build
-- After code changes, rebuild with: `docker-compose build frontend` or `docker-compose up --build frontend`
+- **After every code change**: rebuild AND restart with: `docker-compose build frontend && docker-compose restart frontend`
 - Use `playwright-cli open http://localhost:8888/` to test
-- Take screenshots with: `playwright-cli screenshot --filename <name>.png`
+- Take screenshots with: `playwright-cli screenshot --filename <name>.png --full-page`
