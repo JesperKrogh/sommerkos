@@ -57,7 +57,7 @@ function renderFrontpage(data: SiteData): string {
         </p>
         <div class="hero__cta-row reveal">
           <a href="/hold" class="btn btn--kos" data-link><span class="da">Start her</span><span class="en">Get started</span></a>
-          <a href="/events/sommercamps" class="btn btn--outline btn--outline-light" data-link><span class="da">SommerCamp 2026</span><span class="en">SummerCamp 2026</span></a>
+          <a href="/events/sommercamps" class="btn btn--kos" data-link><span class="da">SommerCamp 2026</span><span class="en">SummerCamp 2026</span></a>
         </div>
       </div>
     </section>
