@@ -47,6 +47,13 @@ export interface Flade {
   description_en: string
   specs_da: string
   specs_en: string
+  designer_da: string
+  designer_en: string
+  manufacturer_url: string
+  class_url: string | null
+  teams_da: string[]
+  teams_en: string[]
+  team_slugs: string[]
   image_folder: string
 }
 
@@ -89,7 +96,10 @@ export interface HoldCard {
   coaches_da: string[]
   coaches_en: string[]
   signup_url: string
-  image_folder: string
+  signup_widget?: string
+  price_da?: string
+  price_en?: string
+  image_folders: string[]
 }
 
 export type HoldCards = Record<string, HoldCard>
@@ -124,5 +134,6 @@ export function navigate(path: string): void {
 }
 
 export function getRoute(): string {
-  return window.location.pathname
+  const path = window.location.pathname
+  return path.length > 1 && path.endsWith('/') ? path.slice(0, -1) : path
 }

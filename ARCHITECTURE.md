@@ -33,6 +33,7 @@ The project is a **vanilla TypeScript + Vite SPA** with a **Python/Flask API** b
 │  ┌───────────────────────────────────────────────┐  │
 │  │  src/router.ts (SPA page templates)            │  │
 │  │  └── renderFrontpage, renderHoldPage, etc.     │  │
+│  │      + updateMeta() for per-route SEO tags     │  │
 │  └───────────────────────────────────────────────┘  │
 │                                                      │
 │  ┌───────────────────────────────────────────────┐  │
@@ -52,17 +53,24 @@ The project is a **vanilla TypeScript + Vite SPA** with a **Python/Flask API** b
 ┌──────────────────────────────────────────────────────┐
 │                  nginx (Docker)                       │
 │                                                       │
-│  /              → SPA (try_files → /index.html)      │
+│  /              → try_files $uri $uri/index.html      │
+│                   /index.html (SPA fallback)           │
 │  /api/*         → proxy_pass to Flask API :5000      │
-│  /images/       → static files from images-web/      │
-│  /data/*        → site.json content data             │
+│  /images/static/→ static files from images-web/       │
+│  /images/       → SPA fallback (gallery sub-app)      │
+│  /images-overview/ → static hold/flåde card images    │
+│  /data/*        → static JSON content data             │
 │                                                       │
 │  Security: X-Frame-Options, X-Content-Type-Options,  │
 │  Referrer-Policy                                      │
 │  Compression: gzip on                                 │
+│                                                       │
+│  Prerendered HTML: each route has its own             │
+│  /route/index.html (built at Docker build time),     │
+│  served without trailing-slash redirect              │
 └──────────┬───────────────────────────┬────────────────┘
-            │                           │
-            ▼                           ▼
+             │                           │
+             ▼                           ▼
 ┌─────────────────────┐   ┌──────────────────────────────┐
 │  Flask API          │   │  /images/ (volume mount)      │
 │  (Docker)           │   │                              │
@@ -91,13 +99,14 @@ sommer-i-kos/
 ├── vite.config.ts              # Build config, output to dist/
 ├── nginx.conf                  # nginx reverse proxy + SPA routing
 ├── docker-compose.yml          # Two services: frontend + api
-├── Dockerfile                  # Multi-stage: Node build → nginx serve
+├── Dockerfile                  # Multi-stage: Node build → prerender → nginx serve
 ├── Dockerfile.api              # Python 3.12 + gunicorn
 │
 ├── src/
 │   ├── main.ts                 # Entry point — initialises nav, router, lightbox
 │   ├── router.ts               # SPA router + all page templates (render*)
-│   ├── data.ts                 # Data loading from /data/site.json + API
+│   │                           # + updateMeta() for per-route SEO
+│   ├── data.ts                 # Data loading, navigate(), getRoute()
 │   ├── style/
 │   │   ├── base.css            # Reset, CSS custom properties (design tokens),
 │   │   │                       # typography, layout, buttons
@@ -107,10 +116,16 @@ sommer-i-kos/
 │   │   └── animations.css      # Keyframes (sail-drift, fade-up, countdown-tick,
 │   │                           # fade-in) and animation applications
 │   └── modules/
-│       └── lightbox.ts          # Gallery lightbox with keyboard nav
+│       ├── lightbox.ts          # Gallery lightbox with keyboard nav
+│       ├── nav.ts               # Navigation module (imported by main.ts)
+│       ├── gallery.ts           # Gallery module
+│       ├── countdown.ts         # Countdown timer module
+│       ├── hero.ts              # Hero module
+│       └── scroll-reveal.ts     # Scroll reveal module
 │
 ├── data/
-│   └── site.json               # All content: hold, flåde, events
+│   ├── site.json               # All content: site, about, flåde, events
+│   └── hold-cards.json         # Hold card data (loaded separately at runtime)
 │
 ├── api/
 │   ├── app.py                  # Flask app — gallery endpoints
@@ -130,12 +145,18 @@ sommer-i-kos/
 │   ├── rsfeva/
 │   └── ... (same folder structure as images/)
 │
+├── images-overview/              # Hold & flåde card images (static)
+│
 ├── scripts/
-│   └── generate_captions.py      # Processes images: resizes, optimizes, generates captions
+│   ├── prerender.mjs            # Playwright-based prerendering of all routes
+│   ├── generate-sitemap.mjs     # Generates public/sitemap.xml from route data
+│   ├── generate_captions.py     # Processes images: resizes, optimizes, generates captions
+│   └── .caption_progress.json   # Caption generation progress tracker
 │
 ├── public/
-│   ├── favicon.svg             # Site favicon
-│   └── logo-kos.png            # KØS logo (copied to dist/)
+│   ├── favicon.svg              # Site favicon
+│   ├── robots.txt              # Search engine directives + sitemap URL
+│   └── sitemap.xml             # Auto-generated (by generate-sitemap.mjs)
 │
 └── dist/                       # Build output (gitignored)
 ```
@@ -160,22 +181,32 @@ The SPA uses a custom client-side router that renders page templates based on th
 
 | Route | Page Function |
 |-------|--------------|
-| `/` | `renderFrontpage` — Hero, intro, SommerCamp banner, hold/flåde overviews, events, gallery teaser, contact |
+| `/` | `renderFrontpage` — Hero, intro, hold/flåde overviews, events, gallery teaser, contact |
 | `/hold` | `renderHoldOverview` — Grid of all teams |
 | `/hold/:slug` | `renderHoldPage` — Team detail with info grid and gallery |
 | `/flade` | `renderFladeOverview` — Grid of all boats |
 | `/flade/:slug` | `renderFladePage` — Boat detail with gallery |
-| `/events/:slug` | `renderEventPage` — Event detail (e.g., SommerCamp) with week cards |
-| `/galleri` | `renderGalleryPage` — Gallery listing with link to static image browser |
+| `/events/:slug` | `renderEventPage` — Event detail with week cards |
+| `/galleri` | `renderGalleryPage` — Gallery with folder browser |
+| `/kalender` | `renderKalenderPage` — Calendar with Holdsport widget |
+| `/tilmelding` | `renderTilmeldingPage` — Signup with Holdsport widget |
+| `/om` | `renderOmOverview` — About section cards |
+| `/om/:slug` | `renderOmSubPage` — About sub-page (vedtægter, bestyrelse, etc.) |
 | `*` | `renderNotFound` — 404 page |
 
-Pages are rendered by calling the page function with site data from `data/site.json`, then injecting the HTML into `<main id="app">`. Language-specific content is stored as bilingual fields (e.g., `name_da` / `name_en`).
+Pages are rendered by calling the page function with site data from `data/site.json` and hold cards from `data/hold-cards.json`, then injecting the HTML into `<main id="app">`. Language-specific content is stored as bilingual fields (e.g., `name_da` / `name_en`).
+
+### Trailing-Slash Handling
+
+The router normalises trailing slashes in `getRoute()` (`src/data.ts`). URLs like `/hold/` are normalised to `/hold` before matching routes. This prevents 404 errors on page reloads, since nginx's `try_files` serves prerendered HTML from `/hold/index.html` without redirecting to `/hold/`.
 
 ### Data Loading (`src/data.ts`)
 
-- `loadData()` — Fetches `/data/site.json` (bundled at build time) and merges with runtime API data
+- `loadData()` — Fetches `/data/site.json` (cached after first load)
+- `loadHoldCards()` — Fetches `/data/hold-cards.json` (cached after first load, loaded separately since hold data is needed before routing)
 - `getLang()` — Returns current language ('da' | 'en')
-- `navigate()`, `getRoute()` — Client-side navigation helpers
+- `navigate(path)` — Pushes to history and dispatches `route-change` event
+- `getRoute()` — Returns normalised pathname (trailing slash stripped)
 
 ### Internationalisation (i18n)
 
@@ -262,6 +293,101 @@ The API parses these with regex to extract `caption_da` and `caption_en`.
 
 ---
 
+## SEO & Prerendering
+
+### Problem
+
+The site is a client-side SPA — without JavaScript, all routes return the same empty `<main id="app">` shell. Search engine crawlers and social media scrapers (Facebook, Twitter, etc.) often don't execute JavaScript, so they'd see a blank page instead of content.
+
+### Solution: Build-Time Prerendering
+
+During the Docker build, after Vite produces `dist/`, a Playwright-based prerendering script (`scripts/prerender.mjs`) runs:
+
+1. Starts a local HTTP server serving the built `dist/` directory
+2. Uses Playwright/Chromium to visit each route
+3. Waits for the SPA to render (3s timeout for data loading + animations)
+4. Captures the fully-rendered HTML
+5. Cleans out Vite dev-mode `<script>` and `<link>` tags (production assets are already inlined/hashed)
+6. Writes each route to `dist/<route>/index.html`
+
+This produces pre-rendered HTML files for every route:
+
+```
+dist/
+├── index.html                    # /
+├── hold/
+│   ├── index.html                # /hold
+│   ├── mini-sejler/index.html    # /hold/mini-sejler
+│   ├── begynder/index.html       # /hold/begynder
+│   └── ...
+├── flade/
+│   ├── index.html                # /flade
+│   ├── optimist/index.html       # /flade/optimist
+│   └── ...
+├── events/
+│   └── ...
+├── galleri/index.html
+├── kalender/index.html
+├── tilmelding/index.html
+├── om/
+│   ├── index.html                # /om
+│   └── ...
+└── assets/                        # Vite's hashed JS/CSS
+```
+
+**Key benefit**: When a crawler or social media scraper requests `/hold/begynder`, nginx serves the prerendered `/hold/begynder/index.html` — a complete HTML page with all content visible, no JavaScript execution required.
+
+### nginx Serving Strategy
+
+The nginx `try_files` directive is configured to serve prerendered pages without trailing-slash redirects:
+
+```nginx
+location / {
+    try_files $uri $uri/index.html /index.html;
+}
+```
+
+- `$uri` — matches hashed assets like `/assets/index-DGQg5kkg.js`
+- `$uri/index.html` — serves prerendered pages (e.g., `/hold` → `/hold/index.html`) without redirecting to `/hold/`
+- `/index.html` — final SPA fallback for client-side routes not prerendered
+
+This avoids the common SPA problem where nginx redirects `/hold` → `/hold/`, causing the JS router to see `/hold/` and fail to match `^/hold$`.
+
+### Sitemap Generation
+
+`scripts/generate-sitemap.mjs` runs as the `prebuild` step (`npm run build`). It reads route data from `data/site.json` and `data/hold-cards.json`, then generates `public/sitemap.xml` with:
+
+- All static routes (`/`, `/hold`, `/flade`, `/galleri`, etc.)
+- All dynamic routes (`/hold/:slug`, `/flade/:slug`, `/events/:slug`, `/om/:slug`)
+- Priority weights: homepage `1.0`, static pages `0.8`, detail pages `0.6`
+- Change frequency: homepage `weekly`, everything else `monthly`
+
+The sitemap is referenced in `public/robots.txt`:
+
+```
+User-agent: *
+Allow: /
+Sitemap: https://kossejlsport.krogh.cc/sitemap.xml
+```
+
+### Dynamic Meta Tags
+
+Each route dynamically updates the page's `<head>` meta tags via `updateMeta()` in `src/router.ts`:
+
+- `<title>` — e.g. "Mini-Sejler | KØS Sejlsport"
+- `<meta name="description">` — Danish/English description based on language
+- Open Graph tags: `og:title`, `og:description`, `og:url`, `og:image`, `og:site_name`, `og:locale`
+- Twitter Card tags: `twitter:card`, `twitter:title`, `twitter:description`, `twitter:image`
+- `<link rel="canonical">` — e.g. `https://kossejlsport.krogh.cc/hold/mini-sejler`
+
+Hold and flåde detail pages include OG images (e.g., `/images-overview/hold-mini-sejler.jpg`) for rich social media previews.
+
+### Schema.org Structured Data
+
+The `<head>` in `index.html` includes a JSON-LD block with `SportsActivityLocation` schema for the club, with name, description, URL, logo, address, geo coordinates, and sameAs links.
+
+---
+
 ## Deployment Architecture
 
 ### Docker Compose
@@ -271,24 +397,69 @@ Two services:
 | Service | Build | Port | Volumes |
 |---------|-------|------|---------|
 | **api** | `Dockerfile.api` (Python/Flask) | 5000 (internal) | `./images-web:/app/images:ro` |
-| **frontend** | `Dockerfile` (Node → nginx) | 8888:80 | `./images-web:/usr/share/nginx/images:ro` |
+| **frontend** | `Dockerfile` (Node → prerender → nginx) | 8888:80 | `./images-web:/usr/share/nginx/images:ro`, `./images-overview:/usr/share/nginx/images-overview:ro` |
 
 ### Frontend Dockerfile (Multi-stage)
 
-1. **Build stage**: `node:22-alpine` — `npm ci` then `npm run build`
-2. **Serve stage**: `nginx:1.27-alpine` — copies built `dist/` and `nginx.conf`
-
-The build stage copies `images-web/` to `dist/images/` and copies `data/` to `dist/data/`.
+1. **Build stage**: `node:22-alpine`
+   - Installs Chromium + Playwright dependencies
+   - Runs `npm ci` then `npm run build` (Vite build)
+   - Copies data files, images, logo to `dist/`
+   - Runs `scripts/prerender.mjs` to generate static HTML for each route
+2. **Serve stage**: `nginx:1.27-alpine`
+   - Copies `nginx.conf` and built `dist/` directory
 
 ### nginx Configuration
 
-- Proxies `/api/*` to Flask container
-- Serves `/images/` directly from `images-web/` volume
-- SPA fallback for `/` and `/images/`
-- Aggressive caching for content-hashed assets (1 year, immutable)
-- No caching for HTML files
-- Security headers (X-Frame-Options, X-Content-Type-Options, Referrer-Policy)
-- Gzip compression for text-based assets
+```nginx
+# Static data files
+location /data/ {
+    alias /usr/share/nginx/html/data/;
+    expires 1h;
+}
+
+# API proxy to Flask
+location /api/ {
+    proxy_pass http://api:5000;
+}
+
+# Static images (hero backgrounds, etc.)
+location /images/static/ {
+    alias /usr/share/nginx/images-web/;
+    expires 30d;
+}
+
+# Hold/flåde card images
+location /images-overview/ {
+    alias /usr/share/nginx/html/images-overview/;
+    expires 30d;
+}
+
+# Gallery SPA sub-app
+location /images/ {
+    try_files $uri /images/index.html;
+}
+
+# SEO files
+location = /robots.txt { ... }
+location = /sitemap.xml { ... }
+
+# Main SPA — serves prerendered pages without trailing-slash redirect
+location / {
+    try_files $uri $uri/index.html /index.html;
+}
+
+# Long-term caching for Vite's content-hashed assets
+location ~* \.(js|css|woff2|woff|ttf|webp|avif|svg|ico|gif)$ {
+    expires 1y;
+    add_header Cache-Control "public, immutable";
+}
+
+# No caching for HTML entry points
+location ~* \.html$ {
+    add_header Cache-Control "no-cache, no-store, must-revalidate";
+}
+```
 
 ---
 
@@ -300,9 +471,13 @@ The build stage copies `images-web/` to `dist/images/` and copies `data/` to `di
 | **Custom SPA router** | URL-based navigation with subpages for hold, flåde, events without a framework |
 | **CSS-only i18n** | Simple class toggling avoids i18n library overhead for a 2-language site |
 | **Sidecar .md for captions** | Non-developers can edit image captions without touching code |
-| **Data in site.json** | All content (hold, flåde, events) in one file for easy updates |
+| **Data in site.json + hold-cards.json** | All content in two JSON files for easy updates; hold cards loaded separately for faster initial route matching |
 | **Random gallery endpoint** | Homepage gallery shows variety across all categories automatically |
 | **Multi-stage Docker build** | Production image contains only nginx + static files, no Node.js |
 | **Rotating hero slideshow** | Engaging visual first impression with CSS keyframe animation |
 | **prefers-reduced-motion** | Parallax/animations disabled for users who prefer reduced motion |
 | **Two-tier image system** | `images/` (raw, read-only) + `images-web/` (processed) keeps originals safe and allows reprocessing |
+| **Prerendered SPA** | All routes are prerendered to static HTML at build time, so crawlers and social media scrapers get full content without JavaScript |
+| **Trailing-slash normalization** | `getRoute()` strips trailing slashes, and nginx `try_files $uri $uri/index.html` serves prerendered pages without redirecting — prevents 404 on page reload |
+| **Per-route meta tags** | Dynamic `<title>`, Open Graph, Twitter Card, and canonical URL tags are set per route for optimal SEO and social sharing |
+| **Sitemap auto-generation** | `generate-sitemap.mjs` runs as prebuild step, producing `sitemap.xml` from data files — stays in sync with content automatically |
