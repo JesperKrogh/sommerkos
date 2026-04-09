@@ -145,30 +145,29 @@ The site implements comprehensive SEO:
 
 ## Adding Images
 
-Images are organised in category folders under `images-web/`:
+Images are organised in category folders under `images/`. To add new images:
 
-```
-images-web/
-├── optimist/
-│   ├── photo1.jpg
-│   └── photo1.md        # Optional bilingual caption
-├── j70/
-├── rsfeva/
-├── socialt/
-└── ...
-```
+1. Place `.jpg` files in the appropriate category folder under `images/` (e.g., `images/j70/`)
+2. Run `python scripts/generate_captions.py` to process them:
+   - Resized copies are saved to `images-web/<folder>/<filename>.jpg`
+   - Bilingual captions are generated using AI (Gemini 2.5 Flash Image) and appended to `images/captions.md`
 
 ### Caption Format
 
-Create a `.md` file next to any `.jpg` with the same name:
+All captions are stored in a single file — `images/captions.md` — not as per-image sidecar files:
 
 ```markdown
+### photo1.jpg
+_Folder: j70_
+
 ## Dansk
 Beskrivende tekst på dansk
 
 ## English
 Descriptive text in English
 ```
+
+Each entry has a `### filename.jpg` heading, a `_Folder: category_` line, then `## Dansk` and `## English` sections. The API parses this file at startup.
 
 ## API Endpoints
 
