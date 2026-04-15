@@ -38,6 +38,20 @@ function initNav(): void {
       hamburger.setAttribute('aria-expanded', String(isOpen))
     })
 
+    const accordionArrows = mobileMenu.querySelectorAll<HTMLElement>('.nav__mobile-arrow')
+    accordionArrows.forEach((accordionArrow) => {
+      const accordionSub = accordionArrow.closest('.nav__mobile-accordion')?.querySelector<HTMLElement>('.nav__mobile-sub')
+      if (accordionSub) {
+        accordionArrow.addEventListener('click', (e) => {
+          e.preventDefault()
+          e.stopPropagation()
+          const isOpen = accordionSub.classList.toggle('is-open')
+          accordionArrow.classList.toggle('is-open', isOpen)
+          accordionArrow.setAttribute('aria-expanded', String(isOpen))
+        })
+      }
+    })
+
     mobileMenu.querySelectorAll('a').forEach((link) => {
       link.addEventListener('click', () => {
         hamburger.classList.remove('is-open')

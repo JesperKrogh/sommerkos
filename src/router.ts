@@ -1,4 +1,45 @@
 import { loadData, loadHoldCards, getLang, navigate, getRoute, type SiteData, type HoldCards } from './data'
+import { rebindLightbox } from './modules/lightbox'
+
+const SITE_NAME = 'KØS Sejlsport'
+const BASE_URL = 'https://kossejlsport.krogh.cc'
+const DEFAULT_OG_IMAGE = '/images-overview/flade-optimist.jpg'
+
+function updateMeta(title: string, description: string, path: string, ogImage?: string): void {
+  document.title = `${title} | ${SITE_NAME}`
+  const url = `${BASE_URL}${path}`
+
+  const setMeta = (prop: string, content: string, isProperty = false) => {
+    const attr = isProperty ? 'property' : 'name'
+    let el = document.querySelector(`meta[${attr}="${prop}"]`) as HTMLMetaElement | null
+    if (!el) {
+      el = document.createElement('meta')
+      el.setAttribute(attr, prop)
+      document.head.appendChild(el)
+    }
+    el.content = content
+  }
+
+  setMeta('description', description)
+  setMeta('og:title', title, true)
+  setMeta('og:description', description, true)
+  setMeta('og:url', url, true)
+  setMeta('og:image', `${BASE_URL}${ogImage || DEFAULT_OG_IMAGE}`, true)
+  setMeta('og:site_name', SITE_NAME, true)
+  setMeta('og:locale', 'da_DK', true)
+  setMeta('twitter:card', 'summary_large_image')
+  setMeta('twitter:title', title)
+  setMeta('twitter:description', description)
+  setMeta('twitter:image', `${BASE_URL}${ogImage || DEFAULT_OG_IMAGE}`, true)
+
+  let canonical = document.querySelector('link[rel="canonical"]') as HTMLLinkElement | null
+  if (!canonical) {
+    canonical = document.createElement('link')
+    canonical.rel = 'canonical'
+    document.head.appendChild(canonical)
+  }
+  canonical.href = url
+}
 
 type PageFn = (data: SiteData, params: Record<string, string>) => string
 
@@ -37,7 +78,10 @@ addRoute('/flade', renderFladeOverview)
 addRoute('/flade/:slug', renderFladePage)
 addRoute('/events/:slug', renderEventPage)
 addRoute('/galleri', renderGalleryPage)
-addRoute('/om', renderOmPage)
+addRoute('/kalender', renderKalenderPage)
+addRoute('/tilmelding', renderTilmeldingPage)
+addRoute('/om', renderOmOverview)
+addRoute('/om/:slug', renderOmSubPage)
 
 // ── Page: Frontpage ───────────────────────────────────────────────────────────
 
@@ -56,6 +100,20 @@ function getHoldCardImage(slug: string): string {
   return `/images-overview/${img}`
 }
 
+function getFladeCardImage(slug: string): string {
+  const imageMap: Record<string, string> = {
+    'optimist': 'flade-optimist.jpg',
+    'rs-tera': 'flade-rs-tera.jpg',
+    'rs-feva': 'flade-rs-feva.jpg',
+    'rs-zest': 'flade-rs-zest.jpg',
+    'ilca-laser': 'flade-ilca-laser.jpg',
+    'h-baad': 'flade-h-baad.jpg',
+    'j70': 'flade-j70.jpg',
+  }
+  const img = imageMap[slug] || imageMap['j70']
+  return `/images-overview/${img}`
+}
+
 function renderFrontpage(data: SiteData): string {
   const lang = getLang()
   const isDa = lang === 'da'
@@ -63,7 +121,7 @@ function renderFrontpage(data: SiteData): string {
   const holdSlugs = Object.keys(_holdCards)
   const holdCards = holdSlugs.map(slug => {
     const card = _holdCards[slug]
-    return `<a href="/hold/${slug}" class="hold-card hold-card--with-bg reveal" data-link style="--card-bg: url('${getHoldCardImage(slug)}')"><div class="hold-card__name">${isDa ? card.name_da : card.name_en}</div><div class="hold-card__age">${isDa ? card.age_da : card.age_en}</div><div class="hold-card__time">${isDa ? card.time_da : card.time_en}</div></a>`
+    return `<a href="/hold/${slug}" class="hold-card hold-card--with-bg reveal" data-link style="--card-bg: url('${getHoldCardImage(slug)}')"><div class="hold-card__name">${isDa ? card.name_da : card.name_en}</div><div class="hold-card__age">${isDa ? card.age_da : card.age_en}</div><div class="hold-card__time">${isDa ? card.time_da : card.time_en}</div>${card.price_da ? `<div class="hold-card__price">${isDa ? card.price_da : card.price_en}</div>` : ''}</a>`
   }).join('')
 
   return `
@@ -80,7 +138,6 @@ function renderFrontpage(data: SiteData): string {
         </p>
         <div class="hero__cta-row reveal">
           <a href="/hold" class="btn btn--kos" data-link><span class="da">Start her</span><span class="en">Get started</span></a>
-          <a href="/events/sommercamps" class="btn btn--kos" data-link><span class="da">SommerCamp 2026</span><span class="en">SummerCamp 2026</span></a>
         </div>
       </div>
     </section>
@@ -128,39 +185,6 @@ function renderFrontpage(data: SiteData): string {
       </div>
     </section>
 
-    <section class="section section--dark" id="sommercamp-cta">
-      <div class="container">
-        <div class="sommercamp-banner">
-          <div class="sommercamp-banner__content">
-            <span class="sommercamp-banner__label">
-              <span class="da">🏖️ SommerCamp 2026</span>
-              <span class="en">🏖️ SummerCamp 2026</span>
-            </span>
-            <h2 class="sommercamp-banner__title">
-              <span class="da">6 ugers eventyr på vandet</span>
-              <span class="en">6 weeks of adventure on the water</span>
-            </h2>
-            <p class="sommercamp-banner__text">
-              <span class="da">Giv dit barn en sommer fuld af oplevelser, venskaber og sejlglæde. SommerCamp henvender sig til børn og unge fra 11 år — alle niveauer er velkomne!</span>
-              <span class="en">Give your child a summer full of experiences, friendships and sailing joy. SommerCamp is for children and youth aged 11+ — all levels welcome!</span>
-            </p>
-            <a href="/events/sommercamps" class="btn btn--kos reveal" data-link><span class="da">Læs mere om SommerCamp</span><span class="en">Read more about SommerCamp</span></a>
-          </div>
-          <div class="sommercamp-banner__visual">
-            <div class="countdown" id="countdown" aria-live="polite">
-              <div class="countdown__unit"><span class="countdown__value" id="cd-days">--</span><span class="countdown__label"><span class="da">Dage</span><span class="en">Days</span></span></div>
-              <span class="countdown__sep" aria-hidden="true">:</span>
-              <div class="countdown__unit"><span class="countdown__value" id="cd-hours">--</span><span class="countdown__label"><span class="da">Timer</span><span class="en">Hours</span></span></div>
-              <span class="countdown__sep" aria-hidden="true">:</span>
-              <div class="countdown__unit"><span class="countdown__value" id="cd-minutes">--</span><span class="countdown__label"><span class="da">Min</span><span class="en">Min</span></span></div>
-              <span class="countdown__sep" aria-hidden="true">:</span>
-              <div class="countdown__unit"><span class="countdown__value" id="cd-seconds">--</span><span class="countdown__label"><span class="da">Sek</span><span class="en">Sec</span></span></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <section class="section section--mid" id="hold-overview">
       <div class="container">
         <span class="section-label reveal"><span class="da">Hold</span><span class="en">Teams</span></span>
@@ -176,7 +200,7 @@ function renderFrontpage(data: SiteData): string {
         <span class="section-label reveal"><span class="da">Flåde</span><span class="en">Fleet</span></span>
         <h2 class="section-title reveal"><span class="da">Vores både</span><span class="en">Our boats</span></h2>
         <div class="flade-grid">
-          ${data.flade.map((f) => `<a href="/flade/${f.slug}" class="flade-card reveal" data-link><div class="flade-card__name">${isDa ? f.name_da : f.name_en}</div><div class="flade-card__specs">${isDa ? f.specs_da : f.specs_en}</div><div class="flade-card__desc">${(isDa ? f.description_da : f.description_en).slice(0, 120)}…</div></a>`).join('')}
+          ${data.flade.map((f) => `<a href="/flade/${f.slug}" class="flade-card flade-card--with-bg reveal" data-link style="--card-bg: url('${getFladeCardImage(f.slug)}')"><div class="flade-card__name">${isDa ? f.name_da : f.name_en}</div><div class="flade-card__specs">${isDa ? f.specs_da : f.specs_en}</div><div class="flade-card__designer">${isDa ? f.designer_da : f.designer_en}</div></a>`).join('')}
         </div>
       </div>
     </section>
@@ -233,7 +257,7 @@ function renderHoldOverview(_data: SiteData): string {
   const holdSlugs = Object.keys(_holdCards)
   const holdCards = holdSlugs.map(slug => {
     const card = _holdCards[slug]
-    return `<a href="/hold/${slug}" class="hold-card hold-card--with-bg reveal" data-link style="--card-bg: url('${getHoldCardImage(slug)}')"><div class="hold-card__name">${isDa ? card.name_da : card.name_en}</div><div class="hold-card__age">${isDa ? card.age_da : card.age_en}</div><div class="hold-card__time">${isDa ? card.time_da : card.time_en}</div><div class="hold-card__boat">${isDa ? card.equipment_da : card.equipment_en}</div></a>`
+    return `<a href="/hold/${slug}" class="hold-card hold-card--with-bg reveal" data-link style="--card-bg: url('${getHoldCardImage(slug)}')"><div class="hold-card__name">${isDa ? card.name_da : card.name_en}</div><div class="hold-card__age">${isDa ? card.age_da : card.age_en}</div><div class="hold-card__time">${isDa ? card.time_da : card.time_en}</div><div class="hold-card__boat">${isDa ? card.equipment_da : card.equipment_en}</div>${card.price_da ? `<div class="hold-card__price">${isDa ? card.price_da : card.price_en}</div>` : ''}</a>`
   }).join('')
   return `
     <section class="page-hero"><div class="container">
@@ -258,7 +282,7 @@ function renderFladeOverview(data: SiteData): string {
       <p class="page-hero__sub"><span class="da">Udforsk vores både — fra små joller til store kølbåde</span><span class="en">Explore our boats — from small dinghies to large keelboats</span></p>
     </div></section>
     <section class="section section--mid"><div class="container">
-      <div class="flade-grid">${data.flade.map((f) => `<a href="/flade/${f.slug}" class="flade-card reveal" data-link><div class="flade-card__name">${isDa ? f.name_da : f.name_en}</div><div class="flade-card__specs">${isDa ? f.specs_da : f.specs_en}</div><div class="flade-card__desc">${(isDa ? f.description_da : f.description_en).slice(0, 150)}…</div></a>`).join('')}</div>
+      <div class="flade-grid">${data.flade.map((f) => `<a href="/flade/${f.slug}" class="flade-card flade-card--with-bg reveal" data-link style="--card-bg: url('${getFladeCardImage(f.slug)}')"><div class="flade-card__name">${isDa ? f.name_da : f.name_en}</div><div class="flade-card__specs">${isDa ? f.specs_da : f.specs_en}</div><div class="flade-card__designer">${isDa ? f.designer_da : f.designer_en}</div></a>`).join('')}</div>
     </div></section>
   `
 }
@@ -275,18 +299,22 @@ function renderHoldPage(_data: SiteData, params: Record<string, string>): string
   const cardTime = isDa ? card.time_da : card.time_en
   const cardSeason = isDa ? card.season_da : card.season_en
   const cardEquipment = isDa ? card.equipment_da : card.equipment_en
+  const cardPrice = isDa ? card.price_da : card.price_en
   const cardDescription = isDa ? card.description_da : card.description_en
   const activities = isDa ? card.activities_da : card.activities_en
   const prerequisites = isDa ? card.prerequisites_da : card.prerequisites_en
   const expectations = isDa ? card.expectations_da : card.expectations_en
   const coaches = isDa ? card.coaches_da : card.coaches_en
   const signupUrl = card.signup_url
+  const signupWidget = card.signup_widget
 
   const activitiesHtml = activities.length ? `<div class="hold-detail-section"><h3 class="hold-detail-section__title"><span class="da">Aktiviteter</span><span class="en">Activities</span></h3><ul>${activities.map(a => `<li>${a}</li>`).join('')}</ul></div>` : ''
   const prerequisitesHtml = prerequisites ? `<div class="hold-detail-section"><h3 class="hold-detail-section__title"><span class="da">Forudsætninger</span><span class="en">Prerequisites</span></h3><p>${prerequisites}</p></div>` : ''
   const expectationsHtml = expectations.length ? `<div class="hold-detail-section"><h3 class="hold-detail-section__title"><span class="da">Forventninger</span><span class="en">Expectations</span></h3><ul>${expectations.map(e => `<li>${e}</li>`).join('')}</ul></div>` : ''
   const coachesHtml = coaches.length ? `<div class="hold-detail-section"><h3 class="hold-detail-section__title"><span class="da">Trænere</span><span class="en">Coaches</span></h3><ul>${coaches.map(c => `<li>${c}</li>`).join('')}</ul></div>` : ''
-  const signupHtml = signupUrl ? `<a href="${signupUrl}" class="btn btn--kos" target="_blank"><span class="da">Tilmeld</span><span class="en">Sign up</span></a>` : ''
+  const signupHtml = signupWidget
+    ? `<div class="hold-detail-signup-widget"><iframe src="${signupWidget}" width="100%" height="800" frameborder="0" loading="lazy"></iframe><div class="powered-by-holdsport">Powered by Holdsport</div></div>`
+    : signupUrl ? `<a href="${signupUrl}" class="btn btn--kos" target="_blank"><span class="da">Tilmeld</span><span class="en">Sign up</span></a>` : ''
 
   return `
     <section class="page-hero"><div class="container">
@@ -296,28 +324,32 @@ function renderHoldPage(_data: SiteData, params: Record<string, string>): string
       <p class="page-hero__sub">${cardAge} · ${cardTime}</p>
     </div></section>
     <section class="section section--mid"><div class="container">
-      <div class="hold-detail">
-        <div class="hold-detail__main">
+      <div class="hold-detail-top">
+        <div class="hold-detail__info">
+          <div class="info-grid info-grid--vertical">
+            <div class="info-item"><span class="info-item__label"><span class="da">Alder</span><span class="en">Age</span></span><span class="info-item__value">${cardAge}</span></div>
+            <div class="info-item"><span class="info-item__label"><span class="da">Tidspunkt</span><span class="en">Time</span></span><span class="info-item__value">${cardTime}</span></div>
+            <div class="info-item"><span class="info-item__label"><span class="da">Sæson</span><span class="en">Season</span></span><span class="info-item__value">${cardSeason}</span></div>
+            <div class="info-item"><span class="info-item__label"><span class="da">Båd</span><span class="en">Boat</span></span><span class="info-item__value">${cardEquipment}</span></div>
+            ${cardPrice ? `<div class="info-item"><span class="info-item__label"><span class="da">Pris</span><span class="en">Price</span></span><span class="info-item__value">${cardPrice}</span></div>` : ''}
+          </div>
+        </div>
+        <div class="hold-detail__gallery">
+          <div class="page-content__gallery" id="page-gallery" data-folders='${card.image_folders.join(",")}'></div>
+        </div>
+      </div>
+      <div class="hold-detail-bottom">
+        <div class="hold-detail-body">
           <div class="hold-detail-section">
+            <h3 class="hold-detail-section__title"><span class="da">Beskrivelse</span><span class="en">Description</span></h3>
             <p class="hold-detail-section__description">${cardDescription}</p>
           </div>
           ${activitiesHtml}
           ${prerequisitesHtml}
           ${expectationsHtml}
           ${coachesHtml}
-          <div class="hold-detail-section hold-detail-section--cta">
-            ${signupHtml}
-          </div>
         </div>
-        <div class="hold-detail__sidebar">
-          <div class="info-grid">
-            <div class="info-item"><span class="info-item__label"><span class="da">Alder</span><span class="en">Age</span></span><span class="info-item__value">${cardAge}</span></div>
-            <div class="info-item"><span class="info-item__label"><span class="da">Tidspunkt</span><span class="en">Time</span></span><span class="info-item__value">${cardTime}</span></div>
-            <div class="info-item"><span class="info-item__label"><span class="da">Sæson</span><span class="en">Season</span></span><span class="info-item__value">${cardSeason}</span></div>
-            <div class="info-item"><span class="info-item__label"><span class="da">Båd</span><span class="en">Boat</span></span><span class="info-item__value">${cardEquipment}</span></div>
-          </div>
-          <div class="page-content__gallery" id="page-gallery" data-folder="${card.image_folder}"></div>
-        </div>
+        ${signupHtml ? `<div class="hold-detail__signup">${signupHtml}</div>` : ''}
       </div>
     </div></section>
   `
@@ -329,6 +361,20 @@ function renderFladePage(data: SiteData, params: Record<string, string>): string
   const flade = data.flade.find(f => f.slug === params.slug)
   if (!flade) return renderNotFound()
   const isDa = getLang() === 'da'
+  const teamsHtml = flade.team_slugs.map((slug, i) => {
+    const name = isDa ? flade.teams_da[i] : flade.teams_en[i]
+    return `<a href="/hold/${slug}" class="flade-team-link" data-link>${name}</a>`
+  }).join('')
+
+  const linksHtml: string[] = []
+  if (flade.manufacturer_url) {
+    const label = isDa ? 'Producent / klasse' : 'Manufacturer / class'
+    linksHtml.push(`<a href="${flade.manufacturer_url}" target="_blank" rel="noopener" class="flade-link">${label} ↗</a>`)
+  }
+  if (flade.class_url) {
+    linksHtml.push(`<a href="${flade.class_url}" target="_blank" rel="noopener" class="flade-link">Dansk Sejlunion ↗</a>`)
+  }
+
   return `
     <section class="page-hero"><div class="container">
       <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/" data-link><span class="da">Forside</span><span class="en">Home</span></a><span class="breadcrumb__sep">›</span><a href="/flade" data-link><span class="da">Flåde</span><span class="en">Fleet</span></a><span class="breadcrumb__sep">›</span><span>${isDa ? flade.name_da : flade.name_en}</span></nav>
@@ -336,9 +382,29 @@ function renderFladePage(data: SiteData, params: Record<string, string>): string
       <p class="page-hero__sub">${isDa ? flade.specs_da : flade.specs_en}</p>
     </div></section>
     <section class="section section--mid"><div class="container">
-      <div class="page-content">
-        <div class="page-content__text"><p class="section-body">${isDa ? flade.description_da : flade.description_en}</p></div>
-        <div class="page-content__gallery" id="page-gallery" data-folder="${flade.image_folder}"></div>
+      <div class="hold-detail-top">
+        <div class="hold-detail__info">
+          <div class="info-grid info-grid--vertical">
+            <div class="info-item"><span class="info-item__label"><span class="da">Specifikationer</span><span class="en">Specifications</span></span><span class="info-item__value">${isDa ? flade.specs_da : flade.specs_en}</span></div>
+            <div class="info-item"><span class="info-item__label"><span class="da">Designer / Producent</span><span class="en">Designer / Manufacturer</span></span><span class="info-item__value">${isDa ? flade.designer_da : flade.designer_en}</span></div>
+            <div class="info-item"><span class="info-item__label"><span class="da">Bruges på hold</span><span class="en">Used on teams</span></span><span class="info-item__value flade-team-links">${teamsHtml}</span></div>
+          </div>
+        </div>
+        <div class="hold-detail__gallery">
+          <div class="page-content__gallery" id="page-gallery" data-folders='${flade.image_folder}'></div>
+        </div>
+      </div>
+      <div class="hold-detail-bottom">
+        <div class="hold-detail-body">
+          <div class="hold-detail-section">
+            <h3 class="hold-detail-section__title"><span class="da">Beskrivelse</span><span class="en">Description</span></h3>
+            <p class="hold-detail-section__description">${isDa ? flade.description_da : flade.description_en}</p>
+          </div>
+          ${linksHtml.length ? `<div class="hold-detail-section">
+            <h3 class="hold-detail-section__title"><span class="da">Links</span><span class="en">Links</span></h3>
+            <div class="flade-links">${linksHtml.join('')}</div>
+          </div>` : ''}
+        </div>
       </div>
     </div></section>
   `
@@ -368,7 +434,7 @@ function renderEventPage(data: SiteData, params: Record<string, string>): string
           ${weeksHtml}
           ${event.signup_url ? `<div style="margin-top:2rem"><a href="${event.signup_url}" target="_blank" rel="noopener noreferrer" class="btn btn--kos"><span class="da">Tilmeld dig</span><span class="en">Sign up</span></a></div>` : ''}
         </div>
-        <div class="page-content__gallery" id="page-gallery" data-folder="${event.image_folder}"></div>
+        <div class="page-content__gallery" id="page-gallery" data-folders='${event.image_folder}'></div>
       </div>
     </div></section>
   `
@@ -381,10 +447,18 @@ function renderGalleryPage(): string {
     <section class="page-hero"><div class="container">
       <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/" data-link><span class="da">Forside</span><span class="en">Home</span></a><span class="breadcrumb__sep">›</span><span><span class="da">Galleri</span><span class="en">Gallery</span></span></nav>
       <h1 class="page-hero__title"><span class="da">Galleri</span><span class="en">Gallery</span></h1>
+      <p class="page-hero__tagline"><span class="da">Udforsk billeder fra alle vores aktiviteter</span><span class="en">Explore photos from all our activities</span></p>
     </div></section>
     <section class="section section--mid"><div class="container">
-      <p class="section-body reveal"><span class="da">Udforsk billeder fra alle vores aktiviteter — vælg en kategori i galleriet.</span><span class="en">Explore photos from all our activities — choose a category in the gallery.</span></p>
-      <div style="text-align:center;margin-top:2rem"><a href="/images/" class="btn btn--kos" target="_blank"><span class="da">Åbn galleri</span><span class="en">Open gallery</span></a></div>
+      <div class="gallery-folders" id="gallery-folders"></div>
+      <div class="gallery-folder-view" id="gallery-folder-view" style="display:none">
+        <button class="gallery-back-btn" id="gallery-back-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
+          <span class="da">Tilbage til kategorier</span><span class="en">Back to categories</span>
+        </button>
+        <h2 class="gallery-folder-title" id="gallery-folder-title"></h2>
+        <div class="page-content__gallery" id="page-gallery"></div>
+      </div>
     </div></section>
   `
 }
@@ -401,58 +475,108 @@ function renderAboutSections(sections: { title: string; text: string }[] | undef
   `).join('')
 }
 
-function renderOmPage(data: SiteData): string {
-  const isDa = getLang() === 'da'
-  const { vedtaegter, bestyrelsen, sikkerhed, udmeldelse } = data.about
-
-  const members = isDa ? bestyrelsen.members_da : bestyrelsen.members_en
-  const membersHtml = members ? members.map(m => `
-    <div class="board-member">
-      <div class="board-member__info">
-        <div class="board-member__name">${m.name}</div>
-        <div class="board-member__role">${m.role}</div>
-        ${m.bio ? `<p class="board-member__bio">${m.bio}</p>` : ''}
-        <div class="board-member__contact">
-          ${m.phone ? `<a href="tel:${m.phone.replace(/\s/g, '')}" class="board-member__link">${m.phone}</a>` : ''}
-          ${m.email ? `<a href="mailto:${m.email}" class="board-member__link">${m.email}</a>` : ''}
-        </div>
+function renderTilmeldingPage(): string {
+  return `
+    <section class="page-hero"><div class="container">
+      <h1 class="page-hero__title"><span class="da">Tilmelding</span><span class="en">Sign Up</span></h1>
+      <p class="page-hero__tagline"><span class="da">Skriv dig på venteliste på et hold</span><span class="en">Join the waitlist for a team</span></p>
+    </div></section>
+    <section class="section section--mid"><div class="container">
+      <div class="tilmelding-description">
+        <p><span class="da">Her kan du skrive dig på venteliste på et hold, når du har gjort det vil du enten blive tilføjet holdet og få en velkomst besked eller blive kontaktet pr mail — når der er plads. Sejlsæsonen starter typisk i ugen omkring 1. Maj og varer til efterårsferien — men der er også aktiviteter gennem vinteren, dog betydeligt lavere end i sejlsæsonen.</span><span class="en">Here you can join the waitlist for a team. Once you do, you will either be added to the team and receive a welcome message, or be contacted by email when there is space. The sailing season typically starts around May 1st and lasts until the autumn holiday — but there are also activities during winter, though significantly fewer than during the sailing season.</span></p>
       </div>
-    </div>
-  `).join('') : ''
+      <div class="hold-detail-signup-widget">
+        <iframe src="https://www.kossejlsport.dk/widgets/kos-sejlsport?mobile=false&hide_profile_mobile=false&hide_profile_email=false&content_type=team_application&team_id=355608,355609,204225,218884,559744,463392,751665,51433,521573,521574,777446,655027,655029,649114,655000,655001&show_price_type_table=false&allow_price_type_selection=false" width="100%" height="800" frameborder="0" loading="lazy"></iframe>
+        <div class="powered-by-holdsport">Powered by Holdsport</div>
+      </div>
+    </div></section>
+  `
+}
 
-  const tocItems = [
-    { id: 'vedtaegter', label: isDa ? vedtaegter.title_da : vedtaegter.title_en },
-    { id: 'bestyrelsen', label: isDa ? bestyrelsen.title_da : bestyrelsen.title_en },
-    { id: 'sikkerhed', label: isDa ? sikkerhed.title_da : sikkerhed.title_en },
-    { id: 'udmeldelse', label: isDa ? udmeldelse.title_da : udmeldelse.title_en },
-  ]
-  const tocHtml = tocItems.map(item => `<a href="#${item.id}" class="toc-link" data-link>${item.label}</a>`).join('')
+function renderKalenderPage(): string {
+  return `
+    <section class="page-hero"><div class="container">
+      <h1 class="page-hero__title"><span class="da">Klub Kalender</span><span class="en">Club Calendar</span></h1>
+      <p class="page-hero__tagline"><span class="da">Se klubbens aktiviteter og tilmeld dig direkte</span><span class="en">See club activities and sign up directly</span></p>
+    </div></section>
+    <section class="section section--mid"><div class="container">
+      <div class="calendar-widget">
+        <iframe src="https://www.kossejlsport.dk/widgets/kos-sejlsport?mobile=false&hide_profile_mobile=false&hide_profile_email=false&content_type=activities_table&show_price_type_table=false&allow_price_type_selection=false&activity_types=1,2,3,4,5,6,7,8,9,46232,1012,1144,110095&limit=25" width="100%" height="800" frameborder="0" loading="lazy"></iframe>
+        <div class="powered-by-holdsport">Powered by Holdsport</div>
+      </div>
+    </div></section>
+  `
+}
+
+const OM_PAGES = [
+  { slug: 'vedtaegter', icon: '📋' },
+  { slug: 'bestyrelsen', icon: '👥' },
+  { slug: 'sikkerhed', icon: '🛟' },
+  { slug: 'udmeldelse', icon: '👋' },
+]
+
+function renderOmOverview(data: SiteData): string {
+  const isDa = getLang() === 'da'
+  const { about } = data
+  const cards = OM_PAGES.map(p => {
+    const section = about[p.slug as keyof typeof about]
+    const name = isDa ? section.title_da : section.title_en
+    const firstSection = (isDa ? section.sections_da : section.sections_en)?.[0]
+    const desc = firstSection ? firstSection.text.slice(0, 140) + '…' : ''
+    return `<a href="/om/${p.slug}" class="om-card om-card--with-bg reveal" data-link style="--card-bg: var(--om-${p.slug}-bg)">
+      <div class="om-card__icon">${p.icon}</div>
+      <div class="om-card__name">${name}</div>
+      <div class="om-card__desc">${desc}</div>
+    </a>`
+  }).join('')
 
   return `
     <section class="page-hero"><div class="container">
       <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/" data-link><span class="da">Forside</span><span class="en">Home</span></a><span class="breadcrumb__sep">›</span><span><span class="da">Om KØS</span><span class="en">About KØS</span></span></nav>
       <h1 class="page-hero__title"><span class="da">Om KØS</span><span class="en">About KØS</span></h1>
+      <p class="page-hero__sub"><span class="da">Vedtægter, bestyrelse, sikkerhed og praktisk info</span><span class="en">Constitution, board, safety and practical info</span></p>
     </div></section>
     <section class="section section--mid"><div class="container">
-      <nav class="toc">${tocHtml}</nav>
-      <div class="about-sections">
-        <div class="about-section" id="vedtaegter">
-          <h2 class="about-section__title">${isDa ? vedtaegter.title_da : vedtaegter.title_en}</h2>
-          <div class="about-section__content">${renderAboutSections(isDa ? vedtaegter.sections_da : vedtaegter.sections_en)}</div>
-        </div>
-        <div class="about-section" id="bestyrelsen">
-          <h2 class="about-section__title">${isDa ? bestyrelsen.title_da : bestyrelsen.title_en}</h2>
-          <div class="board-grid">${membersHtml}</div>
-        </div>
-        <div class="about-section" id="sikkerhed">
-          <h2 class="about-section__title">${isDa ? sikkerhed.title_da : sikkerhed.title_en}</h2>
-          <div class="about-section__content">${renderAboutSections(isDa ? sikkerhed.sections_da : sikkerhed.sections_en)}</div>
-        </div>
-        <div class="about-section" id="udmeldelse">
-          <h2 class="about-section__title">${isDa ? udmeldelse.title_da : udmeldelse.title_en}</h2>
-          <div class="about-section__content">${renderAboutSections(isDa ? udmeldelse.sections_da : udmeldelse.sections_en)}</div>
+      <div class="om-grid">${cards}</div>
+    </div></section>
+  `
+}
+
+function renderOmSubPage(data: SiteData, params: Record<string, string>): string {
+  const slug = params.slug
+  const section = data.about[slug as keyof typeof data.about]
+  if (!section) return renderNotFound()
+  const isDa = getLang() === 'da'
+  const name = isDa ? section.title_da : section.title_en
+  const sections = isDa ? section.sections_da : section.sections_en
+  const members = slug === 'bestyrelsen' ? (isDa ? data.about.bestyrelsen.members_da : data.about.bestyrelsen.members_en) : null
+
+  let contentHtml = ''
+  if (members) {
+    contentHtml = `<div class="board-grid">${members.map(m => `
+      <div class="board-member">
+        <div class="board-member__info">
+          <div class="board-member__name">${m.name}</div>
+          <div class="board-member__role">${m.role}</div>
+          ${m.bio ? `<p class="board-member__bio">${m.bio}</p>` : ''}
+          <div class="board-member__contact">
+            ${m.phone ? `<a href="tel:${m.phone.replace(/\s/g, '')}" class="board-member__link">${m.phone}</a>` : ''}
+            ${m.email ? `<a href="mailto:${m.email}" class="board-member__link">${m.email}</a>` : ''}
+          </div>
         </div>
       </div>
+    `).join('')}</div>`
+  } else if (sections) {
+    contentHtml = `<div class="about-section__content">${renderAboutSections(sections)}</div>`
+  }
+
+  return `
+    <section class="page-hero"><div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/" data-link><span class="da">Forside</span><span class="en">Home</span></a><span class="breadcrumb__sep">›</span><a href="/om" data-link><span class="da">Om KØS</span><span class="en">About KØS</span></a><span class="breadcrumb__sep">›</span><span>${name}</span></nav>
+      <h1 class="page-hero__title">${name}</h1>
+    </div></section>
+    <section class="section section--mid"><div class="container">
+      ${contentHtml}
     </div></section>
   `
 }
@@ -471,6 +595,31 @@ function renderNotFound(): string {
 
 // ── Router init ───────────────────────────────────────────────────────────────
 
+function getRouteMeta(path: string, data: SiteData, params: Record<string, string>): { title: string; description: string; ogImage?: string } {
+  const isDa = getLang() === 'da'
+  if (path === '/') return { title: isDa ? 'Hop om bord' : 'Come aboard', description: isDa ? 'KØS Sejlsport samler børn, unge og voksne i et sikkert, sjovt og læringsrigt miljø ved Svanemøllen Havn.' : 'KØS Sejlsport brings together children, youth and adults in a safe, fun environment at Svanemøllen Harbour.' }
+  if (path === '/hold') return { title: isDa ? 'Hold' : 'Teams', description: isDa ? 'Find dit hold i KØS Sejlsport — fra Mini-Sejler til J70.' : 'Find your team at KØS Sejlsport — from Mini Sailor to J70.' }
+  if (path === '/flade') return { title: isDa ? 'Flåde' : 'Fleet', description: isDa ? 'Udforsk vores både — fra små joller til store kølbåde.' : 'Explore our boats — from small dinghies to large keelboats.' }
+  if (path === '/galleri') return { title: isDa ? 'Galleri' : 'Gallery', description: isDa ? 'Billeder fra livet på vandet i KØS Sejlsport.' : 'Photos from life on the water at KØS Sejlsport.' }
+  if (path === '/kalender') return { title: isDa ? 'Kalender' : 'Calendar', description: isDa ? 'Se klubbens aktiviteter og tilmeld dig direkte.' : 'See club activities and sign up directly.' }
+  if (path === '/tilmelding') return { title: isDa ? 'Tilmelding' : 'Sign Up', description: isDa ? 'Skriv dig på venteliste på et hold i KØS Sejlsport.' : 'Join the waitlist for a team at KØS Sejlsport.' }
+  if (path === '/om') return { title: isDa ? 'Om KØS' : 'About KØS', description: isDa ? 'Vedtægter, bestyrelse, sikkerhed og praktisk info om KØS Sejlsport.' : 'Constitution, board, safety and practical info about KØS Sejlsport.' }
+
+  const holdCard = _holdCards[params.slug]
+  if (holdCard) return { title: isDa ? holdCard.name_da : holdCard.name_en, description: (isDa ? holdCard.description_da : holdCard.description_en).slice(0, 160), ogImage: getHoldCardImage(params.slug) }
+
+  const flade = data.flade.find(f => f.slug === params.slug)
+  if (flade) return { title: isDa ? flade.name_da : flade.name_en, description: (isDa ? flade.description_da : flade.description_en).slice(0, 160), ogImage: getFladeCardImage(params.slug) }
+
+  const event = data.events.find(e => e.slug === params.slug)
+  if (event) return { title: isDa ? event.name_da : event.name_en, description: (isDa ? event.description_da : event.description_en).slice(0, 160) }
+
+  const aboutSection = data.about[params.slug as keyof typeof data.about]
+  if (aboutSection) return { title: isDa ? aboutSection.title_da : aboutSection.title_en, description: (isDa ? aboutSection.sections_da?.[0]?.text : aboutSection.sections_en?.[0]?.text)?.slice(0, 160) || '' }
+
+  return { title: '404', description: '' }
+}
+
 export async function initRouter(): Promise<void> {
   _holdCards = await loadHoldCards()
 
@@ -482,11 +631,15 @@ export async function initRouter(): Promise<void> {
     if (match) {
       loadData().then(data => {
         main.innerHTML = match.page(data, match.params)
+        const meta = getRouteMeta(path, data, match.params)
+        updateMeta(meta.title, meta.description, path, meta.ogImage)
         initScrollReveal()
-        if (path === '/') { initGallery(); initCountdown(); initHeroParallax() }
+        if (path === '/') { initGallery(); initHeroParallax() }
+        if (path === '/galleri') initGalleryFolders()
         const pageGallery = document.getElementById('page-gallery')
-        if (pageGallery) loadPageGallery(pageGallery.dataset.folder || '')
+        if (pageGallery) loadPageGallery((pageGallery.dataset.folders || '').split(',').filter(Boolean)).then(() => rebindLightbox())
         window.scrollTo(0, 0)
+        document.dispatchEvent(new Event('page-ready'))
       }).catch(() => { main.innerHTML = renderNotFound() })
     } else {
       main.innerHTML = renderNotFound()
@@ -524,26 +677,6 @@ function initScrollReveal(): void {
     entries.forEach((entry) => { if (entry.isIntersecting) { entry.target.classList.add('is-visible'); observer.unobserve(entry.target) } })
   }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' })
   elements.forEach((el) => observer.observe(el))
-}
-
-function initCountdown(): void {
-  const DEPARTURE_DATE = new Date('2026-06-29T09:00:00')
-  const elDays = document.getElementById('cd-days')
-  const elHours = document.getElementById('cd-hours')
-  const elMinutes = document.getElementById('cd-minutes')
-  const elSeconds = document.getElementById('cd-seconds')
-  if (!elDays || !elHours || !elMinutes || !elSeconds) return
-  const pad = (n: number) => String(n).padStart(2, '0')
-  const tick = () => {
-    const diff = DEPARTURE_DATE.getTime() - Date.now()
-    if (diff <= 0) { elDays.textContent = '00'; elHours.textContent = '00'; elMinutes.textContent = '00'; elSeconds.textContent = '00'; return }
-    const s = Math.floor(diff / 1000)
-    elDays.textContent = String(Math.floor(s / 86400))
-    elHours.textContent = pad(Math.floor((s % 86400) / 3600))
-    elMinutes.textContent = pad(Math.floor((s % 3600) / 60))
-    elSeconds.textContent = pad(s % 60)
-  }
-  tick(); setInterval(tick, 1000)
 }
 
 function initHeroParallax(): void {
@@ -584,16 +717,92 @@ async function initGallery(): Promise<void> {
   } catch { /* ignore */ }
 }
 
-async function loadPageGallery(folder: string): Promise<void> {
-  if (!folder) return
+async function loadPageGallery(folders: string[], showAll = false): Promise<void> {
+  if (!folders.length) return
   const container = document.getElementById('page-gallery')
   if (!container) return
   try {
-    const res = await fetch(`/api/gallery/${folder}`)
-    if (!res.ok) return
-    const data = await res.json()
-    const images = data.images || []
-    if (!images.length) { container.innerHTML = '<p class="gallery__empty">No images yet</p>'; return }
-    container.innerHTML = `<div class="page-gallery-grid">${images.map((img: { url: string; caption_da: string; caption_en: string }) => `<div class="page-gallery-item" data-caption-da="${img.caption_da || ''}" data-caption-en="${img.caption_en || ''}"><img src="${img.url}" alt="${img.caption_da || ''}" loading="lazy" /><div class="page-gallery-item__caption"><span class="da">${img.caption_da}</span><span class="en">${img.caption_en}</span></div></div>`).join('')}</div>`
+    const allImages: { url: string; caption_da: string; caption_en: string; folder: string }[] = []
+    for (const folder of folders) {
+      const res = await fetch(`/api/gallery/${folder}`)
+      if (!res.ok) continue
+      const data = await res.json()
+      const images = data.images || []
+      allImages.push(...images)
+    }
+    if (!allImages.length) { container.innerHTML = '<p class="gallery__empty">No images yet</p>'; return }
+    const visible = showAll ? allImages : allImages.slice(0, 4)
+    const remainder = allImages.length - 4
+    container.dataset.allImages = JSON.stringify(allImages)
+    container.innerHTML = `<div class="page-gallery-grid${showAll ? ' page-gallery-grid--full' : ''}">${visible.map((img: { url: string; caption_da: string; caption_en: string }, i: number) => {
+      const overlay = (!showAll && i === 3 && remainder > 0) ? `<div class="page-gallery-item__count">+${remainder}</div>` : ''
+      return `<div class="page-gallery-item" data-caption-da="${img.caption_da || ''}" data-caption-en="${img.caption_en || ''}"><img src="${img.url}" alt="${img.caption_da || ''}" loading="lazy" />${overlay}<div class="page-gallery-item__caption"><span class="da">${img.caption_da}</span><span class="en">${img.caption_en}</span></div></div>`
+    }).join('')}</div>`
   } catch { /* ignore */ }
+}
+
+const FOLDER_NAMES: Record<string, { da: string; en: string }> = {
+  'mini-sejler': { da: 'Mini-Sejler', en: 'Mini Sailor' },
+  'begynder': { da: 'Begynder', en: 'Beginner' },
+  'fortsaetter': { da: 'Fortsætter', en: 'Continuer' },
+  'ovede': { da: 'Øvede', en: 'Advanced' },
+  'undervisning': { da: 'Undervisning', en: 'Training' },
+  'adventure': { da: 'Adventure', en: 'Adventure' },
+  'rsfeva': { da: 'RS Feva', en: 'RS Feva' },
+  'rstera': { da: 'RS Tera', en: 'RS Tera' },
+  'rszest': { da: 'RS Zest', en: 'RS Zest' },
+  'optimist': { da: 'Optimist', en: 'Optimist' },
+  'j70': { da: 'J70', en: 'J70' },
+  'socialt': { da: 'Socialt', en: 'Social' },
+  'prepping': { da: 'Klargøring', en: 'Prepping' },
+  'udflugt': { da: 'Udflugter', en: 'Excursions' },
+  'provetimer': { da: 'Prøvetimer', en: 'Trials / Open house' },
+  'parentsailing': { da: 'Forældresejlads', en: 'Parent sailing' },
+  'klubtur': { da: 'Klubtur', en: 'Club trip' },
+  'mini-regatta': { da: 'Mini-Regatta', en: 'Mini Regatta' },
+}
+
+function getFolderName(folder: string): { da: string; en: string } {
+  return FOLDER_NAMES[folder] || { da: folder, en: folder }
+}
+
+async function initGalleryFolders(): Promise<void> {
+  const container = document.getElementById('gallery-folders')
+  if (!container) return
+  try {
+    const res = await fetch('/api/gallery')
+    if (!res.ok) return
+    const folders: { folder: string; count: number; cover_url: string }[] = await res.json()
+    if (!folders.length) { container.innerHTML = '<p class="gallery__empty"><span class="da">Ingen billeder endnu</span><span class="en">No photos yet</span></p>'; return }
+    container.innerHTML = `<div class="gallery-folder-grid">${folders.map(f => {
+      const name = getFolderName(f.folder)
+      return `<button class="gallery-folder-card gallery-folder-card--with-bg reveal" data-folder="${f.folder}" style="--card-bg: url('${f.cover_url}')">
+        <div class="gallery-folder-card__name"><span class="da">${name.da}</span><span class="en">${name.en}</span></div>
+        <div class="gallery-folder-card__count">${f.count} <span class="da">billeder</span><span class="en">photos</span></div>
+      </button>`
+    }).join('')}</div>`
+    initScrollReveal()
+    container.querySelectorAll<HTMLElement>('.gallery-folder-card').forEach(btn => {
+      btn.addEventListener('click', () => openGalleryFolder(btn.dataset.folder || ''))
+    })
+  } catch { /* ignore */ }
+}
+
+async function openGalleryFolder(folder: string): Promise<void> {
+  const foldersEl = document.getElementById('gallery-folders')
+  const viewEl = document.getElementById('gallery-folder-view')
+  const titleEl = document.getElementById('gallery-folder-title')
+  const backBtn = document.getElementById('gallery-back-btn')
+  const galleryEl = document.getElementById('page-gallery')
+  if (!foldersEl || !viewEl || !titleEl || !backBtn || !galleryEl) return
+  const name = getFolderName(folder)
+  titleEl.innerHTML = `<span class="da">${name.da}</span><span class="en">${name.en}</span>`
+  foldersEl.style.display = 'none'
+  viewEl.style.display = 'block'
+  backBtn.onclick = () => {
+    viewEl.style.display = 'none'
+    foldersEl.style.display = ''
+    galleryEl.innerHTML = ''
+  }
+  await loadPageGallery([folder], true).then(() => rebindLightbox())
 }

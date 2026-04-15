@@ -7,8 +7,8 @@
       "tagline_en": "Kids and Boat – cozy, informal and super fun",
       "age_da": "6–9 år",
       "age_en": "6–9 years",
-      "time_da": "Tirsdag 16.30–18.30 eller lørdag 9.00–11.00 / 13.00–15.00",
-      "time_en": "Tuesday 16:30–18:30 or Saturday 9:00–11:00 / 13:00–15:00",
+      "time_da": "Tirsdag 16.30–18.30 eller lørdag 9.00–11.00 / 17.00–19.00",
+      "time_en": "Tuesday 16:30–18:30 or Saturday 9:00–11:00 / 17:00–19:00",
       "season_da": "Uge 18 til efterårsferien",
       "season_en": "Week 18 until autumn holiday",
       "equipment_da": "Optimist, RS Zest, SUP boards",
@@ -21,10 +21,13 @@
       "prerequisites_en": "Mini swimming test recommended. Read our safety policy.",
       "expectations_da": ["Fællesspisning er en vigtig del af klubbens ånd – medbring mad 1-2 gange i sæsonen", "Forældre forventes at hjælpe med praktiske opgaver", "Hold dig opdateret på Holdsport og Facebook"],
       "expectations_en": ["Shared meals are an important part of the club's spirit – bring food 1-2 times per season", "Parents expected to help with practical tasks", "Stay updated on Holdsport and Facebook"],
-      "coaches_da": ["Emma Hospes (Lørdag formiddag)", "Jesper Krogh (Tirsdag)", "Christian Brevadt (Tirsdag)"],
-      "coaches_en": ["Emma Hospes (Saturday morning)", "Jesper Krogh (Tuesday)", "Christian Brevadt (Tuesday)"],
+      "coaches_da": ["Christian Brevadt (Tirsdag)", "Emma Hospes (Lørdag)", "Scot Ausborn (Lørdag)"],
+      "coaches_en": ["Christian Brevadt (Tuesday)", "Emma Hospes (Saturday)", "Scot Ausborn (Saturday)"],
       "signup_url": "https://www.kossejlsport.dk/klub/kos-sejlsport/sider/tilmelding",
-      "image_folder": "mini-sejler"
+      "signup_widget": "https://www.kossejlsport.dk/widgets/kos-sejlsport?mobile=false&hide_profile_mobile=false&hide_profile_email=false&content_type=team_application&team_id=355608,355609&show_price_type_table=false&allow_price_type_selection=false",
+      "price_da": "800,- / halvår",
+      "price_en": "800 DKK / half year",
+      "image_folders": ["mini-sejler"]
     },
     "begynder": {
       "name_da": "Begynder",
@@ -39,7 +42,7 @@
       "season_en": "April to October",
       "equipment_da": "Optimist, RS Tera, RS Zest",
       "equipment_en": "Optimist, RS Tera, RS Zest",
-      "description_da": "Begynderholdet er for dig der aldrig har sejlet før eller kun har prøvet det en enkelt gang. Du lærer grundlæggende sejlteknik, hvordan man vender, krydser og lægger til.",
+      "description_da": "Når du er 8 år eller ældre kan du begynde at lære at sejle jolle selv. Dette gør vi ved en tryg introduktion, både på land (teknik og tilrigning) men også instruktion på vand både ved samsejlads med instruktør eller fra følgebåd for at det bliver en god og tryg oplevelse. Vi følger Dansk Sejlunions diplomsejlerskole og lærer de elementer der indgår i begynder og Sejler 1 niveau over 1-2 år. Holdet består af en blanding af teknik og øvelser og masser af sjov og hygge",
       "description_en": "The beginner team is for you who have never sailed before or only tried it once. You learn basic sailing techniques, how to tack, crosswind and dock.",
       "activities_da": ["Grundlæggende sejlteknik", "Lære at styre båden", "Vendinger og kryds", "Lægge til ved bro"],
       "activities_en": ["Basic sailing techniques", "Learning to steer the boat", "Tacking and sailing", "Docking at the pier"],
@@ -50,7 +53,10 @@
       "coaches_da": [],
       "coaches_en": [],
       "signup_url": "https://www.kossejlsport.dk/klub/kos-sejlsport/sider/tilmelding",
-      "image_folder": "begynder"
+      "signup_widget": "https://www.kossejlsport.dk/widgets/kos-sejlsport?mobile=true&hide_profile_mobile=false&hide_profile_email=false&content_type=team_application&team_id=204225,218884,559744&show_price_type_table=false&allow_price_type_selection=false",
+      "price_da": "800,- / halvår",
+      "price_en": "800 DKK / half year",
+      "image_folders": ["begynder", "optimist"]
     },
     "fortsaetter": {
       "name_da": "Fortsætter",
@@ -65,7 +71,7 @@
       "season_en": "April to October",
       "equipment_da": "Optimist, RS Feva, RS Tera, ILCA",
       "equipment_en": "Optimist, RS Feva, RS Tera, ILCA",
-      "description_da": "Du har sejlet før og kan de grundlæggende manøvrer. Nu arbejdes der med teknik, trim og taktik. Vi sejler både alene og i hold.",
+      "description_da": "Fortsætter holdet er niveauet efter begynder, hvor man forfiner sejlteknik, sejler også i lidt mere vind og lærer flere ting omkring hvordan man sejler - bliver ligeledes introduceret til det at sejle på bane med vigeregler osv. Fortsætterholdet kommer man typisk på når man har sejlet 1-2 sæsoner. Vi følger Dansk Sejlunions diplomsejlerskole niveau 2 og 3. Det vil også være oplagt at deltage i efterårs/vintertræningen hvis man ønsker at holde sejladsen ved lige over vinteren.",
       "description_en": "You've sailed before and know the basic maneuvers. Now we work on technique, trim and tactics. We sail both alone and in teams.",
       "activities_da": ["Teknik og trim", "Taktik og strategi", "Sejlads i forskellige bådtyper", "Kapsejlads basics"],
       "activities_en": ["Technique and trim", "Tactics and strategy", "Sailing in different boat types", "Racing basics"],
@@ -76,7 +82,10 @@
       "coaches_da": [],
       "coaches_en": [],
       "signup_url": "https://www.kossejlsport.dk/klub/kos-sejlsport/sider/tilmelding",
-      "image_folder": "fortsaetter"
+      "signup_widget": "https://www.kossejlsport.dk/widgets/kos-sejlsport?mobile=false&hide_profile_mobile=false&hide_profile_email=false&content_type=team_application&team_id=463392,751665&show_price_type_table=false&allow_price_type_selection=false",
+      "price_da": "800,- / halvår",
+      "price_en": "800 DKK / half year",
+      "image_folders": ["fortsaetter", "rsfeva", "rstra", "optimist"]
     },
     "ovede": {
       "name_da": "Øvede",
@@ -102,7 +111,10 @@
       "coaches_da": [],
       "coaches_en": [],
       "signup_url": "https://www.kossejlsport.dk/klub/kos-sejlsport/sider/tilmelding",
-      "image_folder": "undervisning"
+      "signup_widget": "https://www.kossejlsport.dk/widgets/kos-sejlsport?mobile=false&hide_profile_mobile=false&hide_profile_email=false&content_type=team_application&team_id=51433&show_price_type_table=false&allow_price_type_selection=false",
+      "price_da": "800,- / halvår",
+      "price_en": "800 DKK / half year",
+      "image_folders": ["undervisning"]
     },
     "adventure": {
       "name_da": "Adventure",
@@ -128,7 +140,10 @@
       "coaches_da": [],
       "coaches_en": [],
       "signup_url": "https://www.kossejlsport.dk/klub/kos-sejlsport/sider/tilmelding",
-      "image_folder": "adventure"
+      "signup_widget": "https://www.kossejlsport.dk/widgets/kos-sejlsport?mobile=false&hide_profile_mobile=false&hide_profile_email=false&content_type=team_application&team_id=521573,521574&show_price_type_table=false&allow_price_type_selection=false",
+      "price_da": "800,- / halvår",
+      "price_en": "800 DKK / half year",
+      "image_folders": ["adventure"]
     },
     "j70-youngster": {
       "name_da": "J70 Youngster",
@@ -154,7 +169,10 @@
       "coaches_da": [],
       "coaches_en": [],
       "signup_url": "https://www.kossejlsport.dk/klub/kos-sejlsport/sider/tilmelding",
-      "image_folder": "j70"
+      "signup_widget": "https://www.kossejlsport.dk/widgets/kos-sejlsport?mobile=false&hide_profile_mobile=false&hide_profile_email=false&content_type=team_application&team_id=777446&show_price_type_table=false&allow_price_type_selection=false",
+      "price_da": "1.200,- / halvår",
+      "price_en": "1,200 DKK / half year",
+      "image_folders": ["j70"]
     },
     "j70-begyndere": {
       "name_da": "J70 Begynder",
@@ -180,7 +198,10 @@
       "coaches_da": [],
       "coaches_en": [],
       "signup_url": "https://www.kossejlsport.dk/klub/kos-sejlsport/sider/tilmelding",
-      "image_folder": "j70"
+      "signup_widget": "https://www.kossejlsport.dk/widgets/kos-sejlsport?mobile=false&hide_profile_mobile=false&hide_profile_email=false&content_type=team_application&team_id=655027,655029&show_price_type_table=false&allow_price_type_selection=false",
+      "price_da": "1.600,- / halvår",
+      "price_en": "1,600 DKK / half year",
+      "image_folders": ["j70"]
     },
     "j70": {
       "name_da": "J70 Træning",
@@ -205,7 +226,10 @@
       "expectations_en": ["Dedicated training", "Participation in regattas"],
       "coaches_da": [],
       "coaches_en": [],
-      "signup_url": "https://www.kossejlsport.dk/klub/kos-sejlsport/sider/tilmelding"
+      "signup_url": "https://www.kossejlsport.dk/klub/kos-sejlsport/sider/tilmelding",
+      "signup_widget": "https://www.kossejlsport.dk/widgets/kos-sejlsport?mobile=false&hide_profile_mobile=false&hide_profile_email=false&content_type=team_application&team_id=649114,655000,655001&show_price_type_table=false&allow_price_type_selection=false",
+      "price_da": "1.200,- / halvår",
+      "price_en": "1,200 DKK / half year"
     }
   }
 }

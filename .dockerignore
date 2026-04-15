@@ -1,0 +1,9 @@
+node_modules
+dist
+.git
+.playwright
+.playwright-cli
+.ruff_cache
+screenshots
+.env
+images

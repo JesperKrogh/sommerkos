@@ -7,6 +7,16 @@
   <meta property="og:title" content="KØS Sejlsport — Svanemøllen Havn" />
   <meta property="og:description" content="Sejlglæde for alle — fra Mini-Sejler til J70. Kom forbi Svanemøllen Havn." />
   <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://kossejlsport.krogh.cc" />
+  <meta property="og:image" content="https://kossejlsport.krogh.cc/images-overview/flade-optimist.jpg" />
+  <meta property="og:site_name" content="KØS Sejlsport" />
+  <meta property="og:locale" content="da_DK" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="KØS Sejlsport — Svanemøllen Havn" />
+  <meta name="twitter:description" content="Sejlglæde for alle — fra Mini-Sejler til J70. Kom forbi Svanemøllen Havn." />
+  <meta name="twitter:image" content="https://kossejlsport.krogh.cc/images-overview/flade-optimist.jpg" />
+  <link rel="canonical" href="https://kossejlsport.krogh.cc" />
+  <meta name="robots" content="index, follow" />
 
   <title>KØS Sejlsport — Svanemøllen Havn</title>
 
@@ -22,6 +32,40 @@
   <link rel="stylesheet" href="/src/style/animations.css" />
   <link rel="stylesheet" href="/src/style/components.css" />
   <link rel="stylesheet" href="/src/style/pages.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SportsActivityLocation",
+    "name": "KØS Sejlsport",
+    "description": "Sejlglæde i Svanemøllen Havn siden 1984. Sejlundervisning for børn, unge og voksne.",
+    "url": "https://kossejlsport.krogh.cc",
+    "logo": "https://kossejlsport.krogh.cc/logo-kos.png",
+    "image": "https://kossejlsport.krogh.cc/images-overview/flade-optimist.jpg",
+    "telephone": "+4552390400",
+    "email": "bestyrelsen@kossejlsport.dk",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Svaneknoppen 5",
+      "addressLocality": "København Ø",
+      "postalCode": "2100",
+      "addressCountry": "DK"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 55.7047,
+      "longitude": 12.5833
+    },
+    "sameAs": [
+      "https://www.facebook.com/kossejlsport",
+      "https://www.kossejlsport.dk"
+    ],
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "description": "Sejlsæson april–oktober. Træning mandag–lørdag."
+    }
+  }
+  </script>
 </head>
 <body>
 
@@ -29,18 +73,27 @@
   <nav class="nav" id="nav">
     <div class="nav__inner">
       <a href="/" class="nav__logo" data-link aria-label="KØS Sejlsport">
-        <img src="/logo-kos.png" alt="KØS Sejlsport" style="height:40px;width:auto;" />
+        <img src="/logo-kos.png" alt="KØS Sejlsport" style="height:48px;width:auto;" />
       </a>
 
       <div class="nav__actions">
         <a href="/hold" class="nav__link" data-link>
           <span class="da">Hold</span><span class="en">Teams</span>
         </a>
-        <a href="/events/sommercamps" class="nav__link" data-link>
+        <a href="/flade" class="nav__link" data-link>
+          <span class="da">Flåde</span><span class="en">Fleet</span>
+        </a>
+        <a href="/tilmelding" class="nav__link" data-link>
           <span class="da">Tilmelding</span><span class="en">Sign up</span>
         </a>
         <a href="/#events-overview" class="nav__link" data-link>
           <span class="da">Events</span><span class="en">Events</span>
+        </a>
+        <a href="/kalender" class="nav__link" data-link>
+          <span class="da">Kalender</span><span class="en">Calendar</span>
+        </a>
+        <a href="/galleri" class="nav__link" data-link>
+          <span class="da">Galleri</span><span class="en">Gallery</span>
         </a>
         <a href="/om" class="nav__link" data-link>
           <span class="da">Om</span><span class="en">About</span>
@@ -58,10 +111,59 @@
 
     <!-- Mobile menu -->
     <div class="nav__mobile" id="mobileMenu">
-      <a href="/hold" class="nav__mobile-link" data-link><span class="da">Hold</span><span class="en">Teams</span></a>
-      <a href="/events/sommercamps" class="nav__mobile-link" data-link><span class="da">Tilmelding</span><span class="en">Sign up</span></a>
+      <div class="nav__mobile-accordion">
+        <div class="nav__mobile-accordion-header">
+          <a href="/hold" class="nav__mobile-link" data-link><span class="da">Hold</span><span class="en">Teams</span></a>
+          <button class="nav__mobile-arrow" type="button" aria-label="Expand" aria-expanded="false">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+          </button>
+        </div>
+        <div class="nav__mobile-sub">
+          <a href="/hold/mini-sejler" class="nav__mobile-sublink" data-link><span class="da">Mini-Sejler</span><span class="en">Mini Sailor</span></a>
+          <a href="/hold/begynder" class="nav__mobile-sublink" data-link><span class="da">Begynder</span><span class="en">Beginner</span></a>
+          <a href="/hold/fortsaetter" class="nav__mobile-sublink" data-link><span class="da">Fortsætter</span><span class="en">Continuer</span></a>
+          <a href="/hold/ovede" class="nav__mobile-sublink" data-link><span class="da">Øvede</span><span class="en">Advanced</span></a>
+          <a href="/hold/adventure" class="nav__mobile-sublink" data-link><span class="da">Adventure</span><span class="en">Adventure</span></a>
+          <a href="/hold/j70-youngster" class="nav__mobile-sublink" data-link>J70 Youngster</a>
+          <a href="/hold/j70-begyndere" class="nav__mobile-sublink" data-link><span class="da">J70 Begynder</span><span class="en">J70 Beginner</span></a>
+          <a href="/hold/j70" class="nav__mobile-sublink" data-link><span class="da">J70 Træning</span><span class="en">J70 Training</span></a>
+        </div>
+      </div>
+      <div class="nav__mobile-accordion">
+        <div class="nav__mobile-accordion-header">
+          <a href="/flade" class="nav__mobile-link" data-link><span class="da">Flåde</span><span class="en">Fleet</span></a>
+          <button class="nav__mobile-arrow" type="button" aria-label="Expand" aria-expanded="false">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+          </button>
+        </div>
+        <div class="nav__mobile-sub">
+          <a href="/flade/optimist" class="nav__mobile-sublink" data-link>Optimist</a>
+          <a href="/flade/rs-tera" class="nav__mobile-sublink" data-link>RS Tera</a>
+          <a href="/flade/rs-feva" class="nav__mobile-sublink" data-link>RS Feva</a>
+          <a href="/flade/rs-zest" class="nav__mobile-sublink" data-link>RS Zest</a>
+          <a href="/flade/ilca-laser" class="nav__mobile-sublink" data-link>ILCA/Laser</a>
+          <a href="/flade/h-baad" class="nav__mobile-sublink" data-link><span class="da">H-Båd</span><span class="en">H-Boat</span></a>
+          <a href="/flade/j70" class="nav__mobile-sublink" data-link>J70</a>
+        </div>
+      </div>
+      <a href="/tilmelding" class="nav__mobile-link" data-link><span class="da">Tilmelding</span><span class="en">Sign up</span></a>
       <a href="/#events-overview" class="nav__mobile-link" data-link><span class="da">Events</span><span class="en">Events</span></a>
-      <a href="/om" class="nav__mobile-link" data-link><span class="da">Om</span><span class="en">About</span></a>
+      <a href="/kalender" class="nav__mobile-link" data-link><span class="da">Kalender</span><span class="en">Calendar</span></a>
+      <a href="/galleri" class="nav__mobile-link" data-link><span class="da">Galleri</span><span class="en">Gallery</span></a>
+      <div class="nav__mobile-accordion">
+        <div class="nav__mobile-accordion-header">
+          <a href="/om" class="nav__mobile-link" data-link><span class="da">Om</span><span class="en">About</span></a>
+          <button class="nav__mobile-arrow" type="button" aria-label="Expand" aria-expanded="false">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+          </button>
+        </div>
+        <div class="nav__mobile-sub">
+          <a href="/om/vedtaegter" class="nav__mobile-sublink" data-link><span class="da">Vedtægter</span><span class="en">Constitution</span></a>
+          <a href="/om/bestyrelsen" class="nav__mobile-sublink" data-link><span class="da">Bestyrelsen</span><span class="en">The Board</span></a>
+          <a href="/om/sikkerhed" class="nav__mobile-sublink" data-link><span class="da">Sikkerhedspolitik</span><span class="en">Safety Policy</span></a>
+          <a href="/om/udmeldelse" class="nav__mobile-sublink" data-link><span class="da">Udmeldelse</span><span class="en">Resignation</span></a>
+        </div>
+      </div>
     </div>
   </nav>
 
@@ -77,6 +179,7 @@
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
     </button>
     <div class="lightbox__img-wrap" id="lightboxImgWrap"></div>
+    <div id="lightboxCaption"></div>
     <button class="lightbox__next" id="lightboxNext" aria-label="Next photo">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
     </button>

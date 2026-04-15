@@ -4,11 +4,13 @@
   "private": true,
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "prebuild": "node scripts/generate-sitemap.mjs",
+    "build": "node scripts/generate-sitemap.mjs && tsc && vite build",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
+    "playwright": "^1.59.1",
     "typescript": "^5.4.5",
     "vite": "^5.2.11"
   },

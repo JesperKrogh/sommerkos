@@ -1,0 +1,87 @@
+- generic [active] [ref=e1]:
+  - navigation [ref=e2]:
+    - generic [ref=e3]:
+      - link "KØS Sejlsport" [ref=e4] [cursor=pointer]:
+        - /url: /
+        - img "KØS Sejlsport" [ref=e5]
+      - generic [ref=e6]:
+        - link "Hold" [ref=e7] [cursor=pointer]:
+          - /url: /hold
+        - link "Tilmelding" [ref=e8] [cursor=pointer]:
+          - /url: /events/sommercamps
+        - link "Events" [ref=e9] [cursor=pointer]:
+          - /url: /#events-overview
+        - link "Om" [ref=e10] [cursor=pointer]:
+          - /url: /om
+        - button "Toggle language" [ref=e11] [cursor=pointer]: DA | EN
+  - main [ref=e12]:
+    - generic [ref=e14]:
+      - navigation "Breadcrumb" [ref=e15]:
+        - link "Forside" [ref=e16] [cursor=pointer]:
+          - /url: /
+        - generic [ref=e17]: ›
+        - link "Hold" [ref=e18] [cursor=pointer]:
+          - /url: /hold
+        - generic [ref=e19]: ›
+        - generic [ref=e20]: Mini-Sejler
+      - heading "Mini-Sejler" [level=1] [ref=e21]
+      - paragraph [ref=e22]: Børn og Båd – hyggeligt, uformelt og super sjovt
+      - paragraph [ref=e23]: 6–9 år · Tirsdag 16.30–18.30 eller lørdag 9.00–11.00 / 13.00–15.00
+    - generic [ref=e25]:
+      - generic [ref=e26]:
+        - generic [ref=e27]:
+          - generic [ref=e28]:
+            - generic [ref=e29]:
+              - generic [ref=e30]: Alder
+              - text: 6–9 år
+            - generic [ref=e31]:
+              - generic [ref=e32]: Tidspunkt
+              - text: Tirsdag 16.30–18.30 eller lørdag 9.00–11.00 / 13.00–15.00
+            - generic [ref=e33]:
+              - generic [ref=e34]: Sæson
+              - text: Uge 18 til efterårsferien
+            - generic [ref=e35]:
+              - generic [ref=e36]: Båd
+              - text: Optimist, RS Zest, SUP boards
+          - link "Tilmeld" [ref=e38] [cursor=pointer]:
+            - /url: https://www.kossejlsport.dk/klub/kos-sejlsport/sider/tilmelding
+            - generic [ref=e39]: Tilmeld
+        - generic [ref=e42]:
+          - generic [ref=e43] [cursor=pointer]:
+            - img "Spændte børn gør klar til at sejle en tur på vandet i deres optimistjoller – eventyret venter!" [ref=e44]
+            - generic [ref=e45]: Spændte børn gør klar til at sejle en tur på vandet i deres optimistjoller – eventyret venter!
+          - generic [ref=e46] [cursor=pointer]:
+            - img "En deltager surfer på vandet, mens de andre hepper. Mød nye venner og sejl ud på fantastiske eventyr sammen!" [ref=e47]
+            - generic [ref=e48]: En deltager surfer på vandet, mens de andre hepper. Mød nye venner og sejl ud på fantastiske eventyr sammen!
+          - generic [ref=e49] [cursor=pointer]:
+            - img "Glad besætning klar til eventyr på vandet i gummibåd. Glæd dig til en sommer fuld af sejlads og nye venskaber!" [ref=e50]
+            - generic [ref=e51]: Glad besætning klar til eventyr på vandet i gummibåd. Glæd dig til en sommer fuld af sejlads og nye venskaber!
+          - generic [ref=e52] [cursor=pointer]:
+            - img "Her fanger de unge sejlere krabber fra broen — en sjov aktivitet, der binder venskaber sammen i sommerSolen!" [ref=e53]
+            - generic: "+5"
+            - generic [ref=e54]: Her fanger de unge sejlere krabber fra broen — en sjov aktivitet, der binder venskaber sammen i sommerSolen!
+      - generic [ref=e55]:
+        - paragraph [ref=e57]: Mini-sejler holdet er for børn i alderen 6-9 år. Formålet med træningen er at gøre børn trygge i miljøet ved vandet og få en masse gode oplevelser der gerne kan give dem mod på at fortsætte jollesejlads på vores begynderhold.
+        - generic [ref=e58]:
+          - heading "Aktiviteter" [level=3] [ref=e59]
+          - list [ref=e60]:
+            - listitem [ref=e61]: → Sejlads i Optimistjoller (gerne sammen med far eller mor)
+            - listitem [ref=e62]: → Sejlads i RS Zest jolle (2-3 personers jolle med træner eller forældre)
+            - listitem [ref=e63]: → SUP boards i havnen
+            - listitem [ref=e64]: → Kajak sejlads i havnemiljøet
+            - listitem [ref=e65]: → Leg ved broen
+        - generic [ref=e66]:
+          - heading "Forudsætninger" [level=3] [ref=e67]
+          - paragraph [ref=e68]: Mini-svømmeprøve anbefales. Læs vores sikkerhedspolitik.
+        - generic [ref=e69]:
+          - heading "Forventninger" [level=3] [ref=e70]
+          - list [ref=e71]:
+            - listitem [ref=e72]: → Fællesspisning er en vigtig del af klubbens ånd – medbring mad 1-2 gange i sæsonen
+            - listitem [ref=e73]: → Forældre forventes at hjælpe med praktiske opgaver
+            - listitem [ref=e74]: → Hold dig opdateret på Holdsport og Facebook
+        - generic [ref=e75]:
+          - heading "Trænere" [level=3] [ref=e76]
+          - list [ref=e77]:
+            - listitem [ref=e78]: → Emma Hospes (Lørdag formiddag)
+            - listitem [ref=e79]: → Jesper Krogh (Tirsdag)
+            - listitem [ref=e80]: → Christian Brevadt (Tirsdag)

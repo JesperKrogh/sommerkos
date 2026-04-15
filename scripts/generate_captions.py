@@ -44,7 +44,7 @@ RETRY_DELAY = 5
 MAX_DIM = 1200
 JPEG_QUALITY = 85
 
-SYSTEM_PROMPT = """You are writing short, engaging photo captions for a youth sailing camp website (KØS Sejlsport SommerCamp).
+SYSTEM_PROMPT = """You are writing short, engaging photo captions for a youth sailing club (KØS Sejlsport).
 
 For each image, write exactly two caption lines — one in Danish, one in English.
 
@@ -52,7 +52,7 @@ Rules:
 - Each caption should be 1-2 short sentences (10-20 words)
 - Describe what is actually visible in the image (boat type, weather, action, people, location)
 - Then add a warm, energetic note about the experience — the fun, the community, the feeling of sailing
-- Tone: energetic, warm, inviting — like a summer camp
+- Tone: energetic, warm, inviting
 - Use active, vivid language
 - Do NOT add any extra text, headers, or explanations — only the two caption lines
 

@@ -72,7 +72,7 @@ def folder_images(folder: str) -> list:
 
 @app.route("/api/gallery")
 def gallery():
-    """Return all folders with image counts from images-web/."""
+    """Return all folders with image counts and cover images from images-web/."""
     result = []
     if not os.path.isdir(IMAGES_WEB_DIR):
         return jsonify(result)
@@ -80,9 +80,17 @@ def gallery():
         folder_path = os.path.join(IMAGES_WEB_DIR, folder)
         if not os.path.isdir(folder_path):
             continue
-        count = sum(1 for f in os.listdir(folder_path) if f.lower().endswith(".jpg"))
-        if count:
-            result.append({"folder": folder, "count": count})
+        images = [f for f in os.listdir(folder_path) if f.lower().endswith(".jpg")]
+        if not images:
+            continue
+        cover = random.choice(images)
+        result.append(
+            {
+                "folder": folder,
+                "count": len(images),
+                "cover_url": f"/images/static/{folder}/{cover}",
+            }
+        )
     return jsonify(result)
 
 

@@ -26,7 +26,20 @@ export function initNav(): void {
       hamburger.setAttribute('aria-expanded', String(isOpen))
     })
 
-    // Close mobile menu on link click
+    // Accordion arrow toggle
+    const accordionArrow = mobileMenu.querySelector<HTMLElement>('.nav__mobile-arrow')
+    const accordionSub = mobileMenu.querySelector<HTMLElement>('.nav__mobile-sub')
+    if (accordionArrow && accordionSub) {
+      accordionArrow.addEventListener('click', (e) => {
+        e.preventDefault()
+        e.stopPropagation()
+        const isOpen = accordionSub.classList.toggle('is-open')
+        accordionArrow.classList.toggle('is-open', isOpen)
+        accordionArrow.setAttribute('aria-expanded', String(isOpen))
+      })
+    }
+
+    // Close mobile menu on regular link click
     mobileMenu.querySelectorAll('a').forEach((link) => {
       link.addEventListener('click', () => {
         hamburger.classList.remove('is-open')
