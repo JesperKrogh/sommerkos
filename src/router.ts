@@ -1,5 +1,6 @@
-import { loadData, loadHoldCards, getLang, navigate, getRoute, type SiteData, type HoldCards } from './data'
+import { loadData, loadHoldCards, loadFladeCards, loadEvents, getLang, navigate, getRoute, isEventPast, getUpcomingEvents, formatDateRange, type SiteData, type HoldCards, type FladeCards, type EventCards } from './data'
 import { rebindLightbox } from './modules/lightbox'
+import { initInfoscreen, restoreLang } from './modules/infoscreen'
 
 const SITE_NAME = 'KØS Sejlsport'
 const BASE_URL = 'https://kossejlsport.krogh.cc'
@@ -46,6 +47,40 @@ type PageFn = (data: SiteData, params: Record<string, string>) => string
 const routes: { pattern: RegExp; paramNames: string[]; page: PageFn }[] = []
 
 let _holdCards: HoldCards = {}
+let _fladeCards: FladeCards = {}
+let _events: EventCards = []
+
+function getFladeCardsArray() {
+  return Object.values(_fladeCards)
+}
+
+function renderEventTile(e: EventCards[number], isDa: boolean): string {
+  const lang = isDa ? 'da' : 'en'
+  const name = isDa ? e.name_da : e.name_en
+  const shortDesc = isDa ? e.short_description_da : e.short_description_en
+  const time = isDa ? e.time_da : e.time_en
+  const price = isDa ? e.price_da : e.price_en
+  const optPrice = isDa ? e.optional_price_da : e.optional_price_en
+  const dateStr = formatDateRange(e, lang)
+  const past = isEventPast(e)
+  const bgStyle = e.image ? `style="--card-bg: url('${e.image}')"` : ''
+  const withBg = e.image ? ' event-card--with-bg' : ''
+
+  const metaParts: string[] = []
+  if (dateStr) metaParts.push(dateStr)
+  if (time && time !== 'TBD') metaParts.push(time)
+  if (price) metaParts.push(price)
+  if (optPrice) metaParts.push(optPrice)
+
+  return `<a href="/events/${e.slug}" class="event-card${withBg}${past ? ' event-card--past' : ''} reveal" data-link ${bgStyle}>
+    ${past ? `<div class="event-card__past-badge"><span class="da">Afsluttet</span><span class="en">Finished</span></div>` : ''}
+    <div class="event-card__overlay">
+      <div class="event-card__name">${name}</div>
+      <div class="event-card__short-desc">${shortDesc}</div>
+      <div class="event-card__meta">${metaParts.join(' – ')}</div>
+    </div>
+  </a>`
+}
 
 function addRoute(pattern: string, page: PageFn): void {
   const paramNames: string[] = []
@@ -76,12 +111,16 @@ addRoute('/hold', renderHoldOverview)
 addRoute('/hold/:slug', renderHoldPage)
 addRoute('/flade', renderFladeOverview)
 addRoute('/flade/:slug', renderFladePage)
+addRoute('/events', renderEventsOverview)
 addRoute('/events/:slug', renderEventPage)
 addRoute('/galleri', renderGalleryPage)
 addRoute('/kalender', renderKalenderPage)
 addRoute('/tilmelding', renderTilmeldingPage)
 addRoute('/om', renderOmOverview)
 addRoute('/om/:slug', renderOmSubPage)
+addRoute('/infoscreen', renderInfoscreenPage)
+addRoute('/caption/edit', renderCaptionEditPage)
+addRoute('/caption/review', renderCaptionReviewPage)
 
 // ── Page: Frontpage ───────────────────────────────────────────────────────────
 
@@ -117,11 +156,11 @@ function getFladeCardImage(slug: string): string {
 function renderFrontpage(data: SiteData): string {
   const lang = getLang()
   const isDa = lang === 'da'
-  const upcomingEvents = data.events.slice(0, 3)
+  const upcomingEvents = getUpcomingEvents(_events).slice(0, 3)
   const holdSlugs = Object.keys(_holdCards)
   const holdCards = holdSlugs.map(slug => {
     const card = _holdCards[slug]
-    return `<a href="/hold/${slug}" class="hold-card hold-card--with-bg reveal" data-link style="--card-bg: url('${getHoldCardImage(slug)}')"><div class="hold-card__name">${isDa ? card.name_da : card.name_en}</div><div class="hold-card__age">${isDa ? card.age_da : card.age_en}</div><div class="hold-card__time">${isDa ? card.time_da : card.time_en}</div>${card.price_da ? `<div class="hold-card__price">${isDa ? card.price_da : card.price_en}</div>` : ''}</a>`
+    return `<a href="/hold/${slug}" class="hold-card hold-card--with-bg reveal" data-link style="--card-bg: url('${getHoldCardImage(slug)}')"><div class="hold-card__name">${isDa ? card.name_da : card.name_en}</div><div class="hold-card__tagline">${isDa ? card.tagline_da : card.tagline_en}</div><div class="hold-card__age">${isDa ? card.age_da : card.age_en}</div><div class="hold-card__time">${isDa ? card.time_da : card.time_en}</div>${card.price_da ? `<div class="hold-card__price">${isDa ? card.price_da : card.price_en}</div>` : ''}</a>`
   }).join('')
 
   return `
@@ -148,12 +187,12 @@ function renderFrontpage(data: SiteData): string {
           <div class="intro-text">
             <span class="section-label reveal"><span class="da">Velkommen til KØS</span><span class="en">Welcome to KØS</span></span>
             <h2 class="section-title reveal">
-              <span class="da">Sommer, sol og vind på vandet</span>
-              <span class="en">Summer, sun and wind on the water</span>
+              <span class="da">Sejlads for børn og unge i alderen 6–25 år</span>
+              <span class="en">Sailing for children and youth aged 6–25</span>
             </h2>
             <p class="section-body reveal">
-              <span class="da">KØS Sejlsport er en ung og dynamisk sejlerklub i hjertet af København. Vi tilbyder sejlundervisning for børn, unge og voksne — uanset om du aldrig har prøvet det før eller allerede er en erfaren sejler.</span>
-              <span class="en">KØS Sejlsport is a young and dynamic sailing club in the heart of Copenhagen. We offer sailing lessons for children, youth and adults — whether you've never tried it before or are already an experienced sailor.</span>
+              <span class="da">KØS Sejlsport er en klub for børn og unge i alderen 6–25 år. Vi tilbyder mange forskellige former for sejlads, men fælles for dem alle er, at det skal være trygt, sikkert, hyggeligt og lærerigt at sejle i KØS Sejlsport.</span>
+              <span class="en">KØS Sejlsport is a club for children and youth aged 6–25. We offer many different types of sailing, but they all share one thing: sailing at KØS Sejlsport should be safe, secure, cozy, and educational.</span>
             </p>
             <div class="intro-features">
               <div class="intro-feature reveal">
@@ -200,20 +239,25 @@ function renderFrontpage(data: SiteData): string {
         <span class="section-label reveal"><span class="da">Flåde</span><span class="en">Fleet</span></span>
         <h2 class="section-title reveal"><span class="da">Vores både</span><span class="en">Our boats</span></h2>
         <div class="flade-grid">
-          ${data.flade.map((f) => `<a href="/flade/${f.slug}" class="flade-card flade-card--with-bg reveal" data-link style="--card-bg: url('${getFladeCardImage(f.slug)}')"><div class="flade-card__name">${isDa ? f.name_da : f.name_en}</div><div class="flade-card__specs">${isDa ? f.specs_da : f.specs_en}</div><div class="flade-card__designer">${isDa ? f.designer_da : f.designer_en}</div></a>`).join('')}
+          ${getFladeCardsArray().map((f) => `<a href="/flade/${f.slug}" class="flade-card flade-card--with-bg reveal" data-link style="--card-bg: url('${getFladeCardImage(f.slug)}')"><div class="flade-card__name">${isDa ? f.name_da : f.name_en}</div><div class="flade-card__specs">${isDa ? f.specs_da : f.specs_en}</div><div class="flade-card__designer">${isDa ? f.designer_da : f.designer_en}</div></a>`).join('')}
         </div>
       </div>
     </section>
 
-    <section class="section section--deep" id="events-overview">
+    ${upcomingEvents.length ? `<section class="section section--deep" id="events-overview">
       <div class="container">
-        <span class="section-label section-label--light reveal"><span class="da">Events</span><span class="en">Events</span></span>
-        <h2 class="section-title section-title--light reveal"><span class="da">Kommende events</span><span class="en">Upcoming events</span></h2>
-        <div class="events-grid">
-          ${upcomingEvents.map(e => `<a href="/events/${e.slug}" class="event-card reveal" data-link><div class="event-card__date">${isDa ? e.date_da : e.date_en}</div><div class="event-card__name">${isDa ? e.name_da : e.name_en}</div><div class="event-card__tagline">${isDa ? e.tagline_da : e.tagline_en}</div></a>`).join('')}
+        <div class="events-section-header reveal">
+          <div>
+            <span class="section-label section-label--light"><span class="da">Events</span><span class="en">Events</span></span>
+            <h2 class="section-title section-title--light"><span class="da">Kommende events</span><span class="en">Upcoming events</span></h2>
+          </div>
+          <a href="/events" class="btn btn--kos-outline" data-link><span class="da">Se alle events</span><span class="en">See all events</span></a>
+        </div>
+        <div class="events-list">
+          ${upcomingEvents.map(e => renderEventTile(e, isDa)).join('')}
         </div>
       </div>
-    </section>
+    </section>` : ''}
 
     <section class="section section--mid" id="gallery-teaser">
       <div class="container">
@@ -257,7 +301,7 @@ function renderHoldOverview(_data: SiteData): string {
   const holdSlugs = Object.keys(_holdCards)
   const holdCards = holdSlugs.map(slug => {
     const card = _holdCards[slug]
-    return `<a href="/hold/${slug}" class="hold-card hold-card--with-bg reveal" data-link style="--card-bg: url('${getHoldCardImage(slug)}')"><div class="hold-card__name">${isDa ? card.name_da : card.name_en}</div><div class="hold-card__age">${isDa ? card.age_da : card.age_en}</div><div class="hold-card__time">${isDa ? card.time_da : card.time_en}</div><div class="hold-card__boat">${isDa ? card.equipment_da : card.equipment_en}</div>${card.price_da ? `<div class="hold-card__price">${isDa ? card.price_da : card.price_en}</div>` : ''}</a>`
+    return `<a href="/hold/${slug}" class="hold-card hold-card--with-bg reveal" data-link style="--card-bg: url('${getHoldCardImage(slug)}')"><div class="hold-card__name">${isDa ? card.name_da : card.name_en}</div><div class="hold-card__tagline">${isDa ? card.tagline_da : card.tagline_en}</div><div class="hold-card__age">${isDa ? card.age_da : card.age_en}</div><div class="hold-card__time">${isDa ? card.time_da : card.time_en}</div><div class="hold-card__boat">${isDa ? card.equipment_da : card.equipment_en}</div>${card.price_da ? `<div class="hold-card__price">${isDa ? card.price_da : card.price_en}</div>` : ''}</a>`
   }).join('')
   return `
     <section class="page-hero"><div class="container">
@@ -273,7 +317,7 @@ function renderHoldOverview(_data: SiteData): string {
 
 // ── Page: Flåde Overview ──────────────────────────────────────────────────────
 
-function renderFladeOverview(data: SiteData): string {
+function renderFladeOverview(_data: SiteData): string {
   const isDa = getLang() === 'da'
   return `
     <section class="page-hero"><div class="container">
@@ -282,7 +326,8 @@ function renderFladeOverview(data: SiteData): string {
       <p class="page-hero__sub"><span class="da">Udforsk vores både — fra små joller til store kølbåde</span><span class="en">Explore our boats — from small dinghies to large keelboats</span></p>
     </div></section>
     <section class="section section--mid"><div class="container">
-      <div class="flade-grid">${data.flade.map((f) => `<a href="/flade/${f.slug}" class="flade-card flade-card--with-bg reveal" data-link style="--card-bg: url('${getFladeCardImage(f.slug)}')"><div class="flade-card__name">${isDa ? f.name_da : f.name_en}</div><div class="flade-card__specs">${isDa ? f.specs_da : f.specs_en}</div><div class="flade-card__designer">${isDa ? f.designer_da : f.designer_en}</div></a>`).join('')}</div>
+      <p class="section-body"><span class="da">I KØS Sejlsport har vi mange forskellige joller (1- og 2-personers) og både (3-4 personers) der passer til de forskellige aktiviteter. Typisk startes der med joller, og når sejlteknik og fysik er god nok, kan kølbådene komme i spil.</span><span class="en">At KØS Sejlsport we have many different dinghies (1- and 2-person) and boats (3-4 person) suited to the various activities. Typically you start with dinghies, and when your sailing skills and physical ability are good enough, the keelboats come into play.</span></p>
+      <div class="flade-grid">${getFladeCardsArray().map((f) => `<a href="/flade/${f.slug}" class="flade-card flade-card--with-bg reveal" data-link style="--card-bg: url('${getFladeCardImage(f.slug)}')"><div class="flade-card__name">${isDa ? f.name_da : f.name_en}</div><div class="flade-card__specs">${isDa ? f.specs_da : f.specs_en}</div><div class="flade-card__designer">${isDa ? f.designer_da : f.designer_en}</div></a>`).join('')}</div>
     </div></section>
   `
 }
@@ -301,12 +346,24 @@ function renderHoldPage(_data: SiteData, params: Record<string, string>): string
   const cardEquipment = isDa ? card.equipment_da : card.equipment_en
   const cardPrice = isDa ? card.price_da : card.price_en
   const cardDescription = isDa ? card.description_da : card.description_en
-  const activities = isDa ? card.activities_da : card.activities_en
-  const prerequisites = isDa ? card.prerequisites_da : card.prerequisites_en
-  const expectations = isDa ? card.expectations_da : card.expectations_en
+  const activities = (isDa ? card.activities_da : card.activities_en) || []
+  const prerequisites = (isDa ? card.prerequisites_da : card.prerequisites_en) || ''
+  const expectations = (isDa ? card.expectations_da : card.expectations_en) || []
   const coaches = isDa ? card.coaches_da : card.coaches_en
   const signupUrl = card.signup_url
   const signupWidget = card.signup_widget
+
+  let equipmentHtml = cardEquipment
+  if (card.boat_slugs && card.boat_slugs.length) {
+    const boatNames = cardEquipment.split(',').map((s: string) => s.trim())
+    equipmentHtml = boatNames.map((name: string, i: number) => {
+      const slug = card.boat_slugs![i]
+      if (slug && _fladeCards[slug]) {
+        return `<a href="/flade/${slug}" class="flade-team-link" data-link>${name}</a>`
+      }
+      return name
+    }).join(', ')
+  }
 
   const activitiesHtml = activities.length ? `<div class="hold-detail-section"><h3 class="hold-detail-section__title"><span class="da">Aktiviteter</span><span class="en">Activities</span></h3><ul>${activities.map(a => `<li>${a}</li>`).join('')}</ul></div>` : ''
   const prerequisitesHtml = prerequisites ? `<div class="hold-detail-section"><h3 class="hold-detail-section__title"><span class="da">Forudsætninger</span><span class="en">Prerequisites</span></h3><p>${prerequisites}</p></div>` : ''
@@ -330,7 +387,7 @@ function renderHoldPage(_data: SiteData, params: Record<string, string>): string
             <div class="info-item"><span class="info-item__label"><span class="da">Alder</span><span class="en">Age</span></span><span class="info-item__value">${cardAge}</span></div>
             <div class="info-item"><span class="info-item__label"><span class="da">Tidspunkt</span><span class="en">Time</span></span><span class="info-item__value">${cardTime}</span></div>
             <div class="info-item"><span class="info-item__label"><span class="da">Sæson</span><span class="en">Season</span></span><span class="info-item__value">${cardSeason}</span></div>
-            <div class="info-item"><span class="info-item__label"><span class="da">Båd</span><span class="en">Boat</span></span><span class="info-item__value">${cardEquipment}</span></div>
+            <div class="info-item"><span class="info-item__label"><span class="da">Båd</span><span class="en">Boat</span></span><span class="info-item__value flade-team-links">${equipmentHtml}</span></div>
             ${cardPrice ? `<div class="info-item"><span class="info-item__label"><span class="da">Pris</span><span class="en">Price</span></span><span class="info-item__value">${cardPrice}</span></div>` : ''}
           </div>
         </div>
@@ -357,11 +414,11 @@ function renderHoldPage(_data: SiteData, params: Record<string, string>): string
 
 // ── Page: Flåde Detail ────────────────────────────────────────────────────────
 
-function renderFladePage(data: SiteData, params: Record<string, string>): string {
-  const flade = data.flade.find(f => f.slug === params.slug)
+function renderFladePage(_data: SiteData, params: Record<string, string>): string {
+  const flade = _fladeCards[params.slug]
   if (!flade) return renderNotFound()
   const isDa = getLang() === 'da'
-  const teamsHtml = flade.team_slugs.map((slug, i) => {
+  const teamsHtml = flade.team_slugs.map((slug: string, i: number) => {
     const name = isDa ? flade.teams_da[i] : flade.teams_en[i]
     return `<a href="/hold/${slug}" class="flade-team-link" data-link>${name}</a>`
   }).join('')
@@ -385,6 +442,7 @@ function renderFladePage(data: SiteData, params: Record<string, string>): string
       <div class="hold-detail-top">
         <div class="hold-detail__info">
           <div class="info-grid info-grid--vertical">
+            ${flade.class_insignia ? `<div class="info-item info-item--insignia"><span class="info-item__label"><span class="da">Klassemærke</span><span class="en">Class insignia</span></span><span class="info-item__value"><img src="${flade.class_insignia}" alt="${isDa ? flade.name_da : flade.name_en} klassemærke" class="class-insignia" /></span></div>` : ''}
             <div class="info-item"><span class="info-item__label"><span class="da">Specifikationer</span><span class="en">Specifications</span></span><span class="info-item__value">${isDa ? flade.specs_da : flade.specs_en}</span></div>
             <div class="info-item"><span class="info-item__label"><span class="da">Designer / Producent</span><span class="en">Designer / Manufacturer</span></span><span class="info-item__value">${isDa ? flade.designer_da : flade.designer_en}</span></div>
             <div class="info-item"><span class="info-item__label"><span class="da">Bruges på hold</span><span class="en">Used on teams</span></span><span class="info-item__value flade-team-links">${teamsHtml}</span></div>
@@ -410,28 +468,44 @@ function renderFladePage(data: SiteData, params: Record<string, string>): string
   `
 }
 
-// ── Page: Event Detail ────────────────────────────────────────────────────────
+// ── Page: Events Overview ─────────────────────────────────────────────────────
 
-function renderEventPage(data: SiteData, params: Record<string, string>): string {
-  const event = data.events.find(e => e.slug === params.slug)
-  if (!event) return renderNotFound()
+function renderEventsOverview(_data: SiteData): string {
   const isDa = getLang() === 'da'
-  let weeksHtml = ''
-  if (event.weeks && event.weeks.length) {
-    weeksHtml = `<div class="weeks-grid">${event.weeks.map(w => `<div class="week-card reveal"><div class="week-card__uge"><span class="da">Uge</span><span class="en">Week</span> ${w.week}</div><div class="week-card__dates">${isDa ? w.dates_da : w.dates_en}</div><div class="week-card__body">${isDa ? w.desc_da : w.desc_en}</div></div>`).join('')}</div>`
-  }
+  const events = _events
   return `
     <section class="page-hero"><div class="container">
-      <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/" data-link><span class="da">Forside</span><span class="en">Home</span></a><span class="breadcrumb__sep">›</span><a href="/#events-overview" data-link><span class="da">Events</span><span class="en">Events</span></a><span class="breadcrumb__sep">›</span><span>${isDa ? event.name_da : event.name_en}</span></nav>
+      <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/" data-link><span class="da">Forside</span><span class="en">Home</span></a><span class="breadcrumb__sep">›</span><span><span class="da">Events</span><span class="en">Events</span></span></nav>
+      <h1 class="page-hero__title"><span class="da">Events</span><span class="en">Events</span></h1>
+      <p class="page-hero__sub"><span class="da">Alle events og arrangementer i KØS Sejlsport</span><span class="en">All events and activities at KØS Sejlsport</span></p>
+    </div></section>
+    <section class="section section--mid"><div class="container">
+      <div class="events-list">${events.map(e => renderEventTile(e, isDa)).join('')}</div>
+    </div></section>
+  `
+}
+
+// ── Page: Event Detail ────────────────────────────────────────────────────────
+
+function renderEventPage(_data: SiteData, params: Record<string, string>): string {
+  const event = _events.find(e => e.slug === params.slug)
+  if (!event) return renderNotFound()
+  const isDa = getLang() === 'da'
+  const lang = isDa ? 'da' as const : 'en' as const
+  const dateStr = formatDateRange(event, lang)
+  const descRaw = isDa ? event.description_da : event.description_en
+  const descHtml = descRaw.split('\n\n').map(p => `<p class="section-body">${p}</p>`).join('')
+  return `
+    <section class="page-hero"><div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/" data-link><span class="da">Forside</span><span class="en">Home</span></a><span class="breadcrumb__sep">›</span><a href="/events" data-link><span class="da">Events</span><span class="en">Events</span></a><span class="breadcrumb__sep">›</span><span>${isDa ? event.name_da : event.name_en}</span></nav>
       <h1 class="page-hero__title">${isDa ? event.name_da : event.name_en}</h1>
-      <p class="page-hero__sub">${isDa ? event.date_da : event.date_en}</p>
+      <p class="page-hero__sub">${dateStr}</p>
       <p class="page-hero__tagline">${isDa ? event.tagline_da : event.tagline_en}</p>
     </div></section>
     <section class="section section--mid"><div class="container">
       <div class="page-content">
         <div class="page-content__text">
-          <p class="section-body">${isDa ? event.description_da : event.description_en}</p>
-          ${weeksHtml}
+          ${descHtml}
           ${event.signup_url ? `<div style="margin-top:2rem"><a href="${event.signup_url}" target="_blank" rel="noopener noreferrer" class="btn btn--kos"><span class="da">Tilmeld dig</span><span class="en">Sign up</span></a></div>` : ''}
         </div>
         <div class="page-content__gallery" id="page-gallery" data-folders='${event.image_folder}'></div>
@@ -458,6 +532,44 @@ function renderGalleryPage(): string {
         </button>
         <h2 class="gallery-folder-title" id="gallery-folder-title"></h2>
         <div class="page-content__gallery" id="page-gallery"></div>
+      </div>
+    </div></section>
+  `
+}
+
+// ── Page: Infoscreen (kiosk display) ─────────────────────────────────────────
+
+function renderInfoscreenPage(): string {
+  return `<div class="infoscreen" id="infoscreen"></div>`
+}
+
+// ── Page: Caption Edit ────────────────────────────────────────────────────────
+
+function renderCaptionEditPage(): string {
+  return `
+    <section class="page-hero"><div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/" data-link><span class="da">Forside</span><span class="en">Home</span></a><span class="breadcrumb__sep">›</span><span><span class="da">Rediger billedtekst</span><span class="en">Edit caption</span></span></nav>
+      <h1 class="page-hero__title"><span class="da">Rediger billedtekst</span><span class="en">Edit caption</span></h1>
+    </div></section>
+    <section class="section section--mid"><div class="container">
+      <div class="caption-edit" id="captionEdit">
+        <div class="caption-edit__loading"><span class="da">Indlæser...</span><span class="en">Loading...</span></div>
+      </div>
+    </div></section>
+  `
+}
+
+// ── Page: Caption Review ──────────────────────────────────────────────────────
+
+function renderCaptionReviewPage(): string {
+  return `
+    <section class="page-hero"><div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/" data-link><span class="da">Forside</span><span class="en">Home</span></a><span class="breadcrumb__sep">›</span><span><span class="da">Gennemgå forslag</span><span class="en">Review suggestions</span></span></nav>
+      <h1 class="page-hero__title"><span class="da">Gennemgå billedtekst-forslag</span><span class="en">Review caption suggestions</span></h1>
+    </div></section>
+    <section class="section section--mid"><div class="container">
+      <div class="caption-review" id="captionReview">
+        <div class="caption-edit__loading"><span class="da">Indlæser...</span><span class="en">Loading...</span></div>
       </div>
     </div></section>
   `
@@ -604,14 +716,18 @@ function getRouteMeta(path: string, data: SiteData, params: Record<string, strin
   if (path === '/kalender') return { title: isDa ? 'Kalender' : 'Calendar', description: isDa ? 'Se klubbens aktiviteter og tilmeld dig direkte.' : 'See club activities and sign up directly.' }
   if (path === '/tilmelding') return { title: isDa ? 'Tilmelding' : 'Sign Up', description: isDa ? 'Skriv dig på venteliste på et hold i KØS Sejlsport.' : 'Join the waitlist for a team at KØS Sejlsport.' }
   if (path === '/om') return { title: isDa ? 'Om KØS' : 'About KØS', description: isDa ? 'Vedtægter, bestyrelse, sikkerhed og praktisk info om KØS Sejlsport.' : 'Constitution, board, safety and practical info about KØS Sejlsport.' }
+  if (path === '/events') return { title: isDa ? 'Events' : 'Events', description: isDa ? 'Kommende events og arrangementer i KØS Sejlsport.' : 'Upcoming events and activities at KØS Sejlsport.' }
+  if (path === '/infoscreen') return { title: 'Infoscreen', description: isDa ? 'Infoskærm for KØS Sejlsport' : 'Infoscreen for KØS Sejlsport' }
+  if (path === '/caption/edit') return { title: isDa ? 'Rediger billedtekst' : 'Edit caption', description: isDa ? 'Foreslå ny billedtekst' : 'Suggest a new caption' }
+  if (path === '/caption/review') return { title: isDa ? 'Gennemgå forslag' : 'Review suggestions', description: isDa ? 'Gennemgå billedtekst-forslag' : 'Review caption suggestions' }
 
   const holdCard = _holdCards[params.slug]
   if (holdCard) return { title: isDa ? holdCard.name_da : holdCard.name_en, description: (isDa ? holdCard.description_da : holdCard.description_en).slice(0, 160), ogImage: getHoldCardImage(params.slug) }
 
-  const flade = data.flade.find(f => f.slug === params.slug)
+  const flade = _fladeCards[params.slug]
   if (flade) return { title: isDa ? flade.name_da : flade.name_en, description: (isDa ? flade.description_da : flade.description_en).slice(0, 160), ogImage: getFladeCardImage(params.slug) }
 
-  const event = data.events.find(e => e.slug === params.slug)
+  const event = _events.find(e => e.slug === params.slug)
   if (event) return { title: isDa ? event.name_da : event.name_en, description: (isDa ? event.description_da : event.description_en).slice(0, 160) }
 
   const aboutSection = data.about[params.slug as keyof typeof data.about]
@@ -622,6 +738,8 @@ function getRouteMeta(path: string, data: SiteData, params: Record<string, strin
 
 export async function initRouter(): Promise<void> {
   _holdCards = await loadHoldCards()
+  _fladeCards = await loadFladeCards()
+  _events = await loadEvents()
 
   function handleRoute(): void {
     const path = getRoute()
@@ -636,6 +754,9 @@ export async function initRouter(): Promise<void> {
         initScrollReveal()
         if (path === '/') { initGallery(); initHeroParallax() }
         if (path === '/galleri') initGalleryFolders()
+        if (path === '/infoscreen') { initInfoscreen(); document.body.classList.add('is-infoscreen') } else { document.body.classList.remove('is-infoscreen'); restoreLang() }
+        if (path === '/caption/edit') initCaptionEdit()
+        if (path === '/caption/review') initCaptionReview()
         const pageGallery = document.getElementById('page-gallery')
         if (pageGallery) loadPageGallery((pageGallery.dataset.folders || '').split(',').filter(Boolean)).then(() => rebindLightbox())
         window.scrollTo(0, 0)
@@ -805,4 +926,146 @@ async function openGalleryFolder(folder: string): Promise<void> {
     galleryEl.innerHTML = ''
   }
   await loadPageGallery([folder], true).then(() => rebindLightbox())
+}
+
+// ── Caption Edit init ────────────────────────────────────────────────────────
+
+async function initCaptionEdit(): Promise<void> {
+  const container = document.getElementById('captionEdit')
+  if (!container) return
+
+  const params = new URLSearchParams(window.location.search)
+  const folder = params.get('folder') || ''
+  const image = params.get('image') || ''
+
+  if (!folder || !image) {
+    container.innerHTML = `<p class="section-body"><span class="da">Manglende parametre — brug linket fra infoskærmen.</span><span class="en">Missing parameters — use the link from the infoscreen.</span></p>`
+    return
+  }
+
+  try {
+    const res = await fetch(`/api/gallery/${folder}`)
+    if (!res.ok) throw new Error('not found')
+    const data = await res.json()
+    const imgData = data.images?.find((i: { filename: string }) => i.filename === image)
+    if (!imgData) throw new Error('image not found')
+
+    container.innerHTML = `
+      <div class="caption-edit__preview">
+        <img src="${imgData.url}" alt="${imgData.caption_da || image}" class="caption-edit__image" />
+      </div>
+      <div class="caption-edit__form">
+        <div class="caption-edit__field">
+          <label for="captionDa">Dansk billedtekst</label>
+          <textarea id="captionDa" rows="3">${imgData.caption_da || ''}</textarea>
+        </div>
+        <div class="caption-edit__field">
+          <label for="captionEn">English caption</label>
+          <textarea id="captionEn" rows="3">${imgData.caption_en || ''}</textarea>
+        </div>
+        <button class="btn btn--kos" id="captionSubmit"><span class="da">Indsend forslag</span><span class="en">Submit suggestion</span></button>
+        <div class="caption-edit__status" id="captionStatus"></div>
+      </div>
+    `
+
+    const submitBtn = document.getElementById('captionSubmit')
+    submitBtn?.addEventListener('click', async () => {
+      const captionDa = (document.getElementById('captionDa') as HTMLTextAreaElement).value
+      const captionEn = (document.getElementById('captionEn') as HTMLTextAreaElement).value
+      const statusEl = document.getElementById('captionStatus')
+      try {
+        const res = await fetch('/api/caption-suggestions', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ folder, filename: image, caption_da: captionDa, caption_en: captionEn })
+        })
+        if (!res.ok) throw new Error()
+        if (statusEl) statusEl.innerHTML = `<span class="da">Forslag indsendt — tak!</span><span class="en">Suggestion submitted — thanks!</span>`
+        if (submitBtn) submitBtn.setAttribute('disabled', 'true')
+      } catch {
+        if (statusEl) statusEl.innerHTML = `<span class="da">Fejl ved indsendelse — prøv igen.</span><span class="en">Error submitting — try again.</span>`
+      }
+    })
+  } catch {
+    container.innerHTML = `<p class="section-body"><span class="da">Billedet blev ikke fundet.</span><span class="en">Image not found.</span></p>`
+  }
+}
+
+// ── Caption Review init ──────────────────────────────────────────────────────
+
+async function initCaptionReview(): Promise<void> {
+  const container = document.getElementById('captionReview')
+  if (!container) return
+
+  const params = new URLSearchParams(window.location.search)
+  const token = params.get('token') || ''
+  const isAdmin = !!token
+
+  try {
+    const res = await fetch('/api/caption-suggestions')
+    if (!res.ok) throw new Error('fetch failed')
+    const suggestions = await res.json()
+
+    if (suggestions.length === 0) {
+      container.innerHTML = `<p class="section-body"><span class="da">Ingen afventende forslag.</span><span class="en">No pending suggestions.</span></p>`
+      return
+    }
+
+    const authHeader = `Bearer ${token}`
+
+    const cards = suggestions.map((s: { id: string; folder: string; filename: string; caption_da: string; caption_en: string; submitted_at: string }) => `
+      <div class="caption-review__card" data-id="${s.id}">
+        <div class="caption-review__preview">
+          <img src="/images/static/${s.folder}/${s.filename}" alt="${s.caption_da || s.filename}" class="caption-review__image" loading="lazy" />
+        </div>
+        <div class="caption-review__info">
+          <div class="caption-review__meta">${s.folder} / ${s.filename}</div>
+          <div class="caption-review__caption"><strong>DA:</strong> ${s.caption_da || '<em>tom</em>'}</div>
+          <div class="caption-review__caption"><strong>EN:</strong> ${s.caption_en || '<em>empty</em>'}</div>
+          <div class="caption-review__time">${s.submitted_at}</div>
+          ${isAdmin ? `
+            <div class="caption-review__actions">
+              <button class="btn btn--kos caption-review__approve" data-id="${s.id}"><span class="da">Godkend</span><span class="en">Approve</span></button>
+              <button class="btn btn--kos-outline caption-review__reject" data-id="${s.id}"><span class="da">Afvis</span><span class="en">Reject</span></button>
+            </div>
+          ` : `<p class="caption-review__readonly"><span class="da">Log ind med token for at godkende/afvise.</span><span class="en">Log in with a token to approve/reject.</span></p>`}
+        </div>
+      </div>
+    `).join('')
+
+    container.innerHTML = cards
+
+    if (isAdmin) {
+      container.querySelectorAll('.caption-review__approve').forEach(btn => {
+        btn.addEventListener('click', async () => {
+          const id = (btn as HTMLElement).dataset.id
+          try {
+            const res = await fetch(`/api/caption-suggestions/${id}/approve`, {
+              method: 'PUT',
+              headers: { 'Authorization': authHeader }
+            })
+            if (!res.ok) throw new Error()
+            const card = container.querySelector(`.caption-review__card[data-id="${id}"]`)
+            if (card) card.remove()
+          } catch { /* ignore */ }
+        })
+      })
+      container.querySelectorAll('.caption-review__reject').forEach(btn => {
+        btn.addEventListener('click', async () => {
+          const id = (btn as HTMLElement).dataset.id
+          try {
+            const res = await fetch(`/api/caption-suggestions/${id}`, {
+              method: 'DELETE',
+              headers: { 'Authorization': authHeader }
+            })
+            if (!res.ok) throw new Error()
+            const card = container.querySelector(`.caption-review__card[data-id="${id}"]`)
+            if (card) card.remove()
+          } catch { /* ignore */ }
+        })
+      })
+    }
+  } catch {
+    container.innerHTML = `<p class="section-body"><span class="da">Kunne ikke hente forslag.</span><span class="en">Could not load suggestions.</span></p>`
+  }
 }
