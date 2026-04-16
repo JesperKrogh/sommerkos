@@ -259,22 +259,6 @@ function renderFrontpage(data: SiteData): string {
       </div>
     </section>` : ''}
 
-    <section class="section section--mid" id="gallery-teaser">
-      <div class="container">
-        <span class="section-label reveal"><span class="da">Galleri</span><span class="en">Gallery</span></span>
-        <h2 class="section-title reveal"><span class="da">Billeder fra klubben</span><span class="en">Photos from the club</span></h2>
-        <div class="gallery" id="gallery">
-          <div class="gallery__item reveal" data-index="0"><div class="gallery__placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span class="da">Billeder indlæses...</span><span class="en">Loading photos...</span></div></div>
-          <div class="gallery__item gallery__item--wide reveal" data-index="1"><div class="gallery__placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span class="da">Billeder indlæses...</span><span class="en">Loading photos...</span></div></div>
-          <div class="gallery__item reveal" data-index="2"><div class="gallery__placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span class="da">Billeder indlæses...</span><span class="en">Loading photos...</span></div></div>
-          <div class="gallery__item reveal" data-index="3"><div class="gallery__placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span class="da">Billeder indlæses...</span><span class="en">Loading photos...</span></div></div>
-          <div class="gallery__item gallery__item--tall reveal" data-index="4"><div class="gallery__placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span class="da">Billeder indlæses...</span><span class="en">Loading photos...</span></div></div>
-          <div class="gallery__item reveal" data-index="5"><div class="gallery__placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span class="da">Billeder indlæses...</span><span class="en">Loading photos...</span></div></div>
-        </div>
-        <div style="text-align:center;margin-top:2rem"><a href="/galleri" class="btn btn--kos-outline reveal" data-link><span class="da">Se hele galleriet</span><span class="en">See full gallery</span></a></div>
-      </div>
-    </section>
-
     <section class="section section--deep" id="contact">
       <div class="container">
         <div class="contact-wrap">
