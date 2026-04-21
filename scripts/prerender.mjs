@@ -1,4 +1,4 @@
-import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'fs'
+import { readFileSync, writeFileSync, mkdirSync } from 'fs'
 import { resolve, dirname, join } from 'path'
 import { fileURLToPath } from 'url'
 import { createServer } from 'http'
@@ -8,7 +8,6 @@ import { extname } from 'path'
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const ROOT = resolve(__dirname, '..')
 const DIST = resolve(ROOT, 'dist')
-const BASE_URL = 'https://kossejlsport.krogh.cc'
 
 const MIME_TYPES = {
   '.html': 'text/html',
@@ -28,6 +27,9 @@ const holdData = JSON.parse(readFileSync(resolve(ROOT, 'data/hold-cards.json'), 
 const fladeData = JSON.parse(readFileSync(resolve(ROOT, 'data/flaade-cards.json'), 'utf-8'))
 const eventsData = JSON.parse(readFileSync(resolve(ROOT, 'data/events.json'), 'utf-8'))
 
+// Get about pages from data to be dynamic
+const aboutPages = Object.keys(siteData.about)
+
 const routes = [
   '/',
   '/hold',
@@ -40,11 +42,7 @@ const routes = [
   '/kalender',
   '/tilmelding',
   '/om',
-  '/om/vedtaegter',
-  '/om/bestyrelsen',
-  '/om/sikkerhed',
-  '/om/udmeldelse',
-  '/om/nybegynder-til-jollesejlads',
+  ...aboutPages.map(slug => `/om/${slug}`),
   '/infoscreen',
   '/caption/edit',
   '/caption/review',
@@ -91,6 +89,14 @@ async function startServer(port) {
   })
 }
 
+async function cleanHtml(html) {
+  // Remove dev-mode Vite script tags
+  const cleanHead = html
+    .replace(/<script[^>]*src="\/src\/[^"]*"[^>]*><\/script>/g, '')
+    .replace(/<link[^>]*href="\/src\/[^"]*"[^>]*>/g, '')
+  return html.replace(/<head>([\s\S]*?)<\/head>/, `<head>${cleanHead}</head>`)
+}
+
 async function prerender() {
   const port = 9876
   const server = await startServer(port)
@@ -108,19 +114,40 @@ async function prerender() {
   }
 
   const chromiumPath = process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH || undefined
-  const browser = await playwright.chromium.launch({ headless: true, executablePath: chromiumPath })
-  const context = await browser.newContext()
-  const indexHtml = readFileSync(resolve(DIST, 'index.html'), 'utf-8')
+  const browser = await playwright.chromium.launch({ 
+    headless: true, 
+    executablePath: chromiumPath 
+  })
 
+  console.log(`Prerendering ${routes.length} routes with optimized timing...`)
+  
+  // Use a shared browser context but create new pages
+  const context = await browser.newContext()
+  
   for (const route of routes) {
     console.log(`  Prerendering ${route}...`)
     const page = await context.newPage()
+    
     try {
-      await page.goto(`http://localhost:${port}${route}`, { waitUntil: 'domcontentloaded', timeout: 20000 })
-      await page.waitForTimeout(3000)
-
+      // Faster navigation - don't wait for network idle, just DOM ready
+      await page.goto(`http://localhost:${port}${route}`, { 
+        waitUntil: 'domcontentloaded', 
+        timeout: 15000 
+      })
+      
+      // Wait for app to have content - reduced from 3s to checking if content loaded
+      try {
+        await page.waitForFunction(() => {
+          const app = document.querySelector('main#app')
+          return app && app.children.length > 0 && app.textContent.trim().length > 10
+        }, { timeout: 2000 })
+      } catch {
+        // If content check fails, wait a short time for any dynamic content
+        await page.waitForTimeout(500)
+      }
+      
       const html = await page.content()
-
+      
       let outPath
       if (route === '/') {
         outPath = resolve(DIST, 'index.html')
@@ -129,23 +156,19 @@ async function prerender() {
         mkdirSync(dir, { recursive: true })
         outPath = resolve(dir, 'index.html')
       }
-
-      const fullHtml = html.replace(/<head>([\s\S]*?)<\/head>/, (match, headContent) => {
-        const cleanHead = headContent
-          .replace(/<script[^>]*src="\/src\/[^"]*"[^>]*><\/script>/g, '')
-          .replace(/<link[^>]*href="\/src\/[^"]*"[^>]*>/g, '')
-        return `<head>${cleanHead}</head>`
-      })
-
+      
+      const fullHtml = await cleanHtml(html)
       writeFileSync(outPath, fullHtml, 'utf-8')
       console.log(`    ✓ ${outPath}`)
     } catch (err) {
-      console.error(`    ✗ Failed: ${err}`)
+      console.log(`    ⚠️ ${route}: ${err.message}`)
+      console.log(`    ⚠️ Continuing with next route...`)
     } finally {
       await page.close()
     }
   }
 
+  await context.close()
   await browser.close()
   server.close()
   console.log('Prerendering complete!')
