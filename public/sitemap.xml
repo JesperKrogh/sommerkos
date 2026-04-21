@@ -2,175 +2,193 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://kossejlsport.krogh.cc/</loc>
-    <lastmod>2026-04-09</lastmod>
+    <lastmod>2026-04-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://kossejlsport.krogh.cc/hold</loc>
-    <lastmod>2026-04-09</lastmod>
+    <lastmod>2026-04-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://kossejlsport.krogh.cc/flade</loc>
-    <lastmod>2026-04-09</lastmod>
+    <lastmod>2026-04-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://kossejlsport.krogh.cc/events</loc>
+    <lastmod>2026-04-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://kossejlsport.krogh.cc/galleri</loc>
-    <lastmod>2026-04-09</lastmod>
+    <lastmod>2026-04-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://kossejlsport.krogh.cc/kalender</loc>
-    <lastmod>2026-04-09</lastmod>
+    <lastmod>2026-04-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://kossejlsport.krogh.cc/tilmelding</loc>
-    <lastmod>2026-04-09</lastmod>
+    <lastmod>2026-04-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://kossejlsport.krogh.cc/om</loc>
-    <lastmod>2026-04-09</lastmod>
+    <lastmod>2026-04-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://kossejlsport.krogh.cc/hold/mini-sejler</loc>
-    <lastmod>2026-04-09</lastmod>
+    <lastmod>2026-04-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://kossejlsport.krogh.cc/hold/begynder</loc>
-    <lastmod>2026-04-09</lastmod>
+    <lastmod>2026-04-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://kossejlsport.krogh.cc/hold/fortsaetter</loc>
-    <lastmod>2026-04-09</lastmod>
+    <lastmod>2026-04-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://kossejlsport.krogh.cc/hold/ovede</loc>
-    <lastmod>2026-04-09</lastmod>
+    <lastmod>2026-04-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://kossejlsport.krogh.cc/hold/adventure</loc>
-    <lastmod>2026-04-09</lastmod>
+    <lastmod>2026-04-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://kossejlsport.krogh.cc/hold/j70-youngster</loc>
-    <lastmod>2026-04-09</lastmod>
+    <lastmod>2026-04-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://kossejlsport.krogh.cc/hold/j70-begyndere</loc>
-    <lastmod>2026-04-09</lastmod>
+    <lastmod>2026-04-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://kossejlsport.krogh.cc/hold/j70</loc>
-    <lastmod>2026-04-09</lastmod>
+    <lastmod>2026-04-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://kossejlsport.krogh.cc/flade/optimist</loc>
-    <lastmod>2026-04-09</lastmod>
+    <lastmod>2026-04-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://kossejlsport.krogh.cc/flade/rs-tera</loc>
-    <lastmod>2026-04-09</lastmod>
+    <lastmod>2026-04-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://kossejlsport.krogh.cc/flade/rs-feva</loc>
-    <lastmod>2026-04-09</lastmod>
+    <lastmod>2026-04-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://kossejlsport.krogh.cc/flade/rs-zest</loc>
-    <lastmod>2026-04-09</lastmod>
+    <lastmod>2026-04-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://kossejlsport.krogh.cc/flade/ilca-laser</loc>
-    <lastmod>2026-04-09</lastmod>
+    <lastmod>2026-04-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://kossejlsport.krogh.cc/flade/h-baad</loc>
-    <lastmod>2026-04-09</lastmod>
+    <lastmod>2026-04-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://kossejlsport.krogh.cc/flade/j70</loc>
-    <lastmod>2026-04-09</lastmod>
+    <lastmod>2026-04-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://kossejlsport.krogh.cc/events/sommercamps</loc>
-    <lastmod>2026-04-09</lastmod>
+    <loc>https://kossejlsport.krogh.cc/events/sommercamp-uge-27</loc>
+    <lastmod>2026-04-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://kossejlsport.krogh.cc/events/sommer-i-kos</loc>
-    <lastmod>2026-04-09</lastmod>
+    <loc>https://kossejlsport.krogh.cc/events/fritidscenter-bronshoj-husum</loc>
+    <lastmod>2026-04-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://kossejlsport.krogh.cc/events/piger-pa-bolgelaengde</loc>
+    <lastmod>2026-04-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://kossejlsport.krogh.cc/events/svanemoellehavnsfestival</loc>
-    <lastmod>2026-04-09</lastmod>
+    <lastmod>2026-04-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://kossejlsport.krogh.cc/events/fri-sejlads-og-faellesskab</loc>
+    <lastmod>2026-04-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://kossejlsport.krogh.cc/om/vedtaegter</loc>
-    <lastmod>2026-04-09</lastmod>
+    <lastmod>2026-04-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://kossejlsport.krogh.cc/om/bestyrelsen</loc>
-    <lastmod>2026-04-09</lastmod>
+    <lastmod>2026-04-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://kossejlsport.krogh.cc/om/sikkerhed</loc>
-    <lastmod>2026-04-09</lastmod>
+    <lastmod>2026-04-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://kossejlsport.krogh.cc/om/udmeldelse</loc>
-    <lastmod>2026-04-09</lastmod>
+    <lastmod>2026-04-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>

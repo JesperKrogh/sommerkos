@@ -188,16 +188,6 @@
   animation: pulse-glow 2.5s ease-in-out infinite;
 }
 
-/* Contact links */
-.contact-link {
-  transition: transform var(--duration-fast), color var(--duration-fast);
-}
-
-.contact-link:hover {
-  transform: translateX(6px);
-  color: var(--color-foam);
-}
-
 /* Lightbox */
 .lightbox {
   animation: fade-in var(--duration-normal) ease;

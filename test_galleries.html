@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Galleries</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .test { margin: 20px 0; padding: 10px; border: 1px solid #ccc; }
+        .result { padding: 10px; margin: 5px 0; background: #f0f0f0; }
+        .pass { background: #d4edda; }
+        .fail { background: #f8d7da; }
+    </style>
+</head>
+<body>
+    <h1>Gallery Tests</h1>
+    
+    <div class="test">
+        <h2>Test 1: H-båds Gallery</h2>
+        <p>Should show 16 images (all from h-baad folder)</p>
+        <div id="test1" class="result">Loading...</div>
+    </div>
+    
+    <div class="test">
+        <h2>Test 2: Adventure Gallery API</h2>
+        <p>API should show 11 images (from adventure folder only)</p>
+        <div id="test2" class="result">Loading...</div>
+    </div>
+    
+    <div class="test">
+        <h2>Test 3: Adventure Gallery Frontend Logic</h2>
+        <p>When viewing Adventure gallery, frontend should load adventure + h-baad (27 total) and deduplicate (18 unique)</p>
+        <div id="test3" class="result">Loading...</div>
+    </div>
+    
+    <script>
+        async function runTests() {
+            // Test 1: H-båds gallery
+            try {
+                const res1 = await fetch('/api/gallery/h-baad');
+                const data1 = await res1.json();
+                const count1 = data1.images?.length || 0;
+                const test1 = document.getElementById('test1');
+                test1.textContent = `H-båds gallery: ${count1} images`;
+                test1.className = count1 === 16 ? 'result pass' : 'result fail';
+            } catch (e) {
+                document.getElementById('test1').textContent = `Error: ${e.message}`;
+            }
+            
+            // Test 2: Adventure gallery API
+            try {
+                const res2 = await fetch('/api/gallery/adventure');
+                const data2 = await res2.json();
+                const count2 = data2.images?.length || 0;
+                const test2 = document.getElementById('test2');
+                test2.textContent = `Adventure API: ${count2} images`;
+                test2.className = count2 === 11 ? 'result pass' : 'result fail';
+            } catch (e) {
+                document.getElementById('test2').textContent = `Error: ${e.message}`;
+            }
+            
+            // Test 3: Simulate frontend logic for Adventure gallery
+            try {
+                const [resAdv, resHBaad] = await Promise.all([
+                    fetch('/api/gallery/adventure'),
+                    fetch('/api/gallery/h-baad')
+                ]);
+                const dataAdv = await resAdv.json();
+                const dataHBaad = await resHBaad.json();
+                
+                const allImages = [...(dataAdv.images || []), ...(dataHBaad.images || [])];
+                const seen = new Set();
+                const uniqueImages = [];
+                
+                for (const img of allImages) {
+                    const filename = img.url.split('/').pop();
+                    if (!seen.has(filename)) {
+                        seen.add(filename);
+                        uniqueImages.push(img);
+                    }
+                }
+                
+                const test3 = document.getElementById('test3');
+                test3.innerHTML = `
+                    Adventure + H-båd total: ${allImages.length} images<br>
+                    After deduplication: ${uniqueImages.length} unique images<br>
+                    Expected: 27 total, 18 unique after removing 9 duplicates
+                `;
+                test3.className = uniqueImages.length === 18 ? 'result pass' : 'result fail';
+            } catch (e) {
+                document.getElementById('test3').textContent = `Error: ${e.message}`;
+            }
+        }
+        
+        runTests();
+    </script>
+</body>
+</html>

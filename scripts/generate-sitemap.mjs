@@ -8,6 +8,8 @@ const BASE_URL = 'https://kossejlsport.krogh.cc'
 
 const siteData = JSON.parse(readFileSync(resolve(ROOT, 'data/site.json'), 'utf-8'))
 const holdData = JSON.parse(readFileSync(resolve(ROOT, 'data/hold-cards.json'), 'utf-8'))
+const fladeData = JSON.parse(readFileSync(resolve(ROOT, 'data/flaade-cards.json'), 'utf-8'))
+const eventsData = JSON.parse(readFileSync(resolve(ROOT, 'data/events.json'), 'utf-8'))
 
 const today = new Date().toISOString().split('T')[0]
 
@@ -15,6 +17,7 @@ const staticRoutes = [
   '/',
   '/hold',
   '/flade',
+  '/events',
   '/galleri',
   '/kalender',
   '/tilmelding',
@@ -22,8 +25,8 @@ const staticRoutes = [
 ]
 
 const holdSlugs = Object.keys(holdData['hold-cards'])
-const fladeSlugs = siteData.flade.map(f => f.slug)
-const eventSlugs = siteData.events.map(e => e.slug)
+const fladeSlugs = Object.keys(fladeData['flade-cards'])
+const eventSlugs = eventsData.events.map(e => e.slug)
 const omSlugs = ['vedtaegter', 'bestyrelsen', 'sikkerhed', 'udmeldelse']
 
 const dynamicRoutes = [

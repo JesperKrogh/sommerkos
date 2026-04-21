@@ -57,7 +57,16 @@ const open = (startIndex: number) => {
   showItem(startIndex)
   if (lightbox) lightbox.hidden = false
   document.body.style.overflow = 'hidden'
+  history.pushState({ lightbox: true }, '')
   closeBtn?.focus()
+}
+
+const closeFromUser = () => {
+  if (history.state?.lightbox) {
+    history.back()
+    return
+  }
+  close()
 }
 
 const close = () => {
@@ -99,18 +108,22 @@ export function rebindLightbox(): void {
 export function initLightbox(): void {
   if (!lightbox || !closeBtn || !prevBtn || !nextBtn || !imgWrap) return
 
-  closeBtn.addEventListener('click', close)
+  closeBtn.addEventListener('click', closeFromUser)
   prevBtn.addEventListener('click', () => showItem(currentIndex - 1))
   nextBtn.addEventListener('click', () => showItem(currentIndex + 1))
 
   lightbox.addEventListener('keydown', (e: KeyboardEvent) => {
-    if (e.key === 'Escape')     close()
+    if (e.key === 'Escape')     closeFromUser()
     if (e.key === 'ArrowLeft')  showItem(currentIndex - 1)
     if (e.key === 'ArrowRight') showItem(currentIndex + 1)
   })
 
   lightbox.addEventListener('click', (e) => {
-    if (e.target === lightbox) close()
+    if (e.target === lightbox) closeFromUser()
+  })
+
+  window.addEventListener('popstate', () => {
+    if (!lightbox.hidden) close()
   })
 
   const langObserver = new MutationObserver(() => {

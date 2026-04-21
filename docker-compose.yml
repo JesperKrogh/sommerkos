@@ -5,10 +5,12 @@ services:
       dockerfile: Dockerfile.api
     volumes:
       - ./images-web:/app/images-web:ro
-      - ./images/captions.md:/app/images/captions.md:ro
+      - ./images/captions.md:/app/images/captions.md
+      - ./data:/app/data
     environment:
       - IMAGES_WEB_DIR=/app/images-web
       - CAPTIONS_FILE=/app/images/captions.md
+      - CAPTION_ADMIN_TOKEN=${CAPTION_ADMIN_TOKEN:-}
     expose:
       - "5000"
     restart: unless-stopped

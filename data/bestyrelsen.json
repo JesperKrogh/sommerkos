@@ -1,0 +1,76 @@
+{
+  "bestyrelsen": {
+    "members": [
+      {
+        "name": "Jesper Krogh",
+        "role_da": "Formand",
+        "role_en": "Chairman",
+        "bio_da": "Far til 2 unge sejlere — på både Adventure og Fortsætter/Øvede hold. Har været med i bestyrelsen siden 2024.",
+        "bio_en": "Father of 2 young sailors — on both the Adventure and Advanced teams. Has been on the board since 2024.",
+        "image": "/images-overview/bestyrelsen/jesper.jpg",
+        "phone": "27773240",
+        "email": "jesper@krogh.cc"
+      },
+      {
+        "name": "Peter Ottesen",
+        "role_da": "Kasserer",
+        "role_en": "Treasurer",
+        "bio_da": "Far til sejler på begynderholdet. Med i bestyrelsen siden marts 2024. Derudover formand og sejler i JolleKolle (\"Modne\" Laser sejlere, søsterklub til KØS).",
+        "bio_en": "Father of a beginner team sailor. On the board since March 2024. Also chairman and sailor at JolleKolle (\"Mature\" Laser sailors, sister club to KØS).",
+        "image": "/images-overview/bestyrelsen/peter-ottesen.jpg",
+        "phone": "40271025",
+        "email": "p_ottesen@icloud.com"
+      },
+      {
+        "name": "Anton Seehausen",
+        "role_da": "Næstformand",
+        "role_en": "Vice Chairman",
+        "bio_da": "Anton er næstformand — har været med i mange år og ved alt i KØS. Er også vores mest sejlerfarne og har teknisk viden om alt vores udstyr.",
+        "bio_en": "Anton is vice chairman — has been involved for many years and knows everything about KØS. He's also our most experienced sailor and has technical knowledge of all our equipment.",
+        "image": "/images-overview/bestyrelsen/anton.jpg",
+        "phone": "20676460",
+        "email": "anton@seehausen.nu"
+      },
+      {
+        "name": "Nina Iversen",
+        "role_da": "Bestyrelsesmedlem",
+        "role_en": "Board Member",
+        "bio_da": "Mor til Adrian — jolle og adventure sejler. Har også speedbådscertifikat.",
+        "bio_en": "Mother of Adrian — dinghy and adventure sailor. Also holds a speedboat certificate.",
+        "image": "/images-overview/bestyrelsen/no-image.png",
+        "phone": "",
+        "email": ""
+      },
+      {
+        "name": "Maria Jørgensen",
+        "role_da": "Bestyrelsesmedlem",
+        "role_en": "Board Member",
+        "bio_da": "",
+        "bio_en": "",
+        "image": "/images-overview/bestyrelsen/maria.jpg",
+        "phone": "28191290",
+        "email": "zonen@c.dk"
+      },
+      {
+        "name": "Storm Kejser Hansen",
+        "role_da": "Bestyrelsesmedlem",
+        "role_en": "Board Member",
+        "bio_da": "Storm har været aktiv sejler i snart 9 år (19 år gammel) og har været aktiv på eller omkring de fleste af holdene gennem årene.",
+        "bio_en": "Storm has been an active sailor for nearly 9 years (19 years old) and has been active on or around most of the teams over the years.",
+        "image": "/images-overview/bestyrelsen/storm.jpg",
+        "phone": "93882407",
+        "email": "stormkdk@icloud.com"
+      },
+      {
+        "name": "Ümit Bozyilan",
+        "role_da": "Bestyrelsesmedlem",
+        "role_en": "Board Member",
+        "bio_da": "Bestyrelsesmedlem og far til Philip på Mini-sejler holdet.",
+        "bio_en": "Board member and father of Philip on the Mini-Sailor team.",
+        "image": "/images-overview/bestyrelsen/umit.jpg",
+        "phone": "",
+        "email": ""
+      }
+    ]
+  }
+}

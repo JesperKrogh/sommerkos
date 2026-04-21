@@ -163,7 +163,7 @@ Fire unge sej
 
 
 ### 488462846_986693476781460_5766955343721355158_n.jpg
-_Folder: klubtur_
+_Folder: h-baad_
 
 ## Dansk
 En sejlbåd ankommer til havnen med vindmøller i baggrunden – velkommen hjem efter en fantastisk dag på vandet!
@@ -172,7 +172,7 @@ En sejlbåd ankommer til havnen med vindmøller i baggrunden – velkommen hjem 
 A sailboat arrives at the harbor with windmills in the background – welcome home after a fantastic day on the water!
 
 ### 491260195_986693496781458_5011001040969895543_n.jpg
-_Folder: klubtur_
+_Folder: h-baad_
 
 ## Dansk
 Solskin og godt selskab ved frokostbordene – perfekt til at lade op efter en sjov formiddag på vandet!
@@ -181,7 +181,7 @@ Solskin og godt selskab ved frokostbordene – perfekt til at lade op efter en s
 Sunshine and great company at lunch – perfect for recharging after a fun morning on the water!
 
 ### 491363904_986693503448124_7044138354106259383_n.jpg
-_Folder: klubtur_
+_Folder: h-baad_
 
 ## Dansk
 Nye sejlere og instruktører samles til intro i solskinnet, klar til sjove oplevelser på vandet sammen!
@@ -190,7 +190,7 @@ Nye sejlere og instruktører samles til intro i solskinnet, klar til sjove oplev
 New sailors and instructors gather for introductions in the sunshine, ready for fun adventures on the water together!
 
 ### 492694740_986693480114793_4118764152267689699_n.jpg
-_Folder: klubtur_
+_Folder: h-baad_
 
 ## Dansk
 Efter en dag på vandet nyder hele holdet et lækkert måltid sammen med udsigt til havnen – ægte sejlersommer!
@@ -199,7 +199,7 @@ Efter en dag på vandet nyder hele holdet et lækkert måltid sammen med udsigt 
 After a day on the water, the whole crew enjoys a delicious meal together with harbor views – true sailing summer vibes!
 
 ### 506638394_1025295069587967_919112226532461073_n.jpg
-_Folder: klubtur_
+_Folder: h-baad,adventure_
 
 ## Dansk
 Tre kølbåde ligger fortøjet med en gummibåd ved siden af – en perfekt base for sommerens sejleventyr!
@@ -208,7 +208,7 @@ Tre kølbåde ligger fortøjet med en gummibåd ved siden af – en perfekt base
 Three keelboats are moored together with an inflatable boat – a perfect base for summer sailing adventures!
 
 ### 544905475_1087453356705471_2372604139266755717_n.jpg
-_Folder: klubtur_
+_Folder: h-baad_
 
 ## Dansk
 Børnene nyder en frisk sejltur på det åbne vand. Oplev glæden ved at sejle sammen med nye venner!
@@ -217,7 +217,7 @@ Børnene nyder en frisk sejltur på det åbne vand. Oplev glæden ved at sejle s
 Kids are enjoying a brisk sail on the open water. Experience the joy of sailing with new friends!
 
 ### 545513851_1087453240038816_2534235195652615643_n.jpg
-_Folder: klubtur_
+_Folder: h-baad_
 
 ## Dansk
 Solnedgang ved den hyggelige lejrbålsaften, hvor nye venskaber opstår.
@@ -226,7 +226,7 @@ Solnedgang ved den hyggelige lejrbålsaften, hvor nye venskaber opstår.
 Sunset at the cozy bonfire night, where new friendships are made.
 
 ### 545726973_1087451573372316_5319337004814831120_n.jpg
-_Folder: klubtur_
+_Folder: h-baad_
 
 ## Dansk
 Smukke både i havnen, klar til eventyr på vandet under den blå himmel!
@@ -881,4 +881,266 @@ Vores instruktører hjælper dig med at gøre båden klar, så du trygt kan udfo
 
 ## English
 Our instructors help you get the boat ready, so you can safely explore the waves on Roskilde Fjord!
+
+### _DSC6973.jpg
+_Folder: 29er_
+
+## Dansk
+To sejlere med et spilersejl ude på vandet på en overskyet dag. Det handler om samarbejde og god energi på vandet!
+
+## English
+Two sailors with a spinnaker out on the water on a cloudy day. It's all about teamwork and good vibes out on the water!
+
+### _DSC6975.jpg
+_Folder: 29er_
+
+## Dansk
+Sejlads med en flot 29er i gråt vejr! Fantastisk at opleve fart og fællesskab på vandet.
+
+## English
+Sailing a beautiful 29er in grey weather! It's fantastic to experience speed and community on the water.
+
+### _DSC6994Nic.jpg
+_Folder: 29er_
+
+## Dansk
+Ung matros retter sejl. Man lærer en masse og har det sjovt på vandet!
+
+## English
+Young sailor righting the boat. Learning essential skills and having a blast on the water!
+
+### _DSC7004Nic.jpg
+_Folder: 29er_
+
+## Dansk
+To unge sejlere kantrer i en jolle, mens de lærer at rette den op – sejlads er sjovt og lærerigt!
+
+## English
+Two young sailors capsize in a dinghy, learning to right it – sailing is fun and educational!
+
+### _DSC7007 Nic.jpg
+_Folder: 29er_
+
+## Dansk
+To windsurfere arbejder sammen i vandet. Husk, at sammen er vi stærkere!
+
+## English
+Two windsurfers work together in the water. Remember, together we are stronger!
+
+### _DSC7009Nic.jpg
+_Folder: 29er_
+
+## Dansk
+To unge sejlere kæmper med en kæntret optimistjolle på en gråvejrsdag. Sejlsport handler om at prøve grænser af og finde glæden i selv udfordrende situationer!
+
+## English
+Two young sailors wrestle with a capsized Optimist dinghy on a grey day. Sailing is all about pushing limits and finding joy even in challenging situations!
+
+### 490021067_994645272652947_6252632632859207740_n.jpg
+_Folder: adventure,h-baad_
+
+## Dansk
+Solskin og sejlads! Klar til en fantastisk tur på vandet med venner.
+
+## English
+Sunshine and sailing! Ready for an amazing trip on the water with friends.
+
+### 491260218_989642696486538_6580478291154598179_n.jpg
+_Folder: adventure,h-baad_
+
+## Dansk
+Børn og voksne gør jollen klar til en tur på vandet, hvor sjov og læring venter!
+
+## English
+Kids and adults prepare the dinghy for a trip on the water, where fun and learning await!
+
+### 492925460_994645262652948_3936402816414357660_n.jpg
+_Folder: adventure_
+
+## Dansk
+Tre sejlervenner nyder fuld fart på vandet i strålende solskin. Glæde og fællesskab er altid med os på KØS Sejlsport!
+
+## English
+Three sailing friends full speed on the water under the shining sun. Joy and community are always with us at KØS Sejlsport!
+
+### 494308809_994645282652946_1422840045101311839_n.jpg
+_Folder: adventure,h-baad_
+
+## Dansk
+En smuk dag på vandet med fulde sejl og glade sejlere, der nyder den friske brise!
+
+## English
+A beautiful day on the water with full sails and happy sailors enjoying the fresh breeze!
+
+### 494438409_994645279319613_8667392240730788454_n.jpg
+_Folder: adventure,h-baad_
+
+## Dansk
+Tre unge sejlere på vandet! De ser op mod masten og nyder det gode vejr og fællesskabet.
+
+## English
+Three young sailors on the water! They're looking up at the mast, enjoying the good weather and camaraderie.
+
+### 495643348_1010234861093988_6000530647687643246_n.jpg
+_Folder: adventure,h-baad_
+
+## Dansk
+Fuld fart frem i bølgerne under en smuk himmel! Sejlsport er ren frihed og gode oplevelser.
+
+## English
+Full speed ahead through the waves under a beautiful sky! Sailing is pure freedom and great experiences.
+
+### 506802016_1025295052921302_6525684922094689093_n.jpg
+_Folder: adventure_
+
+## Dansk
+En sjov dag på vandet med tubing og bådkørsel! Fællesskab og leg skaber de bedste minder.
+
+## English
+A fun day on the water with tubing and boating! Community and play make the best memories.
+
+### 530839348_1067412328709574_6952680978001186220_n.jpg
+_Folder: adventure,h-baad_
+
+## Dansk
+Her sejler 4 piger ud med KØS Sejlsport i en kølbåd. Sejling er sjovt, lærerigt og handler om fællesskab på vandet!
+
+## English
+Here, 4 girls are sailing out with KØS Sejlsport in a keelboat. Sailing is fun, educational, and about community on the water!
+
+### 530876336_1067412325376241_1677396143440089983_n.jpg
+_Folder: adventure,h-baad_
+
+## Dansk
+To KØS sejlbåde på vandet, med glade sejlere ombord og solglimt i horisonten. Det er en fantastisk dag!
+
+## English
+Two KØS sailboats are out on the water, with happy sailors on board and a glimpse of sun in the distance. What a fantastic day!
+
+### 579923005_1138151754968964_4259750275537773716_n.jpg
+_Folder: adventure,h-baad_
+
+## Dansk
+En sejler tager en pause på vandet efter en dag fyldt med eventyr og læring.
+
+## English
+A sailor takes a well-deserved break on the water after a day full of adventure and learning.
+
+### 491288651_987538236696984_5216933562702563713_n.jpg
+_Folder: begynder_
+
+## Dansk
+Klargøring af jolle og fokus på instruktøren – klar til en fantastisk dag på vandet!
+
+## English
+Getting the dinghy ready and focusing on the instructor – set for an amazing day on the water!
+
+### 499784713_1017792300338244_2922351705909202044_n.jpg
+_Folder: begynder_
+
+## Dansk
+Små sejlere er klar til nye eventyr på vandet. At lære at sejle er en uforglemmelig oplevelse!
+
+## English
+Young sailors ready for new adventures on the water. Learning to sail is an unforgettable experience!
+
+### 528470530_1062832979167509_5681808038088967856_n.jpg
+_Folder: begynder_
+
+## Dansk
+Her er vi i fuld gang med at øve os i at binde knob. Lær nye ting med dine sejlerkammerater!
+
+## English
+We're busy practicing our knots! Learn new skills and have fun with your sailing friends.
+
+### 528613850_1061675425949931_8807038098988250457_n.jpg
+_Folder: begynder_
+
+## Dansk
+Børnene er ude at sejle i en Feva jolle på en smuk dag. De nyder en sjov dag på vandet!
+
+## English
+The kids are out sailing in a Feva dinghy on a beautiful day. They're enjoying a fun day on the water!
+
+### 499784713_1017792300338244_2922351705909202044_n.jpg
+_Folder: camp_
+
+## Dansk
+Unge sejlere gør klar til en spændende dag på vandet i en optimistjolle under den smukke himmel!
+
+## English
+Young sailors get ready for an exciting day on the water in an Optimist dinghy under the beautiful sky!
+
+### 506766662_1060930102691130_6959070293750245754_n.jpg
+_Folder: camp_
+
+## Dansk
+Klar til en sjov dag på vandet! Vi glæder os altid til at sejle sammen.
+
+## English
+Ready for a fun day on the water! We always look forward to sailing together.
+
+### 528470530_1062832979167509_5681808038088967856_n.jpg
+_Folder: camp_
+
+## Dansk
+Unge sejlere forfiner deres knob-teknik; der er altid noget nyt at lære i KØS Sejlsport!
+
+## English
+Young sailors perfecting their knot-tying skills; there's always something new to learn at KØS Sejlsport!
+
+### 529083406_1062833562500784_216079274361793000_n.jpg
+_Folder: camp_
+
+## Dansk
+Klar til eventyr på vandet! Vi samles før vi stikker til søs for mere KØS Sejlsport-sjov.
+
+## English
+Ready for adventure on the water! We gather before setting sail for more KØS Sejlsport fun.
+
+### 529645162_1062832992500841_7138692980729771382_n.jpg
+_Folder: camp_
+
+## Dansk
+Vores unge sejlere nysgerrigt udforsker livet under overfladen – det er altid spændende at opdage mere om havet!
+
+## English
+Our young sailors curiously exploring life below the surface – it’s always exciting to learn more about the sea!
+
+
+### svanemoellehavnsfestival-activities.jpg
+_Folder: festival_
+
+## Dansk
+Kom og vær med til Svanemøllehavnens Festival, hvor der er masser af sjove aktiviteter på vandet for alle! Oplev glæden ved kajak, sejlads, roning, paddleboard og en varm saunaoplevelse.
+
+## English
+Join us for the Svanemøllehavnens Festival, with plenty of fun water activities for everyone! Experience the joy of kayaking, sailing, rowing, paddleboarding, and a warm sauna experience.
+
+### svanemoellehavnsfestival-poster.jpg
+_Folder: festival_
+
+## Dansk
+To glade piger stråler på vandet, med solskin og smil i KØS Sejslport!
+
+## English
+Two joyful girls beam on the water, with sunshine and smiles at KØS Sejslport!
+
+### piger-pa-bolgelaengde.jpg
+_Folder: piger-pa-bolgelaengde_
+
+## Dansk
+Smilende piger ny
+
+## English
+
+
+### 2ks5hxf35op_20240831_195532.jpg
+_Folder: udflugt_
+
+## Dansk
+Solnedgang ved havnen! Se lige de smukke farver over bådene.
+
+## English
+Sunset at the harbor! Check out the beautiful colors over the boats.
 

@@ -25,14 +25,17 @@ const MIME_TYPES = {
 
 const siteData = JSON.parse(readFileSync(resolve(ROOT, 'data/site.json'), 'utf-8'))
 const holdData = JSON.parse(readFileSync(resolve(ROOT, 'data/hold-cards.json'), 'utf-8'))
+const fladeData = JSON.parse(readFileSync(resolve(ROOT, 'data/flaade-cards.json'), 'utf-8'))
+const eventsData = JSON.parse(readFileSync(resolve(ROOT, 'data/events.json'), 'utf-8'))
 
 const routes = [
   '/',
   '/hold',
   ...Object.keys(holdData['hold-cards']).map(s => `/hold/${s}`),
   '/flade',
-  ...siteData.flade.map(f => `/flade/${f.slug}`),
-  ...siteData.events.map(e => `/events/${e.slug}`),
+  ...Object.keys(fladeData['flade-cards']).map(s => `/flade/${s}`),
+  '/events',
+  ...eventsData.events.map(e => `/events/${e.slug}`),
   '/galleri',
   '/kalender',
   '/tilmelding',
@@ -41,6 +44,10 @@ const routes = [
   '/om/bestyrelsen',
   '/om/sikkerhed',
   '/om/udmeldelse',
+  '/om/nybegynder-til-jollesejlads',
+  '/infoscreen',
+  '/caption/edit',
+  '/caption/review',
 ]
 
 async function startServer(port) {

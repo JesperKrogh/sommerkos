@@ -5,6 +5,7 @@ import './style/pages.css'
 
 import { initRouter } from './router'
 import { initLightbox } from './modules/lightbox'
+import './modules/infoscreen'
 
 document.addEventListener('DOMContentLoaded', () => {
   initNav()

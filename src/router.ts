@@ -1,4 +1,4 @@
-import { loadData, loadHoldCards, loadFladeCards, loadEvents, getLang, navigate, getRoute, isEventPast, getUpcomingEvents, formatDateRange, type SiteData, type HoldCards, type FladeCards, type EventCards } from './data'
+import { loadData, loadHoldCards, loadFladeCards, loadEvents, loadBestyrelsen, getLang, navigate, getRoute, isEventPast, getUpcomingEvents, formatDateRange, type SiteData, type HoldCards, type FladeCards, type EventCards, type BestyrelsenMember } from './data'
 import { rebindLightbox } from './modules/lightbox'
 import { initInfoscreen, restoreLang } from './modules/infoscreen'
 
@@ -68,7 +68,7 @@ function renderEventTile(e: EventCards[number], isDa: boolean): string {
 
   const metaParts: string[] = []
   if (dateStr) metaParts.push(dateStr)
-  if (time && time !== 'TBD') metaParts.push(time)
+  if (time) metaParts.push(time)
   if (price) metaParts.push(price)
   if (optPrice) metaParts.push(optPrice)
 
@@ -151,6 +151,25 @@ function getFladeCardImage(slug: string): string {
   }
   const img = imageMap[slug] || imageMap['j70']
   return `/images-overview/${img}`
+}
+
+function renderContactFooter(data: SiteData): string {
+  return `
+    <footer class="site-footer">
+      <div class="container">
+        <div class="site-footer__inner">
+          <span class="site-footer__address"><span class="da">Svaneknoppen 5, Svanemøllen Havn</span><span class="en">Svaneknoppen 5, Svanemøllen Harbour</span></span>
+          <a href="mailto:${data.site.email}" class="site-footer__link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" width="16" height="16"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 7 10-7"/></svg>
+            ${data.site.email}
+          </a>
+          <a href="${data.site.facebook}" target="_blank" rel="noopener noreferrer" class="site-footer__link">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" width="16" height="16"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            <span class="da">Facebook</span><span class="en">Facebook</span>
+          </a>
+        </div>
+      </div>
+    </footer>`
 }
 
 function renderFrontpage(data: SiteData): string {
@@ -259,22 +278,7 @@ function renderFrontpage(data: SiteData): string {
       </div>
     </section>` : ''}
 
-    <section class="section section--deep" id="contact">
-      <div class="container">
-        <div class="contact-wrap">
-          <span class="section-label section-label--light reveal"><span class="da">Kontakt</span><span class="en">Contact</span></span>
-          <h2 class="section-title section-title--light reveal"><span class="da">Kom forbi havnen</span><span class="en">Visit the harbour</span></h2>
-          <p class="section-body section-body--light reveal">
-            <span class="da">Vi holder til på Svaneknoppen 5 i Svanemøllen Havn. Kig forbi — vi er altid glade for at vise rundt og fortælle om mulighederne for at komme i gang med sejlads.</span>
-            <span class="en">We're located at Svaneknoppen 5 in Svanemøllen Harbour. Drop by — we're always happy to show you around and tell you about the possibilities to start sailing.</span>
-          </p>
-          <div class="contact-links reveal">
-            <a href="mailto:${data.site.email}" class="contact-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 7 10-7"/></svg><span>${data.site.email}</span></a>
-            <a href="${data.site.facebook}" target="_blank" rel="noopener noreferrer" class="contact-link"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg><span><span class="da">Følg KØS på Facebook</span><span class="en">Follow KØS on Facebook</span></span></a>
-          </div>
-        </div>
-      </div>
-    </section>
+    ${renderContactFooter(data)}
   `
 }
 
@@ -296,6 +300,7 @@ function renderHoldOverview(_data: SiteData): string {
     <section class="section section--mid"><div class="container">
       <div class="hold-grid">${holdCards}</div>
     </div></section>
+    ${renderContactFooter(_data)}
   `
 }
 
@@ -313,10 +318,9 @@ function renderFladeOverview(_data: SiteData): string {
       <p class="section-body"><span class="da">I KØS Sejlsport har vi mange forskellige joller (1- og 2-personers) og både (3-4 personers) der passer til de forskellige aktiviteter. Typisk startes der med joller, og når sejlteknik og fysik er god nok, kan kølbådene komme i spil.</span><span class="en">At KØS Sejlsport we have many different dinghies (1- and 2-person) and boats (3-4 person) suited to the various activities. Typically you start with dinghies, and when your sailing skills and physical ability are good enough, the keelboats come into play.</span></p>
       <div class="flade-grid">${getFladeCardsArray().map((f) => `<a href="/flade/${f.slug}" class="flade-card flade-card--with-bg reveal" data-link style="--card-bg: url('${getFladeCardImage(f.slug)}')"><div class="flade-card__name">${isDa ? f.name_da : f.name_en}</div><div class="flade-card__specs">${isDa ? f.specs_da : f.specs_en}</div><div class="flade-card__designer">${isDa ? f.designer_da : f.designer_en}</div></a>`).join('')}</div>
     </div></section>
+    ${renderContactFooter(_data)}
   `
 }
-
-// ── Page: Hold Detail ─────────────────────────────────────────────────────────
 
 function renderHoldPage(_data: SiteData, params: Record<string, string>): string {
   const card = _holdCards[params.slug]
@@ -393,6 +397,7 @@ function renderHoldPage(_data: SiteData, params: Record<string, string>): string
         ${signupHtml ? `<div class="hold-detail__signup">${signupHtml}</div>` : ''}
       </div>
     </div></section>
+    ${renderContactFooter(_data)}
   `
 }
 
@@ -449,6 +454,7 @@ function renderFladePage(_data: SiteData, params: Record<string, string>): strin
         </div>
       </div>
     </div></section>
+    ${renderContactFooter(_data)}
   `
 }
 
@@ -466,6 +472,7 @@ function renderEventsOverview(_data: SiteData): string {
     <section class="section section--mid"><div class="container">
       <div class="events-list">${events.map(e => renderEventTile(e, isDa)).join('')}</div>
     </div></section>
+    ${renderContactFooter(_data)}
   `
 }
 
@@ -479,28 +486,41 @@ function renderEventPage(_data: SiteData, params: Record<string, string>): strin
   const dateStr = formatDateRange(event, lang)
   const descRaw = isDa ? event.description_da : event.description_en
   const descHtml = descRaw.split('\n\n').map(p => `<p class="section-body">${p}</p>`).join('')
+  const imageHtml = event.image ? `<img src="${event.image}" alt="${isDa ? event.name_da : event.name_en}" class="event-page__image" loading="lazy">` : ''
+  const price = isDa ? event.price_da : event.price_en
+  const optionalPrice = isDa ? event.optional_price_da : event.optional_price_en
+  const signupHtml = event.signup_widget
+    ? `<div class="hold-detail-signup-widget"><iframe src="${event.signup_widget}" width="100%" height="800" frameborder="0" loading="lazy"></iframe><div class="powered-by-holdsport">Powered by Holdsport</div></div>`
+    : event.signup_url
+    ? `<a href="${event.signup_url}" class="btn btn--primary" target="_blank" rel="noopener noreferrer"><span class="da">Tilmeld</span><span class="en">Sign up</span></a>`
+    : ''
   return `
     <section class="page-hero"><div class="container">
       <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/" data-link><span class="da">Forside</span><span class="en">Home</span></a><span class="breadcrumb__sep">›</span><a href="/events" data-link><span class="da">Events</span><span class="en">Events</span></a><span class="breadcrumb__sep">›</span><span>${isDa ? event.name_da : event.name_en}</span></nav>
       <h1 class="page-hero__title">${isDa ? event.name_da : event.name_en}</h1>
-      <p class="page-hero__sub">${dateStr}</p>
+      <p class="page-hero__sub">${dateStr || (isDa ? event.time_da : event.time_en)}</p>
       <p class="page-hero__tagline">${isDa ? event.tagline_da : event.tagline_en}</p>
     </div></section>
     <section class="section section--mid"><div class="container">
       <div class="page-content">
         <div class="page-content__text">
           ${descHtml}
-          ${event.signup_url ? `<div style="margin-top:2rem"><a href="${event.signup_url}" target="_blank" rel="noopener noreferrer" class="btn btn--kos"><span class="da">Tilmeld dig</span><span class="en">Sign up</span></a></div>` : ''}
+          ${price ? `<p class="event-page__price"><strong>${price}</strong>${optionalPrice ? ` <span class="event-page__price-note">· ${optionalPrice}</span>` : ''}</p>` : ''}
+          ${signupHtml}
         </div>
-        <div class="page-content__gallery" id="page-gallery" data-folders='${event.image_folder}'></div>
+        <div class="page-content__sidebar">
+          ${imageHtml ? `<div class="page-content__image">${imageHtml}</div>` : ''}
+          ${event.image_folder ? `<div class="page-content__gallery" id="page-gallery" data-folders='${event.image_folder}'></div>` : ''}
+        </div>
       </div>
     </div></section>
+    ${renderContactFooter(_data)}
   `
 }
 
 // ── Page: Gallery ─────────────────────────────────────────────────────────────
 
-function renderGalleryPage(): string {
+function renderGalleryPage(_data: SiteData): string {
   return `
     <section class="page-hero"><div class="container">
       <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/" data-link><span class="da">Forside</span><span class="en">Home</span></a><span class="breadcrumb__sep">›</span><span><span class="da">Galleri</span><span class="en">Gallery</span></span></nav>
@@ -518,6 +538,7 @@ function renderGalleryPage(): string {
         <div class="page-content__gallery" id="page-gallery"></div>
       </div>
     </div></section>
+    ${renderContactFooter(_data)}
   `
 }
 
@@ -529,7 +550,7 @@ function renderInfoscreenPage(): string {
 
 // ── Page: Caption Edit ────────────────────────────────────────────────────────
 
-function renderCaptionEditPage(): string {
+function renderCaptionEditPage(_data: SiteData): string {
   return `
     <section class="page-hero"><div class="container">
       <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/" data-link><span class="da">Forside</span><span class="en">Home</span></a><span class="breadcrumb__sep">›</span><span><span class="da">Rediger billedtekst</span><span class="en">Edit caption</span></span></nav>
@@ -540,12 +561,13 @@ function renderCaptionEditPage(): string {
         <div class="caption-edit__loading"><span class="da">Indlæser...</span><span class="en">Loading...</span></div>
       </div>
     </div></section>
+    ${renderContactFooter(_data)}
   `
 }
 
 // ── Page: Caption Review ──────────────────────────────────────────────────────
 
-function renderCaptionReviewPage(): string {
+function renderCaptionReviewPage(_data: SiteData): string {
   return `
     <section class="page-hero"><div class="container">
       <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/" data-link><span class="da">Forside</span><span class="en">Home</span></a><span class="breadcrumb__sep">›</span><span><span class="da">Gennemgå forslag</span><span class="en">Review suggestions</span></span></nav>
@@ -556,6 +578,7 @@ function renderCaptionReviewPage(): string {
         <div class="caption-edit__loading"><span class="da">Indlæser...</span><span class="en">Loading...</span></div>
       </div>
     </div></section>
+    ${renderContactFooter(_data)}
   `
 }
 
@@ -571,7 +594,106 @@ function renderAboutSections(sections: { title: string; text: string }[] | undef
   `).join('')
 }
 
-function renderTilmeldingPage(): string {
+function renderNybegynderPage(sections: { title: string; text: string }[], isDa: boolean): string {
+  // Get images from begynder folder (15 images total)
+  const imageFilenames = Array.from({ length: 15 }, (_, i) => i + 1).map(n => 
+    n.toString().padStart(4, '0')
+  )
+  
+  const sectionsHtml = sections.map((section, index) => {
+    const imageIndex = index % 15 // Cycle through 15 images
+    const imageName = imageFilenames[imageIndex]
+    const imageSrc = `/images-web/begynder/DSC${imageName}.jpg`
+    
+    // Alternate layout pattern: text-left for even, text-right for odd
+    const isAlternate = index % 2 === 1
+    
+    // Convert markdown table to HTML if present
+    let textHtml = section.text
+    // Simple markdown table conversion (basic support for the Beaufort table)
+    if (section.text.includes('|')) {
+      const lines = section.text.split('\n')
+      let inTable = false
+      const processedLines: string[] = []
+      
+      for (let line of lines) {
+        if (line.trim().startsWith('|') && line.includes('|')) {
+          if (!inTable) {
+            // Start table
+            processedLines.push('<table>')
+            inTable = true
+          }
+          // Parse table row
+          const cells = line.split('|').filter(cell => cell.trim() !== '').map(cell => cell.trim())
+          if (cells.length > 0) {
+            if (line.includes('---') || line.includes('|--')) {
+              // This is a separator/header row
+              processedLines[processedLines.length - 1] = processedLines[processedLines.length - 1].replace('<table>', '<table><thead><tr>')
+              processedLines[processedLines.length - 1] = processedLines[processedLines.length - 1] + cells.map(cell => `<th>${cell}</th>`).join('') + '</tr></thead><tbody>'
+            } else {
+              // Normal row
+              processedLines.push('<tr>' + cells.map(cell => `<td>${cell}</td>`).join('') + '</tr>')
+            }
+          }
+        } else {
+          if (inTable) {
+            processedLines.push('</tbody></table>')
+            inTable = false
+          }
+          processedLines.push(line)
+        }
+      }
+      
+      if (inTable) {
+        processedLines.push('</tbody></table>')
+      }
+      
+      textHtml = processedLines.join('\n')
+    }
+    
+    // Replace markdown headers
+    textHtml = textHtml.replace(/^##\s+(.+)$/gm, '<h4>$1</h4>')
+    textHtml = textHtml.replace(/^###\s+(.+)$/gm, '<h5>$1</h5>')
+    
+    return `
+    <div class="nybegynder-section ${isAlternate ? 'nybegynder-section--alternate' : ''}">
+      <div class="nybegynder-section__inner">
+        <div class="nybegynder-section__content">
+          <h2 class="nybegynder-section__title">${section.title}</h2>
+          <div class="nybegynder-section__text">${textHtml}</div>
+        </div>
+        <div class="nybegynder-section__image">
+          <img src="${imageSrc}" alt="${section.title}" loading="lazy">
+        </div>
+      </div>
+    </div>
+    `
+  }).join('')
+  
+  // Get signup info from begynder team in hold-cards.json
+  const begynderCard = _holdCards['begynder']
+  const signupWidget = begynderCard?.signup_widget || 'https://www.kossejlsport.dk/widgets/kos-sejlsport?mobile=false&hide_profile_mobile=false&hide_profile_email=false&content_type=team_application&team_id=204225,218884,559744&show_price_type_table=false&allow_price_type_selection=false'
+  
+  const signupSection = begynderCard ? `
+    <div class="nybegynder-page__signup reveal">
+      <h3>${isDa ? 'Tilmeld til begynderhold' : 'Sign up for beginner team'}</h3>
+      <p>${isDa ? 'Er du klar til at komme på vandet? Skriv dig på venteliste til vores begynderhold og bliv kontaktet, når der er plads.' : 'Ready to get on the water? Join the waitlist for our beginner team and be contacted when there\'s space.'}</p>
+      <div class="nybegynder-page__signup__widget">
+        <iframe src="${signupWidget}" width="100%" height="600" frameborder="0" loading="lazy"></iframe>
+        <div class="powered-by-holdsport">Powered by Holdsport</div>
+      </div>
+    </div>
+  ` : ''
+  
+  return `
+    <div class="nybegynder-alternating">
+      ${sectionsHtml}
+      ${signupSection}
+    </div>
+  `
+}
+
+function renderTilmeldingPage(_data: SiteData): string {
   return `
     <section class="page-hero"><div class="container">
       <h1 class="page-hero__title"><span class="da">Tilmelding</span><span class="en">Sign Up</span></h1>
@@ -586,10 +708,11 @@ function renderTilmeldingPage(): string {
         <div class="powered-by-holdsport">Powered by Holdsport</div>
       </div>
     </div></section>
+    ${renderContactFooter(_data)}
   `
 }
 
-function renderKalenderPage(): string {
+function renderKalenderPage(_data: SiteData): string {
   return `
     <section class="page-hero"><div class="container">
       <h1 class="page-hero__title"><span class="da">Klub Kalender</span><span class="en">Club Calendar</span></h1>
@@ -601,6 +724,7 @@ function renderKalenderPage(): string {
         <div class="powered-by-holdsport">Powered by Holdsport</div>
       </div>
     </div></section>
+    ${renderContactFooter(_data)}
   `
 }
 
@@ -609,6 +733,7 @@ const OM_PAGES = [
   { slug: 'bestyrelsen', icon: '👥' },
   { slug: 'sikkerhed', icon: '🛟' },
   { slug: 'udmeldelse', icon: '👋' },
+  { slug: 'nybegynder-til-jollesejlads', icon: '⛵' },
 ]
 
 function renderOmOverview(data: SiteData): string {
@@ -618,7 +743,14 @@ function renderOmOverview(data: SiteData): string {
     const section = about[p.slug as keyof typeof about]
     const name = isDa ? section.title_da : section.title_en
     const firstSection = (isDa ? section.sections_da : section.sections_en)?.[0]
-    const desc = firstSection ? firstSection.text.slice(0, 140) + '…' : ''
+    let desc = ''
+    if (p.slug === 'bestyrelsen') {
+      desc = isDa ? 'Mød bestyrelsen bag KØS Sejlsport…' : 'Meet the board behind KØS Sejlsport…'
+    } else if (p.slug === 'nybegynder-til-jollesejlads') {
+      desc = isDa ? 'Introduktion til jollesejlads for helt nye sejlere og deres forældre…' : 'Introduction to dinghy sailing for complete beginners and their parents…'
+    } else if (firstSection) {
+      desc = firstSection.text.slice(0, 140) + '…'
+    }
     return `<a href="/om/${p.slug}" class="om-card om-card--with-bg reveal" data-link style="--card-bg: var(--om-${p.slug}-bg)">
       <div class="om-card__icon">${p.icon}</div>
       <div class="om-card__name">${name}</div>
@@ -630,13 +762,16 @@ function renderOmOverview(data: SiteData): string {
     <section class="page-hero"><div class="container">
       <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/" data-link><span class="da">Forside</span><span class="en">Home</span></a><span class="breadcrumb__sep">›</span><span><span class="da">Om KØS</span><span class="en">About KØS</span></span></nav>
       <h1 class="page-hero__title"><span class="da">Om KØS</span><span class="en">About KØS</span></h1>
-      <p class="page-hero__sub"><span class="da">Vedtægter, bestyrelse, sikkerhed og praktisk info</span><span class="en">Constitution, board, safety and practical info</span></p>
+      <p class="page-hero__sub"><span class="da">Vedtægter, bestyrelse, sikkerhed, nybegynder vejledning og praktisk info</span><span class="en">Constitution, board, safety, beginner guide and practical info</span></p>
     </div></section>
     <section class="section section--mid"><div class="container">
       <div class="om-grid">${cards}</div>
     </div></section>
+    ${renderContactFooter(data)}
   `
 }
+
+let _bestyrelsenMembers: BestyrelsenMember[] | null = null
 
 function renderOmSubPage(data: SiteData, params: Record<string, string>): string {
   const slug = params.slug
@@ -645,23 +780,30 @@ function renderOmSubPage(data: SiteData, params: Record<string, string>): string
   const isDa = getLang() === 'da'
   const name = isDa ? section.title_da : section.title_en
   const sections = isDa ? section.sections_da : section.sections_en
-  const members = slug === 'bestyrelsen' ? (isDa ? data.about.bestyrelsen.members_da : data.about.bestyrelsen.members_en) : null
+  const isBestyrelsen = slug === 'bestyrelsen'
+  const isNybegynder = slug === 'nybegynder-til-jollesejlads'
 
   let contentHtml = ''
-  if (members) {
-    contentHtml = `<div class="board-grid">${members.map(m => `
-      <div class="board-member">
+  if (isBestyrelsen && _bestyrelsenMembers) {
+    contentHtml = `<div class="board-grid">${_bestyrelsenMembers.map(m => {
+      const role = isDa ? m.role_da : m.role_en
+      const bio = isDa ? m.bio_da : m.bio_en
+      return `
+      <div class="board-member reveal">
+        <img src="${m.image}" alt="${m.name}" class="board-member__photo" loading="lazy">
         <div class="board-member__info">
           <div class="board-member__name">${m.name}</div>
-          <div class="board-member__role">${m.role}</div>
-          ${m.bio ? `<p class="board-member__bio">${m.bio}</p>` : ''}
+          <div class="board-member__role">${role}</div>
+          ${bio ? `<p class="board-member__bio">${bio}</p>` : ''}
           <div class="board-member__contact">
             ${m.phone ? `<a href="tel:${m.phone.replace(/\s/g, '')}" class="board-member__link">${m.phone}</a>` : ''}
             ${m.email ? `<a href="mailto:${m.email}" class="board-member__link">${m.email}</a>` : ''}
           </div>
         </div>
-      </div>
-    `).join('')}</div>`
+      </div>`
+    }).join('')}</div>`
+  } else if (isNybegynder && sections) {
+    contentHtml = renderNybegynderPage(sections, isDa)
   } else if (sections) {
     contentHtml = `<div class="about-section__content">${renderAboutSections(sections)}</div>`
   }
@@ -674,6 +816,7 @@ function renderOmSubPage(data: SiteData, params: Record<string, string>): string
     <section class="section section--mid"><div class="container">
       ${contentHtml}
     </div></section>
+    ${renderContactFooter(data)}
   `
 }
 
@@ -724,6 +867,7 @@ export async function initRouter(): Promise<void> {
   _holdCards = await loadHoldCards()
   _fladeCards = await loadFladeCards()
   _events = await loadEvents()
+  _bestyrelsenMembers = await loadBestyrelsen()
 
   function handleRoute(): void {
     const path = getRoute()
@@ -827,14 +971,26 @@ async function loadPageGallery(folders: string[], showAll = false): Promise<void
   const container = document.getElementById('page-gallery')
   if (!container) return
   try {
-    const allImages: { url: string; caption_da: string; caption_en: string; folder: string }[] = []
+    const allImages: { url: string; caption_da: string; caption_en: string; folder: string; filename?: string }[] = []
+    const seenFilenames = new Set<string>()
+    
     for (const folder of folders) {
       const res = await fetch(`/api/gallery/${folder}`)
       if (!res.ok) continue
       const data = await res.json()
       const images = data.images || []
-      allImages.push(...images)
+      
+      for (const img of images) {
+        // Extract filename from URL for deduplication
+        const filename = img.url.split('/').pop() || ''
+        if (!seenFilenames.has(filename)) {
+          seenFilenames.add(filename)
+          allImages.push({...img, filename})
+        }
+        // If duplicate filename, skip it (already added)
+      }
     }
+    
     if (!allImages.length) { container.innerHTML = '<p class="gallery__empty">No images yet</p>'; return }
     const visible = showAll ? allImages : allImages.slice(0, 4)
     const remainder = allImages.length - 4
@@ -909,7 +1065,10 @@ async function openGalleryFolder(folder: string): Promise<void> {
     foldersEl.style.display = ''
     galleryEl.innerHTML = ''
   }
-  await loadPageGallery([folder], true).then(() => rebindLightbox())
+  
+  // Special handling for Adventure gallery: include h-baad images too
+  const foldersToLoad = folder === 'adventure' ? ['adventure', 'h-baad'] : [folder]
+  await loadPageGallery(foldersToLoad, true).then(() => rebindLightbox())
 }
 
 // ── Caption Edit init ────────────────────────────────────────────────────────
