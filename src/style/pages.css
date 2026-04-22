@@ -1699,7 +1699,7 @@ body.is-infoscreen #nav {
 .nybegynder-section__text td {
   padding: 0.75rem;
   border: 1px solid rgba(255,255,255,0.1);
-  color: var(--color-foam);
+  color: var(--color-text);
 }
 
 .nybegynder-section__text tr:nth-child(even) {
@@ -1760,7 +1760,7 @@ body.is-infoscreen #nav {
 
 .nybegynder-tiles__description {
   font-size: 1.125rem;
-  color: var(--color-foam);
+  color: var(--color-text);
   margin-bottom: var(--space-xl);
   max-width: 600px;
 }
@@ -1829,7 +1829,7 @@ body.is-infoscreen #nav {
 .nybegynder-tile__tagline {
   font-size: 1rem;
   line-height: 1.4;
-  color: var(--color-foam);
+  color: white;
   margin-bottom: var(--space-lg);
   flex-grow: 1;
 }
@@ -1841,7 +1841,7 @@ body.is-infoscreen #nav {
   display: flex;
   align-items: center;
   margin-bottom: var(--space-xs);
-  color: var(--color-foam);
+  color: white;
 }
 
 .nybegynder-tile__price {
@@ -1882,7 +1882,7 @@ body.is-infoscreen #nav {
 .nybegynder-table td {
   padding: var(--space-sm) var(--space-md);
   border-bottom: 1px solid rgba(255,255,255,0.05);
-  color: var(--color-foam);
+  color: var(--color-text);
 }
 
 .nybegynder-table tr:last-child td {
@@ -1898,7 +1898,7 @@ body.is-infoscreen #nav {
   display: block;
   margin-top: var(--space-lg);
   font-size: 0.95rem;
-  color: var(--color-foam);
+  color: var(--color-text);
   line-height: 1.5;
   font-style: italic;
   opacity: 0.9;
