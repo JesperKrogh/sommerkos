@@ -31,7 +31,6 @@ const eventsData = JSON.parse(readFileSync(resolve(ROOT, 'data/events.json'), 'u
 const aboutPages = Object.keys(siteData.about)
 
 const routes = [
-  '/',
   '/hold',
   ...Object.keys(holdData['hold-cards']).map(s => `/hold/${s}`),
   '/flade',
@@ -46,9 +45,10 @@ const routes = [
   '/infoscreen',
   '/caption/edit',
   '/caption/review',
+  '/',  // Moved to last to prevent content concatenation
 ]
 
-async function startServer(port) {
+async function startServer(port, tempDir = DIST) {
   const server = createServer(async (req, res) => {
     let urlPath = req.url?.split('?')[0] || '/'
 
@@ -70,7 +70,8 @@ async function startServer(port) {
         await stat(filePath)
       }
     } catch {
-      filePath = resolve(DIST, 'index.html')
+      // Fall back to tempDir for clean SPA template during prerendering
+      filePath = resolve(tempDir, 'index.html')
     }
 
     try {
@@ -94,12 +95,30 @@ async function cleanHtml(html) {
   const cleanHead = html
     .replace(/<script[^>]*src="\/src\/[^"]*"[^>]*><\/script>/g, '')
     .replace(/<link[^>]*href="\/src\/[^"]*"[^>]*>/g, '')
-  return html.replace(/<head>([\s\S]*?)<\/head>/, `<head>${cleanHead}</head>`)
+  
+  // Replace head section
+  html = html.replace(/<head>([\s\S]*?)<\/head>/, `<head>${cleanHead}</head>`)
+  
+  // Simple brute-force: Remove everything after the first </html>
+  const firstHtmlEnd = html.indexOf('</html>')
+  if (firstHtmlEnd !== -1) {
+    html = html.substring(0, firstHtmlEnd + 7) // Keep the </html> tag
+  }
+  
+  return html
 }
 
 async function prerender() {
   const port = 9876
-  const server = await startServer(port)
+  
+  // Create temporary clean SPA template to prevent content concatenation
+  const cleanIndexHtml = readFileSync(resolve(DIST, 'index.html'), 'utf-8')
+  const tempDir = resolve(ROOT, '.prerender-temp')
+  mkdirSync(tempDir, { recursive: true })
+  writeFileSync(resolve(tempDir, 'index.html'), cleanIndexHtml, 'utf-8')
+  console.log('Created clean SPA template for prerendering')
+  
+  const server = await startServer(port, tempDir)
   console.log(`Prerender server started on port ${port}`)
 
   let playwright

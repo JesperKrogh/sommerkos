@@ -926,6 +926,16 @@ export async function initRouter(): Promise<void> {
   function handleRoute(): void {
     const path = getRoute()
     const match = matchRoute(path)
+    
+    // Clean up any duplicate main#app elements (defensive measure)
+    const allAppElements = document.querySelectorAll('main#app')
+    if (allAppElements.length > 1) {
+      // Keep first, remove others
+      for (let i = 1; i < allAppElements.length; i++) {
+        allAppElements[i].remove()
+      }
+    }
+    
     const main = document.getElementById('app')
     if (!main) return
     if (match) {
