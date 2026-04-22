@@ -595,15 +595,29 @@ function renderAboutSections(sections: { title: string; text: string }[] | undef
 }
 
 function renderNybegynderPage(sections: { title: string; text: string }[], isDa: boolean): string {
-  // Get images from begynder folder (15 images total)
-  const imageFilenames = Array.from({ length: 15 }, (_, i) => i + 1).map(n => 
-    n.toString().padStart(4, '0')
-  )
+  // Get actual image filenames from begynder folder (15 images total)
+  const imageFilenames = [
+    '491288651_987538236696984_5216933562702563713_n.jpg',
+    '499784713_1017792300338244_2922351705909202044_n.jpg',
+    '504378096_1037081355076005_6914104289461035240_n.jpg',
+    '504379903_1063986395718834_8596789478345456645_n.jpg',
+    '514340140_1063983295719144_8395703865714017596_n.jpg',
+    '514917521_1037081375076003_8798524774020815478_n.jpg',
+    '527500299_1060930106024463_2018805063777711299_n.jpg',
+    '528470530_1062832979167509_5681808038088967856_n.jpg',
+    '528613850_1061675425949931_8807038098988250457_n.jpg',
+    '529700726_1063983375719136_453241296820112562_n.jpg',
+    '586921763_1154016800049126_4586769144178668977_n.jpg',
+    '591697516_1154016806715792_2862262999162887056_n.jpg',
+    '591744585_1154016796715793_1748447747056941573_n.jpg',
+    '591750349_1154656239985182_7425083467368490826_n.jpg',
+    '591771283_1154016803382459_5237296944235722678_n.jpg'
+  ]
   
   const sectionsHtml = sections.map((section, index) => {
     const imageIndex = index % 15 // Cycle through 15 images
     const imageName = imageFilenames[imageIndex]
-    const imageSrc = `/images-web/begynder/DSC${imageName}.jpg`
+    const imageSrc = `/images/static/begynder/${imageName}`
     
     // Alternate layout pattern: text-left for even, text-right for odd
     const isAlternate = index % 2 === 1

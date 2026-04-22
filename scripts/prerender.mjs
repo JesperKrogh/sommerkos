@@ -135,15 +135,26 @@ async function prerender() {
         timeout: 15000 
       })
       
-      // Wait for app to have content - reduced from 3s to checking if content loaded
+      // Wait for app to have actual page content
       try {
+        // First wait for SPA to initialize and router to render
         await page.waitForFunction(() => {
           const app = document.querySelector('main#app')
-          return app && app.children.length > 0 && app.textContent.trim().length > 10
+          if (!app || !app.children.length) return false
+          
+          // Check for page-specific content - for about pages, look for page title
+          if (route.includes('/om/')) {
+            const pageTitle = document.querySelector('h1.page-hero__title')
+            return pageTitle && pageTitle.textContent && pageTitle.textContent !== 'Hop om bord'
+          }
+          
+          // For other pages, check for meaningful content
+          const content = app.textContent.trim()
+          return content.length > 100
         }, { timeout: 2000 })
       } catch {
-        // If content check fails, wait a short time for any dynamic content
-        await page.waitForTimeout(500)
+        // Fallback wait if content check fails
+        await page.waitForTimeout(1000)
       }
       
       const html = await page.content()
