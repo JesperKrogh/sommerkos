@@ -1742,3 +1742,131 @@ body.is-infoscreen #nav {
     min-height: 250px;
   }
 }
+
+/* Nybegynder tiles */
+.nybegynder-tiles {
+  margin-top: var(--space-2xl);
+  padding-top: var(--space-2xl);
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+.nybegynder-tiles__title {
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--color-sail);
+  margin-bottom: var(--space-sm);
+}
+
+.nybegynder-tiles__description {
+  font-size: 1.125rem;
+  color: var(--color-foam);
+  margin-bottom: var(--space-xl);
+  max-width: 600px;
+}
+
+.nybegynder-tiles__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--space-lg);
+  margin-bottom: var(--space-xl);
+}
+
+.nybegynder-tile {
+  position: relative;
+  background: var(--color-bg-dark);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+  border: 1px solid rgba(176,184,240,0.1);
+  transition: transform 0.3s var(--ease-out), border-color 0.3s var(--ease-out), box-shadow 0.3s var(--ease-out);
+  overflow: hidden;
+  min-height: 280px;
+}
+
+.nybegynder-tile:hover {
+  transform: translateY(-4px);
+  border-color: rgba(176,184,240,0.2);
+  box-shadow: 0 12px 32px -8px rgba(0,0,0,0.4);
+}
+
+.nybegynder-tile--with-bg {
+  color: white;
+  position: relative;
+  z-index: 1;
+}
+
+.nybegynder-tile--with-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: var(--tile-bg);
+  background-size: cover;
+  background-position: center;
+  z-index: -1;
+  opacity: 0.9;
+}
+
+.nybegynder-tile--with-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(18,47,98,0.85) 0%, rgba(8,27,65,0.95) 100%);
+  z-index: -1;
+}
+
+.nybegynder-tile__name {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: var(--space-sm);
+  color: var(--color-sail);
+}
+
+.nybegynder-tile__tagline {
+  font-size: 1rem;
+  line-height: 1.4;
+  color: var(--color-foam);
+  margin-bottom: var(--space-lg);
+  flex-grow: 1;
+}
+
+.nybegynder-tile__age,
+.nybegynder-tile__time,
+.nybegynder-tile__price {
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  margin-bottom: var(--space-xs);
+  color: var(--color-foam);
+}
+
+.nybegynder-tile__price {
+  font-weight: 600;
+  color: var(--color-sail);
+  margin-top: var(--space-sm);
+}
+
+@media (max-width: 768px) {
+  .nybegynder-tiles__grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .nybegynder-tile {
+    min-height: 240px;
+  }
+}
+
+/* Table note styling */
+.table-note {
+  display: block;
+  margin-top: var(--space-lg);
+  font-size: 0.95rem;
+  color: var(--color-foam);
+  line-height: 1.5;
+  font-style: italic;
+  opacity: 0.9;
+}

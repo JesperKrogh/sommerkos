@@ -595,12 +595,18 @@ function renderAboutSections(sections: { title: string; text: string }[] | undef
 }
 
 function renderNybegynderPage(sections: { title: string; text: string }[], isDa: boolean): string {
-  // Get actual image filenames from begynder folder (15 images total)
-  const imageFilenames = [
+  // Custom image mapping for each section
+  // We'll use specific images for specific sections, and fall back to cycling for others
+  const customImageMap: Record<number, string> = {
+    3: '45DABFCC-252A-4CD0-AFAA-D8044EFFC800.jpg', // 👕 Tøj og varme
+    8: '504379903_1063986395718834_8596789478345456645_n.jpg' // 🚩 God opstart
+  }
+  
+  // General image pool for cycling through other sections
+  const imagePool = [
     '491288651_987538236696984_5216933562702563713_n.jpg',
     '499784713_1017792300338244_2922351705909202044_n.jpg',
     '504378096_1037081355076005_6914104289461035240_n.jpg',
-    '504379903_1063986395718834_8596789478345456645_n.jpg',
     '514340140_1063983295719144_8395703865714017596_n.jpg',
     '514917521_1037081375076003_8798524774020815478_n.jpg',
     '527500299_1060930106024463_2018805063777711299_n.jpg',
@@ -615,8 +621,15 @@ function renderNybegynderPage(sections: { title: string; text: string }[], isDa:
   ]
   
   const sectionsHtml = sections.map((section, index) => {
-    const imageIndex = index % 15 // Cycle through 15 images
-    const imageName = imageFilenames[imageIndex]
+    // Use custom image if defined, otherwise cycle through image pool
+    let imageName: string
+    if (customImageMap[index]) {
+      imageName = customImageMap[index]
+    } else {
+      const poolIndex = index % imagePool.length
+      imageName = imagePool[poolIndex]
+    }
+    
     const imageSrc = `/images/static/begynder/${imageName}`
     
     // Alternate layout pattern: text-left for even, text-right for odd
@@ -684,26 +697,48 @@ function renderNybegynderPage(sections: { title: string; text: string }[], isDa:
     `
   }).join('')
   
-  // Get signup info from begynder team in hold-cards.json
+  // Get mini-sejler and begynder hold cards for tiles
+  const miniSejlerCard = _holdCards['mini-sejler']
   const begynderCard = _holdCards['begynder']
-  const signupWidget = begynderCard?.signup_widget || 'https://www.kossejlsport.dk/widgets/kos-sejlsport?mobile=false&hide_profile_mobile=false&hide_profile_email=false&content_type=team_application&team_id=204225,218884,559744&show_price_type_table=false&allow_price_type_selection=false'
   
-  const signupSection = begynderCard ? `
-    <div class="nybegynder-page__signup reveal">
-      <h3>${isDa ? 'Tilmeld til begynderhold' : 'Sign up for beginner team'}</h3>
-      <p>${isDa ? 'Er du klar til at komme på vandet? Skriv dig på venteliste til vores begynderhold og bliv kontaktet, når der er plads.' : 'Ready to get on the water? Join the waitlist for our beginner team and be contacted when there\'s space.'}</p>
-      <div class="nybegynder-page__signup__widget">
-        <iframe src="${signupWidget}" width="100%" height="600" frameborder="0" loading="lazy"></iframe>
-        <div class="powered-by-holdsport">Powered by Holdsport</div>
+  // Function to get hold card image (similar to getHoldCardImage function)
+  function getHoldTileImage(slug: string): string {
+    return `/images-overview/hold-${slug}.jpg`
+  }
+  
+  // Create tiles similar to hold overview page
+  const tilesHtml = `
+    <div class="nybegynder-tiles reveal">
+      <h3 class="nybegynder-tiles__title">${isDa ? 'Kom i gang' : 'Get started'}</h3>
+      <p class="nybegynder-tiles__description">${isDa ? 'Vælg det hold, der passer til alder og erfaring' : 'Choose the team that fits age and experience'}</p>
+      <div class="nybegynder-tiles__grid">
+        ${miniSejlerCard ? `
+          <a href="/hold/mini-sejler" class="nybegynder-tile nybegynder-tile--with-bg" data-link style="--tile-bg: url('${getHoldTileImage('mini-sejler')}')">
+            <div class="nybegynder-tile__name">${isDa ? miniSejlerCard.name_da : miniSejlerCard.name_en}</div>
+            <div class="nybegynder-tile__tagline">${isDa ? miniSejlerCard.tagline_da : miniSejlerCard.tagline_en}</div>
+            <div class="nybegynder-tile__age">${isDa ? miniSejlerCard.age_da : miniSejlerCard.age_en}</div>
+            <div class="nybegynder-tile__time">${isDa ? miniSejlerCard.time_da : miniSejlerCard.time_en}</div>
+            ${miniSejlerCard.price_da ? `<div class="nybegynder-tile__price">${isDa ? miniSejlerCard.price_da : miniSejlerCard.price_en}</div>` : ''}
+          </a>
+        ` : ''}
+        ${begynderCard ? `
+          <a href="/hold/begynder" class="nybegynder-tile nybegynder-tile--with-bg" data-link style="--tile-bg: url('${getHoldTileImage('begynder')}')">
+            <div class="nybegynder-tile__name">${isDa ? begynderCard.name_da : begynderCard.name_en}</div>
+            <div class="nybegynder-tile__tagline">${isDa ? begynderCard.tagline_da : begynderCard.tagline_en}</div>
+            <div class="nybegynder-tile__age">${isDa ? begynderCard.age_da : begynderCard.age_en}</div>
+            <div class="nybegynder-tile__time">${isDa ? begynderCard.time_da : begynderCard.time_en}</div>
+            ${begynderCard.price_da ? `<div class="nybegynder-tile__price">${isDa ? begynderCard.price_da : begynderCard.price_en}</div>` : ''}
+          </a>
+        ` : ''}
       </div>
     </div>
-  ` : ''
+  `
   
   return `
     <div class="nybegynder-alternating">
       ${sectionsHtml}
-      ${signupSection}
     </div>
+    ${tilesHtml}
   `
 }
 
