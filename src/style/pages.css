@@ -1807,14 +1807,14 @@ body.is-infoscreen #nav {
   background-size: cover;
   background-position: center;
   z-index: -1;
-  opacity: 0.9;
+  opacity: 1;
 }
 
 .nybegynder-tile--with-bg::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(18,47,98,0.85) 0%, rgba(8,27,65,0.95) 100%);
+  background: linear-gradient(135deg, rgba(18,47,98,0.6) 0%, rgba(8,27,65,0.75) 100%);
   z-index: -1;
 }
 
@@ -1858,6 +1858,39 @@ body.is-infoscreen #nav {
   .nybegynder-tile {
     min-height: 240px;
   }
+}
+
+/* Nybegynder table styling */
+.nybegynder-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: var(--space-md) 0;
+  background: rgba(255,255,255,0.05);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.nybegynder-table th {
+  background: rgba(176,184,240,0.15);
+  color: var(--color-sail);
+  font-weight: 600;
+  text-align: left;
+  padding: var(--space-sm) var(--space-md);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.nybegynder-table td {
+  padding: var(--space-sm) var(--space-md);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  color: var(--color-foam);
+}
+
+.nybegynder-table tr:last-child td {
+  border-bottom: none;
+}
+
+.nybegynder-table tr:nth-child(even) {
+  background: rgba(255,255,255,0.02);
 }
 
 /* Table note styling */

@@ -641,24 +641,28 @@ function renderNybegynderPage(sections: { title: string; text: string }[], isDa:
     if (section.text.includes('|')) {
       const lines = section.text.split('\n')
       let inTable = false
+      let hasHeader = false
       const processedLines: string[] = []
       
       for (let line of lines) {
         if (line.trim().startsWith('|') && line.includes('|')) {
           if (!inTable) {
             // Start table
-            processedLines.push('<table>')
+            processedLines.push('<table class="nybegynder-table">')
             inTable = true
           }
           // Parse table row
           const cells = line.split('|').filter(cell => cell.trim() !== '').map(cell => cell.trim())
           if (cells.length > 0) {
             if (line.includes('---') || line.includes('|--')) {
-              // This is a separator/header row
-              processedLines[processedLines.length - 1] = processedLines[processedLines.length - 1].replace('<table>', '<table><thead><tr>')
-              processedLines[processedLines.length - 1] = processedLines[processedLines.length - 1] + cells.map(cell => `<th>${cell}</th>`).join('') + '</tr></thead><tbody>'
+              // This is a separator row - skip it, we already have header
+              continue
+            } else if (!hasHeader) {
+              // First non-separator row is the header
+              processedLines.push('<thead><tr>' + cells.map(cell => `<th>${cell}</th>`).join('') + '</tr></thead><tbody>')
+              hasHeader = true
             } else {
-              // Normal row
+              // Normal data row
               processedLines.push('<tr>' + cells.map(cell => `<td>${cell}</td>`).join('') + '</tr>')
             }
           }
@@ -666,6 +670,7 @@ function renderNybegynderPage(sections: { title: string; text: string }[], isDa:
           if (inTable) {
             processedLines.push('</tbody></table>')
             inTable = false
+            hasHeader = false
           }
           processedLines.push(line)
         }
